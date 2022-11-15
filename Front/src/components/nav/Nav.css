@@ -6,6 +6,8 @@ nav{
     background-color: rgba(0, 0, 0, 0.719);
     justify-content: space-between;
     padding: 0px 30px;
+    position: absolute;
+    top: 0;
 }
 
 nav .logo img {
