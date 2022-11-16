@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SeccionEvent from "../../components/nextEvents/SeccionEvent";
+import SeccionEvent from "../../components/seccionEvents/SeccionEvent";
 
 
 const Home = () => {
