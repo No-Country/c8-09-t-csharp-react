@@ -1,0 +1,31 @@
+.containerNext{
+    display: flex;
+    flex-direction: column;
+    background-color: #1F1F1F;
+    height: max-content;
+}
+.titulo h3{
+    color: white;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.titulo a{
+    color: white;
+    font-weight: bold;
+}
+
+.titulo{
+    display: flex;
+    padding: 10px 20px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.eventos{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
