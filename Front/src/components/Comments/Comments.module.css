@@ -1,0 +1,85 @@
+.comments {
+	width: 100%;
+	height: 300px;
+	background: linear-gradient(
+		185.87deg,
+		rgba(10, 30, 38, 0.17) 12.77%,
+		rgba(10, 30, 38, 0.859) 94.3%
+	);
+	display: flex;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+}
+
+.comments img {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	margin: auto;
+	z-index: -99;
+	opacity: 0.9;
+}
+
+.container {
+	display: flex;
+	color: white;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	padding: 3rem;
+}
+
+.container h3 {
+	font-size: 42px;
+	font-weight: 700;
+}
+
+.container div {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: row;
+}
+
+.container div h3 {
+	text-align: left;
+	font-size: 40px;
+	font-weight: 600;
+}
+
+.description {
+	position: relative;
+	flex-wrap: wrap;
+	padding: 0px;
+	margin: 0 3rem;
+	gap: 8px;
+}
+
+.descriptionName {
+	font-size: 26px;
+	font-weight: 400;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+.containerButton {
+	display: flex;
+	align-content: center;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	background-color: white;
+	width: 48px;
+	height: 48px;
+	border-radius: 100%;
+	padding: 1.1rem;
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3),
+		0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+}
