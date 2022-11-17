@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import SeccionEvent from "../../components/seccionEvents/SeccionEvent";
-
+import Newsletter from "../../components/Newsletter/Newsletter"
+import Footer from "../../components/footer/Footer"
+import Comments from "../../components/Comments/Comments";
 
 const Home = () => {
 
@@ -20,6 +22,9 @@ const Home = () => {
 	return (
 		<div>
 			<SeccionEvent seccion={"Proximos eventos"} eventos={events}/>
+            <Comments/>
+            <Newsletter/>
+            <Footer />
 		</div>
 	)
 }

@@ -16,7 +16,7 @@ const Nav = () => {
                 </ul>
             </div>
             <div className="button-carrito">
-                <Link to={"/"}>
+                <Link to={"/login"}>
                     <div className="buttonIngresar">
                         <img src="/perfil.svg" alt="perfil" />
                         <span>Ingresar</span>
