@@ -51,7 +51,7 @@
     justify-content: center;
     align-items: center;
     padding-bottom: 20px;
-    padding-top: 20px;
+    padding-top: 0px;
     /* border: 1.8px solid rgb(167, 61, 61); */
 }
 
@@ -88,6 +88,7 @@
     border: 1px solid #000000;
     border-radius: 7px;
     margin-top: 10px;   
+    /* text-align:left; */
 }
 
 .create_button{
@@ -162,4 +163,11 @@
     line-height: 17px;
     text-align: center;
     color: #B90A58;
+}
+
+.warning{
+    float: left;
+    font-size: 11px;
+    margin: 0px;
+    color: red;
 }
