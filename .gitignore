@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+/Back/obj
+/Back/.vs
+/Back/bin/Debug/net6.0
+/Back/.vs/CohorteApi/v17/.suo
