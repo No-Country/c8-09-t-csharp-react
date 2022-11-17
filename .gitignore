@@ -1,7 +1,7 @@
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
-/Back/CohorteApi/obj/Debug/net6.0
-/Back/CohorteApi/.vs/CohorteApi/FileContentIndex
-/Back/CohorteApi/.vs/CohorteApi/v17
-/Back/CohorteApi/.vs
+/Back/obj
+/Back/.vs
+/Back/bin/Debug/net6.0
+/Back/.vs/CohorteApi/v17/.suo

@@ -95,7 +95,12 @@ public class AuthenticateController : ControllerBase
         //}
         return Ok(new { Status = "Success", Message = "User created successfully!" });
     }
-
+    [HttpGet]
+    [Route("Users")]
+    public async Task<IActionResult> GetUsers()
+    {
+        return Ok(userManager.Users.ToList());
+    }
 }
 
 
