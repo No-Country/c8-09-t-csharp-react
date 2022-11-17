@@ -6,6 +6,8 @@ import Login from './pages/login/login'
 import Register from './pages/register/register'
 import ForgotPassword from './pages/forgotPassword/forgotPassword'
 
+
+
 function App() {
 
 	return (
@@ -15,6 +17,8 @@ function App() {
 			<Route element={<Register />} path={"/register"} />
 			<Route element={<ForgotPassword />} path={"/forgotPassword"} />
 		</Routes>
+
+		
 	)
 }
 
