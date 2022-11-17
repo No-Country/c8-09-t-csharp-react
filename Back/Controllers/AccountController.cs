@@ -97,7 +97,7 @@ public class AuthenticateController : ControllerBase
     }
     [HttpGet]
     [Route("Users")]
-    public async Task<IActionResult> GetUsers(string Role, string name)
+    public async Task<IActionResult> GetUsers()
     {
         return Ok(userManager.Users.ToList());
     }
