@@ -1,3 +1,5 @@
+using CohorteApi.Core.Business;
+using CohorteApi.Core.Interfaces;
 using CohorteApi.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +10,9 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
+
+builder.Services.AddScoped<INewsletterBusiness, NewsletterBusiness>();
+
 //builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -41,6 +46,9 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -60,9 +68,9 @@ builder.Services.AddAuthentication(options =>
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
         };
     });
-builder.Services.AddCors(o => 
+builder.Services.AddCors(o =>
 {
-    o.AddDefaultPolicy(policy => 
+    o.AddDefaultPolicy(policy =>
     {
         policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
