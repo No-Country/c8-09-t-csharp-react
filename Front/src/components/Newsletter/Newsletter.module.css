@@ -1,0 +1,45 @@
+.newsletter {
+	background-color: #ff8301;
+	color: white;
+	padding: 2.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.newsletterTitle {
+	margin-left: 1rem;
+	padding: 1rem;
+	padding-left: 5rem;
+	text-align: left;
+	font-size: 24px;
+	font-weight: bold;
+	width: 30%;
+	line-height: 1.8rem;
+}
+
+.form {
+	display: block;
+	width: 70%;
+	padding: 0;
+	justify-content: center;
+	align-items: center;
+}
+
+.formInput {
+	width: 70%;
+	border-radius: 10px;
+	padding: 1rem;
+	height: 35px;
+	margin: 0 1rem;
+	letter-spacing: 1px;
+	border: 2px solid rgb(150, 150, 150);
+}
+
+.formButton {
+	background-color: #fc4a88;
+	border-radius: 20px;
+	font-weight: 600;
+	padding: 6px 30px;
+	letter-spacing: 2px;
+}
