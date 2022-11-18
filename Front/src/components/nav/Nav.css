@@ -3,11 +3,12 @@ nav{
     height: 100px;
     display: flex;
     align-items: center;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.63);
     justify-content: space-between;
     padding: 0px 30px;
-    /* position: absolute;
-    top: 0; */
+    position: absolute;
+    top: 0;
+    z-index: 2;
 }
 
 nav .logo img {
