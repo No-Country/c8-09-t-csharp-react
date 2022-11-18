@@ -1,0 +1,85 @@
+.cardEvento {
+	background-color: black;
+	border-radius: 10px;
+	margin: 10px;
+}
+
+.cardImagen {
+	max-width: 260px;
+	border-radius: 10px 10px 0px 0px;
+}
+
+.infoEvento {
+	background-image: url('./fondo.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	border-radius: 0px 0px 10px 10px;
+	height: 130px;
+	width: 100%;
+	padding: 5px;
+}
+
+.containerInfo {
+	height: 65%;
+	border-bottom: 1px solid white;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.containerBotones {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	height: 35%;
+	border-radius: 0px 0px 10px 10px;
+}
+
+.containerBotones a {
+	color: white;
+	font-weight: bold;
+}
+
+.buttonComprar {
+	display: flex;
+	align-items: center;
+	background-color: #fc4a88;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
+.fechaHoraContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 90px;
+}
+
+.fecha {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.mesHora {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.fechaHoraContainer h3 {
+	color: white;
+}
+
+.fechaHoraContainer h4 {
+	color: white;
+}
+
+.eventoArtista h2 {
+	color: white;
+}
+
+.eventoArtista h4 {
+	color: white;
+}
