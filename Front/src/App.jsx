@@ -12,10 +12,14 @@ function App() {
 
 	return (
 		<Routes>
+			{/* RUTAS PUBLICAS */}
 			<Route element={<Home/>} path={"/"}/>
 			<Route element={<Login />} exact path={"/login"} />
 			<Route element={<Register />} path={"/register"} />
 			<Route element={<ForgotPassword />} path={"/forgotPassword"} />
+
+			{/* RUTAS PROTEGIDAS */}
+			
 		</Routes>
 
 		
