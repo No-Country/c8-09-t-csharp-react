@@ -29,9 +29,10 @@
 .formInput {
 	width: 70%;
 	border-radius: 10px;
-	padding: 1rem;
+	margin: 0 0.4rem;
+	padding: 0 0.5rem;
+	color: rgb(150, 150, 150);
 	height: 35px;
-	margin: 0 1rem;
 	letter-spacing: 1px;
 	border: 2px solid rgb(150, 150, 150);
 }
