@@ -4,14 +4,12 @@ const TopVendidos = () => {
 
     return(
         <div className="vendidosContainer">
-            <div className="topVendidosContainer">
                 <h1>Top mas vendidos</h1>
                 <div className="topVendidos">
-                    <div className="imagen1"></div>
-                    <div className="imagen1"></div>
-                    <div className="imagen1"></div>
+                    <img src="/imagen-larga.png" alt="imagenevento"/>
+                    <img src="/imagen-larga.png" alt="imagenevento"/>
+                    <img src="/imagen-larga.png" alt="imagenevento"/>
                 </div>
-            </div>
         </div>
     )
 }
