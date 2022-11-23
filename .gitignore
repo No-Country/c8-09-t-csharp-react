@@ -7,3 +7,4 @@
 /Back/.vs/CohorteApi/v17/.suo
 *.suo
 /.vs
+/Back/bin/Release/net6.0
