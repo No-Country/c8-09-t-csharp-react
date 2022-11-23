@@ -8,14 +8,12 @@ import ForgotPassword from './pages/forgotPassword/forgotPassword'
 import { AuthGuard } from './guards/AuthGuard'
 import { AuthRolesGuard } from './guards/AuthRolesGuard'
 import { isUserAdmin, isUserLogged } from './utils/validations'
-
 import Error from "./pages/error/Error"
 
 function App() {
 	return (
 		<Routes>
 			<Route index element={<Home />} />
-			
 			<Route element={<ForgotPassword />} path={'/forgotPassword'} />
 			<Route
 				element={
