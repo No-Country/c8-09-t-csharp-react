@@ -1,5 +1,4 @@
-﻿using DataAnnotationsExtensions;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CohorteApi.Models
 {
@@ -7,7 +6,7 @@ namespace CohorteApi.Models
     {
         [Key]
         public int Id { get; set; }
-        [Email]
+        [EmailAddress]
         [Required]
         public string Email { get; set; }
         public DateTime DateSubscribed { get; set ; }

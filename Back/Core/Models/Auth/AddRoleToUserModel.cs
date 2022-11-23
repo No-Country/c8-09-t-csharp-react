@@ -1,12 +1,11 @@
-﻿using DataAnnotationsExtensions;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CohorteApi.Core.Models.Auth
 {
     public class AddRoleToUserModel
     {
         [Required]
-        [Email]
+        [EmailAddress]
         public string UserEmail { get; set; }
         [Required]
         [RegularExpression("user|admin",ErrorMessage ="Invalid role")]

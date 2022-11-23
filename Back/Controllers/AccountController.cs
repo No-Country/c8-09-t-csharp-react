@@ -71,11 +71,11 @@ public class AuthenticateController : ControllerBase
        
         var userExists = await userManager.FindByNameAsync(model.Username);
         if (userExists != null)
-            return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "User already exists!" });
+            return StatusCode(StatusCodes.Status400BadRequest, new { Status = "Error", Message = "User already exists!" });
 
-        //var emailExists = await userManager.FindByEmailAsync(model.Email);
-        //if (emailExists != null)
-        //    return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "Email is already associated with an account!" });
+        var emailExists = await userManager.FindByEmailAsync(model.Email);
+        if (emailExists != null)
+            return StatusCode(StatusCodes.Status400BadRequest, new { Status = "Error", Message = "Email is already associated with an account!" });
 
         IdentityUser user = new IdentityUser()
         {
@@ -150,8 +150,9 @@ public class AuthenticateController : ControllerBase
         return Ok(userManager.Users.ToList());
     }
 
-
-    private void ResetUsers()
+    [HttpGet]
+    [Route("tests/deleteallusers")]
+    public void ResetUsers()
     {
         ApplicationDbContext ctx = new ApplicationDbContext(options);
         ctx.UserRoles.RemoveRange(ctx.UserRoles);
