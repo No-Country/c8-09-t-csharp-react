@@ -15,7 +15,7 @@ const Home = () => {
 			'https://635eb27203d2d4d47af47b8b.mockapi.io/Cohorte'
 		)
 		const data = await response.json()
-		setEvents(data.slice(0, 5))
+		setEvents(data.slice(0, 4))
 	}
 
 	useEffect(() => {

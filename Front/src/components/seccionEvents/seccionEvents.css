@@ -3,6 +3,7 @@
     flex-direction: column;
     background-color: #1F1F1F;
     height: max-content;
+    padding: 30px;
 }
 .titulo h3{
     color: white;

@@ -9,17 +9,20 @@ import { AuthGuard } from './guards/AuthGuard'
 import { AuthRolesGuard } from './guards/AuthRolesGuard'
 import { isUserAdmin, isUserLogged } from './utils/validations'
 
+import Error from "./pages/error/Error"
+
 function App() {
 	return (
 		<Routes>
 			<Route index element={<Home />} />
-			<Route element={<Register />} path={'/register'} />
+			
 			<Route element={<ForgotPassword />} path={'/forgotPassword'} />
 			<Route
 				element={
 					<AuthGuard redirectPath={'/account'} isAllowed={!isUserLogged()} />
 				}
 			>
+				<Route element={<Register />} path={'/register'} />
 				<Route element={<Login />} exact path={'/login'} />
 			</Route>
 			<Route element={<AuthGuard isAllowed={isUserLogged()} />}>
@@ -30,10 +33,10 @@ function App() {
 					<Route element={<div>Admin</div>} exact path={'/admin/*'}>
 						{/* aca van la sub ruta de account*/}
 					</Route>
-					<Route element={<div>Not Found 404</div>} path={'*'} />
+					{/* <Route element={<Error/>} path={'*'} /> */}
 				</Route>
 			</Route>
-			<Route element={<div>Not Found 404</div>} path={'*'} />
+			<Route element={<Error/>} path={'*'} />
 		</Routes>
 	)
 }
