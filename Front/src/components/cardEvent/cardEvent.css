@@ -57,6 +57,24 @@
 	width: 90px;
 }
 
+.fechaHoraContainer h3{
+	font-size: 14px;
+}
+
+.mesHora h4{
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.eventoArtista h2{
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.eventoArtista h4{
+	font-size: 16px;
+}
+
 .fecha {
 	font-weight: bold;
 	font-size: 20px;
