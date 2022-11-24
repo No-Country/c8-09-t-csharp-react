@@ -2,7 +2,7 @@ import "./seccionEvents.css"
 import ListEvents from "../listEvents/ListEvents";
 import {Link} from "react-router-dom"
 
-const SeccionEvent = ({seccion, eventos, ruta}) => {
+const SeccionEvent = ({seccion, ruta}) => {
     return(
         <div className="containerNext">
             <div className="titulo">
@@ -10,7 +10,7 @@ const SeccionEvent = ({seccion, eventos, ruta}) => {
                 <Link to={ruta}>Ver mas eventos {">"}</Link>
             </div>
             <div className="eventos">
-                <ListEvents eventos={eventos}/>
+                <ListEvents/>
             </div>
         </div>
     )
