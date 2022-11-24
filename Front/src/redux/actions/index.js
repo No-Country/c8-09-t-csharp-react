@@ -24,3 +24,24 @@ export function getEvents(payload){
         })
     }
 }
+
+export function loginUser(payload){
+    return async function(dispatch){
+
+        try{
+            const APIresponse = await axios.post("https://cohorteapi.azurewebsites.net/api/Authenticate/Login", payload)
+
+            dispatch({
+                type: "LOGIN_USER",
+                payload: APIresponse.data
+            })
+
+            return APIresponse.status
+
+        } catch(error){
+            // return `Error ${error.response.status}: ${error.response.statusText}`
+            return error
+        }
+
+    }
+}

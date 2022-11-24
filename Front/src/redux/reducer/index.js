@@ -9,6 +9,7 @@ const initialState = {
     singleUser: [],
     allEvents: [],
     singleUser: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : singleUserEmpty,
+    userloginData: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -27,6 +28,13 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 singleUser: singleUserEmpty
             }
+
+        case "LOGIN_USER":
+            return{
+                ...state,
+                userloginData: action.payload
+            }
+
         default: return state;
     }
 }
