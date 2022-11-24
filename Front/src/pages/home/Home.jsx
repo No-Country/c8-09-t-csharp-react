@@ -7,6 +7,7 @@ import Carousel from '../../components/Carousel/Carousel'
 import TopVendidos from '../../components/TopVendidos/TopVendidos'
 
 const Home = () => {
+
 	return (
 		<div>
 			<Carousel />
