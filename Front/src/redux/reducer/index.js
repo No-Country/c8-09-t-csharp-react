@@ -1,5 +1,6 @@
 const initialState = {
-    singleUser: []
+    singleUser: [],
+    allEvents: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -8,7 +9,11 @@ function rootReducer(state = initialState, action) {
             return{
                 ...state
             }
-
+        case "GET_EVENTS":
+            return{
+                ...state,
+                allEvents: action.payload
+            }
         default: return state;
     }
 }
