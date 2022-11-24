@@ -1,34 +1,53 @@
-h1{
-  font-weight: "bold";
-  font-size: 56px;
+h1 {
+	font-weight: 'bold';
+	font-size: 56px;
 }
 
-h2{
-  font-weight: 600;
-  font-size: 48px;
+h2 {
+	font-weight: 600;
+	font-size: 48px;
 }
 
-h3{
-  font-weight: 400;
-  font-size: 40px;
+h3 {
+	font-weight: 400;
+	font-size: 40px;
 }
 
-h4{
-  font-weight: "bold";
-  font-size: 32px;
+h4 {
+	font-weight: 'bold';
+	font-size: 32px;
 }
 
-h5{
-  font-weight: lighter;
-  font-size: 24px;
+h5 {
+	font-weight: lighter;
+	font-size: 24px;
 }
 
-a{
-  font-size: 16px;
-  font-weight: lighter;
+a {
+	font-size: 16px;
+	font-weight: lighter;
 }
 
-button{
-  font-weight: 700;
-  font-size: 16px;
+button {
+	font-weight: 700;
+	font-size: 16px;
+}
+.botonPrincipal {
+	background: #fc4a88;
+	border-radius: 6.25rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 0.3rem 1.4rem;
+	gap: 0.5rem;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 24px;
+	letter-spacing: 0.75px;
+	color: #ffffff;
+}
+
+.botonPrincipal:hover {
+	background: #b90a58;
 }
