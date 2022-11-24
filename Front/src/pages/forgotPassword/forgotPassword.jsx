@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import { Alert } from "../../utils/alert";
 // import rejectionImg from '../../../public/rejection.svg'
 // import responseImg from '../../../public/response.svg'
@@ -19,20 +18,10 @@
 //     imageAlt: 'error',
 //     confirmButtonText: `<button class="botonPrincipal" >Intentar de nuevo</button>`,
 // })
-
-const ForgotPassword = function () {
-	return (
-		<div>
-			<h1>Reset your password here!</h1>
-		</div>
-	)
-=======
 import '../forgotPassword/forgotPassword.css'
 import { Link } from 'react-router-dom';
 
 const ForgotPassword = function () {
-
-
     // Funcion que va a checar si el correo existe 
 
     // 
@@ -65,7 +54,6 @@ const ForgotPassword = function () {
             </div>
         </div>
     )
->>>>>>> 0ae43e6de847125567d4c684c3a99a732c13cf60
 }
 
 export default ForgotPassword
