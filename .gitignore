@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Back/.vs
+/Back/bin/Debug/net6.0
+/Back/obj
+/Back/Properties
+/Back/CohorteApi.csproj.user
