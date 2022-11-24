@@ -1,17 +1,34 @@
 import style from './Newsletter.module.css'
 import axios from 'axios'
+import rejectionImg from '/rejection.svg'
+import responseImg from '/response.svg'
+import { Alert } from '../../utils/alert'
 
 const Newsletter = () => {
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault()
 		const body = { email: e.target[0].value }
-		return axios
-			.post(
+		try {
+			await axios.post(
 				'https://cohorteapi.azurewebsites.net/api/Newsletter/subscribe',
 				body
 			)
-			.then(response => alert(JSON.stringify(response.data))) //CAMBIAR ESTO POR ALGUNA LIBRERIA DE ALERTAS
-			.catch(error => alert(error))
+			Alert.fire({
+				title: '¡Bien hecho!',
+				html: `Te has subscripto correctamente con el correo: </br> <b>${body.email}</b>`,
+				imageUrl: responseImg,
+				imageAlt: 'confirm',
+				confirmButtonText: `<button class="botonPrincipal" >Ok</button>`,
+			})
+		} catch (error) {
+			return await Alert.fire({
+				title: 'Ooops',
+				html: `Ha ocurrido un error </br> Por favor inténtenlo nuevamente`,
+				imageUrl: rejectionImg,
+				imageAlt: 'error',
+				confirmButtonText: `<button class="botonPrincipal" >Volver a intentar</button>`,
+			})
+		}
 	}
 	return (
 		<div className={style.newsletter}>
