@@ -1,5 +1,6 @@
 const initialState = {
-    singleUser: []
+    singleUser: [],
+    userloginData: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -7,6 +8,12 @@ function rootReducer(state = initialState, action) {
         case "CREATE_USER":
             return{
                 ...state
+            }
+
+        case "LOGIN_USER":
+            return{
+                ...state,
+                userloginData: action.payload
             }
 
         default: return state;
