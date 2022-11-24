@@ -16,6 +16,7 @@ namespace CohorteApi.Data
 
         public virtual DbSet<Newsletter> Newsletters { get; set; }
         public virtual DbSet<Subscription> Subscriptions { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
