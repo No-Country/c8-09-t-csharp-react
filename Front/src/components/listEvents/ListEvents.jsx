@@ -13,7 +13,6 @@ const ListEvents = () => {
         dispatch(getEvents())
     }, [])
 
-
     return(
         <div className="containerEventos">
             <div className="listaEventos">

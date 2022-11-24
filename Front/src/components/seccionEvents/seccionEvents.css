@@ -29,4 +29,35 @@
     height: 100%;
     display: flex;
     padding: 10px;
+    overflow-x: auto;
+}
+
+.eventos::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.eventos::-webkit-scrollbar:vertical {
+    width:7px;
+}
+
+.eventos::-webkit-scrollbar-button:increment ,.body::-webkit-scrollbar-button {
+    display: none;
+} 
+
+.eventos::-webkit-scrollbar:horizontal {
+    height: 15px;
+}
+
+.eventos::-webkit-scrollbar-track {
+    background: rgba(255, 166, 0, 0);        
+}
+
+.eventos::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 30px;
+    border: 10px solid white;
+}
+
+.eventos::-webkit-scrollbar-track {
+    border-radius: 10px;  
 }
