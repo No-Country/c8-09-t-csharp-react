@@ -24,7 +24,7 @@ namespace CohorteApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Event>>> GetEvents()
         {
-            return await _context.Events.ToListAsync();
+            return await _context.Events.Include(a=>a.EventTags).ToListAsync();
         }
 
         [HttpGet("{id}")]
