@@ -8,6 +8,7 @@ using CohorteApi.Models.Identity;
 using CohorteApi.Core.Models.Auth;
 using CohorteApi.Data;
 using Microsoft.EntityFrameworkCore;
+using CohorteApi.Core.Interfaces;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -17,13 +18,15 @@ public class AuthenticateController : ControllerBase
     private readonly RoleManager<IdentityRole> roleManager;
     private readonly IConfiguration _configuration;
     private readonly DbContextOptions<ApplicationDbContext> options;
+    private readonly IEmailBusiness email;
 
-    public AuthenticateController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, DbContextOptions<ApplicationDbContext> options)
+    public AuthenticateController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, DbContextOptions<ApplicationDbContext> options, IEmailBusiness email)
     {
         this.userManager = userManager;
         this.roleManager = roleManager;
         _configuration = configuration;
         this.options = options;
+        this.email = email;
     }
 
     [HttpPost]
@@ -68,7 +71,7 @@ public class AuthenticateController : ControllerBase
     [Route("Register")]
     public async Task<IActionResult> Register([FromBody] RegisterModel model)
     {
-       
+
         var userExists = await userManager.FindByNameAsync(model.Username);
         if (userExists != null)
             return StatusCode(StatusCodes.Status400BadRequest, new { Status = "Error", Message = "User already exists!" });
@@ -87,12 +90,17 @@ public class AuthenticateController : ControllerBase
         var result = await userManager.CreateAsync(user, model.Password);
 
         if (!result.Succeeded)
-            return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = $"User creation failed! Please check user details and try again. {String.Join(" | ",result.Errors.Select( x => x.Description))}" });
+            return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = $"User creation failed! Please check user details and try again. {String.Join(" | ", result.Errors.Select( x => x.Description))}" });
+
+        Task welcomeTask = email.SendWelcomeEmailAsync(model.Username, model.Email);
 
         var resultRoleAssign = await userManager.AddToRoleAsync(user, UserRoles.User);
         var roleMessage = "";
-        if (resultRoleAssign.Succeeded) roleMessage = " as User Role";
 
+        //TODO not awaiting can lead mail not get delivered
+      //  await welcomeTask.WaitAsync(TimeSpan.FromSeconds(2));
+
+        if (resultRoleAssign.Succeeded) roleMessage = " as User Role";
         return Ok(new { Status = "Success", Message = $"User created{roleMessage} successfully!" });
     }
 
@@ -114,11 +122,11 @@ public class AuthenticateController : ControllerBase
         //if (!await roleManager.RoleExistsAsync(model.Role))
         //    return StatusCode(StatusCodes.Status400BadRequest, new { Status = "Error", Message = "Role doesn´t exists, a valid role must be provided" });
 
-        var currentRoles =await  userManager.GetRolesAsync(userExists);
-        var removeResult =await userManager.RemoveFromRolesAsync(userExists, currentRoles);
+        var currentRoles = await  userManager.GetRolesAsync(userExists);
+        var removeResult = await userManager.RemoveFromRolesAsync(userExists, currentRoles);
         if (!removeResult.Succeeded)
             return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "Role assignation  failed! Please report this error." });
-        
+
         var resultRoleAssign = await userManager.AddToRoleAsync(userExists, model.Role);
         if (!resultRoleAssign.Succeeded)
             return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "Role assignation  failed! Please report this error." });
