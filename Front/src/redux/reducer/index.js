@@ -1,3 +1,5 @@
+import jwt_decode from "jwt-decode";
+
 const singleUserEmpty = {
     id: 0,
     name: "",
@@ -30,9 +32,12 @@ function rootReducer(state = initialState, action) {
             }
 
         case "LOGIN_USER":
+            const initialData = action.payload
+            const decode = jwt_decode(initialData.token)
+            localStorage.setItem("user", JSON.stringify(decode))
             return{
                 ...state,
-                userloginData: action.payload
+                userloginData: decode
             }
 
         default: return state;
