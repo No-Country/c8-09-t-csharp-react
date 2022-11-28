@@ -1,7 +1,12 @@
 import "./Nav.css"
 import {Link} from "react-router-dom"
+import { useEffect } from "react"
 
-const Nav = () => {
+const Nav = ({isAllowed}) => {  
+
+    useEffect(()=>{
+        console.log(isAllowed)
+    }, [])
 
     return(
         <nav>
