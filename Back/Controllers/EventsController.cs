@@ -97,5 +97,11 @@ namespace CohorteApi.Controllers
         {
             return _context.Events.Any(e => e.Id == id);
         }
+
+        [HttpGet("{id}/details")]
+        public async Task<string> EventDetail(int id)
+        {
+            return  await Task.FromResult("not implemented yet");
+        }
     }
 }
