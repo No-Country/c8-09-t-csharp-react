@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+
 
 import "../login/login.css"
 import { loginUser } from "../../redux/actions";
+
 
 
 ///////// ESTO ES PARA EL LOGIN DE GOOGLE /////////////
@@ -14,6 +17,7 @@ import { loginUser } from "../../redux/actions";
 
 
 const Login = function () {
+
 
     const dispatch = useDispatch()
     const loginData = useSelector(state => state.userloginData)
@@ -37,8 +41,10 @@ const Login = function () {
                 if (val !== 200) {
                     alert(`Error ${val.response.status}: ${val.response.statusText}`)
                 } else {
-                    const decode = jwt.decode(loginData.token)
+                
+                    const decode = jwt_decode(loginData.token)
                     localStorage.setItem("loginData", JSON.stringify(decode))
+                    console.log(decode)
                     alert("Bienvenido!")
                 }
             })
