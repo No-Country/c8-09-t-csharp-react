@@ -28,7 +28,8 @@ const Login = function () {
         dispatch(loginUser(input))
             .then(val => {
                 if (val !== 200) {
-                    alert(`Error ${val.response.status}: ${val.response.statusText}`)
+                    // alert(`Error ${val.response.status}: ${val.response.statusText}`)
+                    alert("Error")
                 } else {
                     const decoded = jwt.decode(loginResponse.token)
                     console.log(decoded)
