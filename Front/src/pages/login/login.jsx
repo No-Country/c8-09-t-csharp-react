@@ -6,13 +6,6 @@ import "../login/login.css"
 import { loginUser } from "../../redux/actions";
 
 
-///////// ESTO ES PARA EL LOGIN DE GOOGLE /////////////
-// import GoogleLogin from 'react-google-login';
-// import { gapi } from "gapi-script";
-// const idClientGoogleLogin = ""
-//////////////////////////////////////////////////////
-
-
 const Login = function () {
 
     const dispatch = useDispatch()
@@ -37,7 +30,9 @@ const Login = function () {
                 if (val !== 200) {
                     alert(`Error ${val.response.status}: ${val.response.statusText}`)
                 } else {
-                    localStorage.setItem("loginData", JSON.stringify({...loginResponse}))
+                    const decoded = jwt.decode(loginResponse.token)
+                    console.log(decoded)
+                    // localStorage.setItem("loginData", JSON.stringify({...loginResponse}))
                     alert("Bienvenido!")
                 }
             })
