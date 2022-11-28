@@ -22,6 +22,8 @@ namespace CohorteApi.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Subscription>().HasData(SubscriptionsSeed.GetData());
+      //      modelBuilder.Entity<Tag>().HasData(TagsSeed.GetData());
+//modelBuilder.Entity<Event>().HasData(EventsSeed.GetData());
         }
     }
 }
