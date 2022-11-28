@@ -16,7 +16,7 @@ import { loginUser } from "../../redux/actions";
 const Login = function () {
 
     const dispatch = useDispatch()
-    // const loginData = useSelector(state => state.userloginData)
+    const loginData = useSelector(state => state.userloginData)
 
     const [input, setInput] = useState({
         email: "",
@@ -37,6 +37,8 @@ const Login = function () {
                 if (val !== 200) {
                     alert(`Error ${val.response.status}: ${val.response.statusText}`)
                 } else {
+                    const decode = jwt.decode(loginData.token)
+                    localStorage.setItem("loginData", JSON.stringify(decode))
                     alert("Bienvenido!")
                 }
             })
