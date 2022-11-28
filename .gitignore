@@ -8,3 +8,7 @@
 /Back/obj
 /Back/Properties
 /Back/CohorteApi.csproj.user
+/Back/bin/Release/net6.0
+/Back/wwwroot/Newsletters
+/Back/appsettings.Development.json
+/Back/wwwroot/index.html
