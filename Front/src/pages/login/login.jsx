@@ -43,7 +43,7 @@ const Login = function () {
                 } else {
                 
                     const decode = jwt_decode(loginData.token)
-                    localStorage.setItem("loginData", JSON.stringify(decode))
+                    localStorage.setItem("user", JSON.stringify(decode))
                     console.log(decode)
                     alert("Bienvenido!")
                 }

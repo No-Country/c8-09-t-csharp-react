@@ -1,11 +1,15 @@
 import "./Nav.css"
 import {Link} from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { clearLocalStorage } from "../../utils/localStorage"
+import { useDispatch, useSelector } from 'react-redux'
 
 const Nav = ({isAllowed}) => {  
 
+    const loginData = useSelector(state => state.userloginData)
+
     useEffect(()=>{
-        console.log(isAllowed)
+        console.log(loginData)
     }, [])
 
     return(
@@ -21,12 +25,20 @@ const Nav = ({isAllowed}) => {
                 </ul>
             </div>
             <div className="button-carrito">
+                {isAllowed ?
+                <div className="buttonIngresar" onClick={()=>{
+                    //clearLocalStorage("user")
+                }}>
+                    <img src="/perfil.svg" alt="perfil" />
+                    <span>Cerrar sesion</span>
+                </div> :
                 <Link to={"/login"}>
                     <div className="buttonIngresar">
                         <img src="/perfil.svg" alt="perfil" />
                         <span>Ingresar</span>
                     </div>
                 </Link>
+                }
                 <Link to={"/"}><img src="/carrito.svg" alt="carrito"/></Link> 
             </div>
         </nav>
