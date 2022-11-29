@@ -2,6 +2,7 @@
 	background-color: black;
 	border-radius: 10px;
 	margin: 10px;
+	width: 300px;
 }
 
 .cardImagen {
@@ -66,8 +67,25 @@
 	font-weight: bold;
 }
 
+.cardImg{
+	width: 300px;
+	height: 200px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	border-radius: 10px 10px 0px 0px;
+}
+
+.eventoArtista{
+	overflow: auto;
+	height: inherit;
+	width: 100%;
+	margin: 5px;
+}
+
 .eventoArtista h2{
-	font-size: 18px;
+	font-size: 13px;
+	padding: 5px;
 	font-weight: bold;
 }
 
@@ -101,3 +119,33 @@
 .eventoArtista h4 {
 	color: white;
 }
+.eventoArtista::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.eventoArtista::-webkit-scrollbar:vertical {
+    width:7px;
+}
+
+.eventoArtista::-webkit-scrollbar-button:increment ,.body::-webkit-scrollbar-button {
+    display: none;
+} 
+
+.eventoArtista::-webkit-scrollbar:horizontal {
+    height: 15px;
+}
+
+.eventoArtista::-webkit-scrollbar-track {
+    background: rgba(255, 166, 0, 0);        
+}
+
+.eventoArtista::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 30px;
+    border: 10px solid white;
+}
+
+.eventoArtista::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}
+
