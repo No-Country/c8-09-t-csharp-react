@@ -7,6 +7,7 @@
 
         public string EventDescription { get; set; }
         public string FrontPageImage { get; set; }
+        public string Thumbnail { get; set; }
         public string Venue { get; set; }
 
         public double Price { get; set; }
