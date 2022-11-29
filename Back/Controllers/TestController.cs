@@ -98,21 +98,22 @@ namespace CohorteApi.Controllers
         [HttpPost("UploadFiles")]
         public IActionResult UploadImages([FromForm] List<IFormFile> files,string folder ="images")
         {
-            var path = "wwwroot/{folder}";
+            var path = $"wwwroot/{folder}";
             //create folder if not exist
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
             var url = this.HttpContext.Request.Scheme + "://" +
                     this.HttpContext.Request.Host + "/" +
-                    path.Replace("wwwroot", "");
+                    path.Replace("wwwroot/", "");
 
             List<(string, string, bool)> results = new();
 
             foreach (var model in files)
             {
-               // if file is exe,dll,bin etc  = >fail
-                string fileName = HttpUtility.UrlEncode(model.FileName);
+                // if file is exe,dll,bin etc  = >fail
+                //string fileName = HttpUtility.UrlEncode(model.FileName);
+                string fileName = model.FileName;
                 string fileNameWithPath = Path.Combine(path, fileName);
 
                 try
@@ -121,8 +122,9 @@ namespace CohorteApi.Controllers
                     {
                         model.OpenReadStream().CopyTo(fileStream);
                     }
+                    var uri = new Uri(url + $"/{fileName}");
 
-                    results.Add((fileName, url + $"/{fileName}", true));
+                    results.Add((fileName, uri.AbsoluteUri, true));
                 }
                 catch (Exception e)
                 {
