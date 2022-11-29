@@ -1,4 +1,6 @@
 import jwt_decode from "jwt-decode";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 const singleUserEmpty = {
     id: 0,
@@ -11,7 +13,8 @@ const initialState = {
     singleUser: [],
     allEvents: [],
     singleUser: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : singleUserEmpty,
-    userloginData: []
+    userloginData: [],
+    isLogged: null
 }
 
 function rootReducer(state = initialState, action) {
@@ -38,6 +41,11 @@ function rootReducer(state = initialState, action) {
             return{
                 ...state,
                 userloginData: decode
+            }
+        case "CHECK_LOCAL_STORAGE":
+            return {
+                ...state,
+                isLogged: action.payload
             }
 
         default: return state;

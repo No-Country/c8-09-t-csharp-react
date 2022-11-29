@@ -10,13 +10,6 @@ import { useEffect } from "react";
 
 
 
-///////// ESTO ES PARA EL LOGIN DE GOOGLE /////////////
-// import GoogleLogin from 'react-google-login';
-// import { gapi } from "gapi-script";
-// const idClientGoogleLogin = ""
-//////////////////////////////////////////////////////
-
-
 const Login = function () {
 
     const navigate = useNavigate()
@@ -41,7 +34,8 @@ const Login = function () {
         dispatch(loginUser(input))
             .then(val => {
                 if (val !== 200) {
-                    alert(`Error ${val.response.status}: ${val.response.statusText}`)
+                    // alert(`Error ${val.response.status}: ${val.response.statusText}`)
+                    alert("Error")
                 } else {
                     try{
                         // const decode = jwt_decode(loginData.token)
@@ -57,6 +51,7 @@ const Login = function () {
     }
     
 
+    
     return (
         <div className="login_main">
 
