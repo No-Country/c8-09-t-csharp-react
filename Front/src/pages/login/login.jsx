@@ -15,10 +15,6 @@ const Login = function () {
     const navigate = useNavigate()
     const loginData = useSelector(state => state.userloginData)
     const dispatch = useDispatch()
-<<<<<<< HEAD
-    const loginResponse = useSelector(state => state.userloginData)
-=======
->>>>>>> f603c61992ea1e1fca2e92f29d9b451475be54e8
 
     const [input, setInput] = useState({
         email: "",
@@ -41,12 +37,6 @@ const Login = function () {
                     // alert(`Error ${val.response.status}: ${val.response.statusText}`)
                     alert("Error")
                 } else {
-<<<<<<< HEAD
-                    const decoded = jwt.decode(loginResponse.token)
-                    console.log(decoded)
-                    // localStorage.setItem("loginData", JSON.stringify({...loginResponse}))
-                    alert("Bienvenido!")
-=======
                     try{
                         // const decode = jwt_decode(loginData.token)
                         // localStorage.setItem("user", JSON.stringify(decode))
@@ -56,7 +46,6 @@ const Login = function () {
                     } catch(error){
                         console.log(error)
                     }
->>>>>>> f603c61992ea1e1fca2e92f29d9b451475be54e8
                 }
             })
     }

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { isUserLogged } from '../../utils/validations'
 
 export function createUser(payload){
     return async function(dispatch){
@@ -43,5 +44,21 @@ export function loginUser(payload){
             return error
         }
 
+    }
+}
+
+export function checkLocalStorage(payload){
+    return async function(dispatch){
+        try{
+            
+            let result = isUserLogged()
+
+            dispatch({
+                type: "CHECK_LOCAL_STORAGE",
+                payload: result
+            })
+        } catch(error){
+            return error
+        }
     }
 }
