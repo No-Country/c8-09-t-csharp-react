@@ -69,7 +69,7 @@ const Nav = () => {
                 {isLogged ? 
                 <Menu as="div" className="relative inline-block text-left">
                     <div>
-                        <Menu.Button className="inline-flex w-full justify-center rounded-2xl bg-pink-400 px-4 py-2 text-sm font-medium text-white-700 shadow-sm hover:bg-pink-300">
+                        <Menu.Button className="inline-flex w-full justify-center rounded-2xl bg-pink-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-pink-600">
                         {userName}
                         <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
                         </Menu.Button>
@@ -83,7 +83,7 @@ const Nav = () => {
                                 }}>
                                     <a
                                     href="#"
-                                    className={'bg-gray-100 text-gray-900 block px-4 py-2 text-sm'}
+                                    className={'bg-gray-100 text-gray-900 block px-4 py-2 text-md font-semibold'}
                                     >
                                     {i.name}
                                     </a>
