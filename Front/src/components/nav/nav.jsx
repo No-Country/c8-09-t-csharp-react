@@ -101,7 +101,7 @@ const Nav = () => {
                     </div>
                 </Link>
                 }
-                <Link to={"/"}><img src="/carrito.svg" alt="carrito"/></Link> 
+                <Link to={"/"} className="carrito"><img src="/carrito.svg" alt="carrito"/></Link> 
             </div>
         </nav>
     )

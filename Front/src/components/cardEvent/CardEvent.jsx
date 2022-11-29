@@ -24,7 +24,7 @@ const CardEvent = ({ evento }) => {
 
 	return (
 		<div className='cardEvento'>
-			<div className='cardImg' style={{backgroundImage: `url(${evento.thumbnail})`}}></div>
+			<div className='cardImg' style={{backgroundImage: `url(${evento.frontPageImage})`}}></div>
 			<div className='infoEvento'>
 				<div className='containerInfo'>
 					<div className='fechaHoraContainer'>

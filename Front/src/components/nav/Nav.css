@@ -3,7 +3,7 @@ nav{
     height: 100px;
     display: flex;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.63);
+    background-color: rgba(0, 0, 0, 0.774);
     justify-content: space-between;
     padding: 0px 30px;
     position: absolute;
@@ -61,6 +61,21 @@ nav ul li {
     cursor: pointer;
 }
 
+.buttonIngresar:hover{
+    transition: 0.5s;
+    background-color: #fc4a8825;
+    color: #FC4A88;
+}
+
+.carrito{
+    padding: 10px;
+}
+
+.carrito:hover{
+    transition: 0.5s;
+    border-radius: 10px;
+    background-color: #fc4a8825;
+}
 
 .buttonIngresar span {
     margin-left: 8px;
