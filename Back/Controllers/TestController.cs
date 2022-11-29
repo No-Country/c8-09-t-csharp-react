@@ -98,7 +98,7 @@ namespace CohorteApi.Controllers
         [HttpPost("UploadFiles")]
         public IActionResult UploadImages([FromForm] List<IFormFile> files,string folder ="images")
         {
-            var path = "wwwroot/{folder}";
+            var path = $"wwwroot/{folder}";
             //create folder if not exist
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
