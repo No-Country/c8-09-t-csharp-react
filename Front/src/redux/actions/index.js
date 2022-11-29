@@ -50,10 +50,10 @@ export function loginUser(payload){
 export function checkLocalStorage(payload){
     return async function(dispatch){
         try{
-            
+
             let result = isUserLogged()
 
-            dispatch({
+            return dispatch({
                 type: "CHECK_LOCAL_STORAGE",
                 payload: result
             })
