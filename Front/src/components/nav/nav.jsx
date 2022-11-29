@@ -1,8 +1,19 @@
 import "./Nav.css"
 import {Link} from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
 import { useEffect} from "react"
+import { checkLocalStorage } from "../../redux/actions"
+import { clearLocalStorage } from "../../utils/localStorage"
 
-const Nav = () => {  
+const Nav = () => {      
+
+    const dispatch = useDispatch()
+    const isLogged = useSelector(state => state.isLogged)
+
+    useEffect(()=> {
+        dispatch(checkLocalStorage())
+        console.log(isLogged)
+    }, [])
 
     return(
         <nav>
@@ -17,12 +28,23 @@ const Nav = () => {
                 </ul>
             </div>
             <div className="button-carrito">
+                {isLogged ? 
+                <div className="buttonIngresar" onClick={() =>{
+                    clearLocalStorage("user")
+                    dispatch(checkLocalStorage())
+                }}>
+                    <img src="/perfil.svg" alt="perfil" />
+                    <span>Cerrar sesion</span>
+                </div>
+                :
                 <Link to={"/login"}>
                     <div className="buttonIngresar">
                         <img src="/perfil.svg" alt="perfil" />
                         <span>Ingresar</span>
                     </div>
                 </Link>
+                }
+                
                 <Link to={"/"}><img src="/carrito.svg" alt="carrito"/></Link> 
             </div>
         </nav>
