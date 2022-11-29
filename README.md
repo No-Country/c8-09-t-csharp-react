@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/No-Country/c8-09-t-csharp-react">Ver repositorio</a> - 
-  <a href="https://palomochat.vercel.app/">Deploy del proyecto</a>
+  <a href="http://tiketfan.vercel.app/">Deploy del proyecto</a>
 </p>
 
 
