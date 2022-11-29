@@ -18,7 +18,7 @@ export function createUser(payload){
 
 export function getEvents(payload){
     return async function(dispatch){
-        const response = await axios.get("ohttps://635eb27203d2d4d47af47b8b.mockapi.io/Cohorte")
+        const response = await axios.get("https://cohorteapi.azurewebsites.net/api/Events")
         return dispatch({
             type: "GET_EVENTS",
             payload: response,

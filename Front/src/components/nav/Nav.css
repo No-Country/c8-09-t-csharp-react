@@ -57,8 +57,10 @@ nav ul li {
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
+    margin-right: 35px;
     cursor: pointer;
 }
+
 
 .buttonIngresar span {
     margin-left: 8px;
