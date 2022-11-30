@@ -26,11 +26,19 @@ nav ul {
 nav ul li {
     color: white;
     font-size: 18px;
+    padding: 3px 10px;
+    border-radius: 10px;
+}
+
+nav ul li:hover{
+    transition: 0.5s;
+    color: #FC4A88;
+    background-color: #fc4a8842;
+    border-radius: 10px;
 }
 
 .active{
-    color: #942DBD;
-    border-bottom: 1px solid #942DBD;
+    color: #FC4A88;
     font-weight: bold;
 }
 
