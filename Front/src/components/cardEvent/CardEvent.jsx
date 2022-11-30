@@ -44,7 +44,7 @@ const CardEvent = ({ evento }) => {
 				</div>
 				<div className='containerBotones'>
 					<Link to={'/'}> Saber mas </Link>
-					<Link to={'/'}>
+					<Link to={`/event/${evento.id}`}>
 						<div className='buttonComprar'>
 							<span>Comprar ahora</span>
 						</div>
