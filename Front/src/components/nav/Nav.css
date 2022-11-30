@@ -65,7 +65,6 @@ nav ul li:hover{
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
-    margin-right: 35px;
     cursor: pointer;
 }
 
@@ -77,6 +76,7 @@ nav ul li:hover{
 
 .carrito{
     padding: 10px;
+    margin-left: 10px;
 }
 
 .carrito:hover{
