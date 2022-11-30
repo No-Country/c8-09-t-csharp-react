@@ -11,6 +11,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 const Nav = () => {     
     
+    const userInfo = useSelector(state => state.userloginData)
     const [userName, setUserName] = useState("Nadir Blanco")
     const dispatch = useDispatch()
     const isLogged = useSelector(state => state.isLogged)
@@ -52,6 +53,10 @@ const Nav = () => {
     useEffect(()=> {
         dispatch(checkLocalStorage())
     }, [])
+
+    useEffect(()=> {
+        setUserName(userInfo["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"])
+    }, [userInfo])
 
     return(
         <nav>
