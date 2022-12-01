@@ -56,6 +56,7 @@ const Login = function () {
         <div className="login_main">
 
             <div className="login_form_main">
+                <div className="login_form_subcontainer">
                 <div className="login_title">Ingresar a tu Cuenta</div>
                 <button className="google_button">
                     <img className="google_icon" src="../../../G_Logo_Clean.png" alt="Google Icon" height={"24px"} width={"24px"} />
@@ -90,6 +91,7 @@ const Login = function () {
 
                 <div>¿No tienes una cuenta? <Link className="register_link" to="/register">Regístrate</Link></div>
             </div>
+                </div>
         </div>
     )
 }
