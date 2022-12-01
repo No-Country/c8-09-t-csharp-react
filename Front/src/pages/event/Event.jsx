@@ -9,6 +9,7 @@ import Footer from '../../components/footer/Footer'
 //Tailwind components
 import { Menu } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import Reviews from "../../components/Reviews/Reviews";
 
 const Event = () => {
 
@@ -135,6 +136,7 @@ const Event = () => {
                 </div>
                 <button className="buttonComprar">Comprar</button>  
             </div>
+            <Reviews />
             <SeccionEvent seccion={"Te puede interesar"} ruta={"/"} />
             <Footer />
         </div>
