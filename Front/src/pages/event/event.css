@@ -1,0 +1,75 @@
+body{
+    background-color: #1f1f1f;
+}
+
+.imageHeader{
+    width: 100%;
+    height: 400px;
+    margin-bottom: 30px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.eventInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.eventInfo h1{
+    margin-bottom: 10px;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.eventInfo h3{
+    color: white;
+    font-weight: 300;
+    font-size: 15px;
+    width: 50%;
+}
+
+.escenario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.escenario h2{
+    margin-bottom: 30px;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.escenario img{
+    height: 350px;
+}
+
+.eleccion{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.opciones{
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.buttonComprar{
+    display: flex;
+	align-items: center;
+	background-color: #fc4a88;
+	padding: 5px 10px;
+    color: white;
+	border-radius: 10px;
+}

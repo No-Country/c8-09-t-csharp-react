@@ -9,12 +9,14 @@ import { AuthGuard } from './guards/AuthGuard'
 import { AuthRolesGuard } from './guards/AuthRolesGuard'
 import { isUserAdmin, isUserLogged } from './utils/validations'
 import Error from "./pages/error/Error"
+import Event from './pages/event/event'
 
 function App() {
 	return (
 		<Routes>
 			<Route index element={<Home />} />
 			<Route element={<ForgotPassword />} path={'/forgotPassword'} />
+			<Route element={<Event />} path={'/event/:id'} />
 			<Route
 				element={
 					<AuthGuard redirectPath={'/account'} isAllowed={!isUserLogged()} />

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-
+import { checkLocalStorage } from "../../redux/actions";
 
 import "../login/login.css"
 import { loginUser } from "../../redux/actions";
@@ -41,6 +41,7 @@ const Login = function () {
                         // const decode = jwt_decode(loginData.token)
                         // localStorage.setItem("user", JSON.stringify(decode))
                         alert("Bienvenido!")
+                        dispatch(checkLocalStorage())
                         navigate("/")
                      
                     } catch(error){
