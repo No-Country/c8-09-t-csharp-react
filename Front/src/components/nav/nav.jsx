@@ -12,6 +12,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 const Nav = () => {     
     
     const userInfo = useSelector(state => state.userloginData)
+    const userStorage = useSelector(state => state.singleUser)
     const [userName, setUserName] = useState("Nadir Blanco")
     const dispatch = useDispatch()
     const isLogged = useSelector(state => state.isLogged)
@@ -58,6 +59,7 @@ const Nav = () => {
         setUserName(userInfo["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"])
     }, [userInfo])
 
+
     return(
         <nav>
             <div className="logo-links">
@@ -75,15 +77,17 @@ const Nav = () => {
                 <Menu as="div" className="relative inline-block text-left">
                     <div>
                         <Menu.Button className="inline-flex w-full justify-center rounded-2xl bg-pink-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-pink-600">
-                        {userName}
+                        {userInfo.length === 0 ? userStorage["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]:
+                        userName
+                        }
                         <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
                         </Menu.Button>
                     </div>
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div className="py-1">
-                            {items.map((i)=>{
+                            {items.map((i, index)=>{
                                 return(
-                                <Menu.Item onClick={()=>{
+                                <Menu.Item key={index} onClick={()=>{
                                     i.action()
                                 }}>
                                     <a

@@ -10,7 +10,6 @@ const singleUserEmpty = {
 }
 
 const initialState = {
-    singleUser: [],
     allEvents: [],
     singleUser: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : singleUserEmpty,
     userloginData: [],

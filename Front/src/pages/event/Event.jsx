@@ -13,7 +13,11 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 const Event = () => {
 
     const [event, setEvent] = useState({})
+    const [total, setTotal] = useState(0)
     const { id } = useParams()
+
+    const ubicacion = ["Platea izquierda", "Platea central", "Platea derecha", "Palco izquierdo", "Palco derecho"]
+    const cantidad = [ 1,2,3,4,5]
 
     const getEvent = async () => {
         const response = await axios.get(`https://cohorteapi.azurewebsites.net/api/Events/${id}`)
@@ -52,7 +56,7 @@ const Event = () => {
                                                 href="#"
                                                 className={'bg-gray-800 border-gray-600 border-solid border-2 text-white block px-4 py-2 text-md font-semibold'}
                                                 >
-                                                Item
+                                                ${event.price}
                                                 </a>
                                             </Menu.Item>
                                     </div>
@@ -67,14 +71,19 @@ const Event = () => {
                                 </div>
                                 <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right bg-transparent shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="py-1">
-                                            <Menu.Item>
-                                                <a
-                                                href="#"
-                                                className={'bg-gray-800 border-gray-600 border-solid border-2 text-white block px-4 py-2 text-md font-semibold'}
-                                                >
-                                                Item
-                                                </a>
-                                            </Menu.Item>
+                                            {ubicacion.map((u)=>{
+                                                return(
+                                                <Menu.Item>
+                                                    <a
+                                                    href="#"
+                                                    className={'bg-gray-800 border-gray-600 border-solid border-2 text-white block px-4 py-2 text-md font-semibold'}
+                                                    >
+                                                    {u}
+                                                    </a>
+                                                </Menu.Item>
+                                                )
+                                            })}
+                                            
                                     </div>
                                 </Menu.Items>
                             </Menu>
@@ -87,14 +96,19 @@ const Event = () => {
                                 </div>
                                 <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right bg-transparent shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="py-1">
-                                            <Menu.Item>
-                                                <a
-                                                href="#"
-                                                className={'bg-gray-800 border-gray-600 border-solid border-2 text-white block px-4 py-2 text-md font-semibold'}
-                                                >
-                                                Item
-                                                </a>
-                                            </Menu.Item>
+                                            {cantidad.map((c)=>{
+                                                return(
+                                                <Menu.Item>
+                                                    <a
+                                                    href="#"
+                                                    className={'bg-gray-800 border-gray-600 border-solid border-2 text-white block px-4 py-2 text-md font-semibold'}
+                                                    >
+                                                    {c}
+                                                    </a>
+                                                </Menu.Item>
+                                                )   
+                                            })}
+                                            
                                     </div>
                                 </Menu.Items>
                             </Menu>
@@ -112,7 +126,7 @@ const Event = () => {
                                                 href="#"
                                                 className={'bg-gray-800 border-gray-600 border-solid border-2 text-white block px-4 py-2 text-md font-semibold'}
                                                 >
-                                                Item
+                                                ${total}
                                                 </a>
                                             </Menu.Item>
                                     </div>
