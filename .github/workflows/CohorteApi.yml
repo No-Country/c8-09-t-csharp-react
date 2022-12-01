@@ -2,11 +2,11 @@ name: Build and deploy .NET Core application to Web App CohorteApi
 on:
   push:
     branches:
-    - back
+    - main
 env:
   AZURE_WEBAPP_NAME: CohorteApi
   AZURE_WEBAPP_PACKAGE_PATH: .\publish
-  CONFIGURATION: Release
+  #CONFIGURATION: Debug
   DOTNET_CORE_VERSION: 6.0.x
   WORKING_DIRECTORY: ./Back
 jobs:
@@ -21,28 +21,14 @@ jobs:
     - name: Restore
       run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
     - name: Build
-      run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
+      run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ secrets.CONFIGURATION }} --no-restore
     - name: Test
       run: dotnet test "${{ env.WORKING_DIRECTORY }}" --no-build
     - name: Publish
-      run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
-    - name: Publish Artifacts
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: webapp
-        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-  deploy:
-    runs-on: windows-latest
-    needs: build
-    steps:
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v2
-      with:
-        name: webapp
-        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ secrets.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
     - name: Deploy to Azure WebApp
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.CohorteApi_0879 }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        publish-profile: ${{ secrets.CohorteApi_C857 }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }} 
