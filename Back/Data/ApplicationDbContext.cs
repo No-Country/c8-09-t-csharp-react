@@ -1,8 +1,9 @@
 ﻿
+using CohorteApi.Data.Seeds;
+using CohorteApi.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace CohorteApi.Data
 {
@@ -11,6 +12,17 @@ namespace CohorteApi.Data
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+        }
+
+        public virtual DbSet<Newsletter> Newsletters { get; set; }
+        public virtual DbSet<Subscription> Subscriptions { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Subscription>().HasData(SubscriptionsSeed.GetData());
+           // modelBuilder.Entity<Event>().HasData(EventsSeed.GetData());
         }
     }
 }
