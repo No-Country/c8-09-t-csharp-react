@@ -1,22 +1,20 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import { checkLocalStorage } from "../../redux/actions";
 
 import "../login/login.css"
 import { loginUser } from "../../redux/actions";
+import { useEffect } from "react";
 
-
-///////// ESTO ES PARA EL LOGIN DE GOOGLE /////////////
-// import GoogleLogin from 'react-google-login';
-// import { gapi } from "gapi-script";
-// const idClientGoogleLogin = ""
-//////////////////////////////////////////////////////
 
 
 const Login = function () {
 
+    const navigate = useNavigate()
+    const loginData = useSelector(state => state.userloginData)
     const dispatch = useDispatch()
-    // const loginData = useSelector(state => state.userloginData)
 
     const [input, setInput] = useState({
         email: "",
@@ -30,22 +28,36 @@ const Login = function () {
         })
     }
 
+    
     function submit(e) {
         e.preventDefault()
         dispatch(loginUser(input))
             .then(val => {
                 if (val !== 200) {
-                    alert(`Error ${val.response.status}: ${val.response.statusText}`)
+                    // alert(`Error ${val.response.status}: ${val.response.statusText}`)
+                    alert("Error")
                 } else {
-                    alert("Bienvenido!")
+                    try{
+                        // const decode = jwt_decode(loginData.token)
+                        // localStorage.setItem("user", JSON.stringify(decode))
+                        alert("Bienvenido!")
+                        dispatch(checkLocalStorage())
+                        navigate("/")
+                     
+                    } catch(error){
+                        console.log(error)
+                    }
                 }
             })
     }
+    
 
+    
     return (
         <div className="login_main">
 
             <div className="login_form_main">
+                <div className="login_form_subcontainer">
                 <div className="login_title">Ingresar a tu Cuenta</div>
                 <button className="google_button">
                     <img className="google_icon" src="../../../G_Logo_Clean.png" alt="Google Icon" height={"24px"} width={"24px"} />
@@ -80,6 +92,7 @@ const Login = function () {
 
                 <div>¿No tienes una cuenta? <Link className="register_link" to="/register">Regístrate</Link></div>
             </div>
+                </div>
         </div>
     )
 }
