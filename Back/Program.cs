@@ -70,10 +70,14 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
     options.User.RequireUniqueEmail = true;
+
 })
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>(TokenOptions.DefaultProvider);
 
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
+   opt.TokenLifespan = TimeSpan.FromHours(2));
 
 builder.Services.AddAuthentication(options =>
 {

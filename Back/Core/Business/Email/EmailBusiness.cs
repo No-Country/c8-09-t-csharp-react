@@ -2,13 +2,14 @@
 using CohorteApi.Core.Models.Email;
 using Org.BouncyCastle.Cms;
 using System;
+using System.Xml.Linq;
 
 namespace CohorteApi.Core.Business.Email
 {
     public class EmailBusiness : IEmailBusiness
     {
         readonly IEmailService _service;
-        string templatesPath = "wwwroot/templates/auth/welcome";
+        string templatesPath = "wwwroot/templates/auth";
         public EmailBusiness( IEmailService service)
         {
             _service = service;
@@ -30,16 +31,24 @@ namespace CohorteApi.Core.Business.Email
             throw new NotImplementedException();
         }
 
-        public Task SendRecoverPasswordEmailAsync(string email)
+        public async Task SendRecoverPasswordEmailAsync(string email,string userName, string link,string title = "Recover your password")
         {
-            throw new NotImplementedException();
+            var recoverypasswordTemplate = System.IO.File.ReadAllText($"{templatesPath}/ChangePassword.html");
+
+            //get base url from settings
+          
+            var content = string.Format(recoverypasswordTemplate, new[] { userName, link });
+
+            var recipients = new[] { email };
+            var message = new Message(recipients, title, content);
+            await _service.SendEmailAsync(message);
         }
 
         public async  Task SendWelcomeEmailAsync(string name,string email)
         {
             //TODO validations of emailadresss
 
-            var welcomeTemplate = System.IO.File.ReadAllText($"{templatesPath}/welcome.html");
+            var welcomeTemplate = System.IO.File.ReadAllText($"{templatesPath}/welcome/welcome.html");
             var userName = name;
             var content = string.Format(welcomeTemplate, userName);
 

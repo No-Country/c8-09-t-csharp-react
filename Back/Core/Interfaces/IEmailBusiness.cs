@@ -8,7 +8,7 @@ namespace CohorteApi.Core.Interfaces
         Task SendWelcomeEmailAsync(string name, string email);
    
         Task SendNewsLetterAsync(int id, List<String> emails);
-        Task SendRecoverPasswordEmailAsync(string email);
+        Task SendRecoverPasswordEmailAsync(string email,string userName, string link,string? title= "Recover your password");
 
 
     }

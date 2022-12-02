@@ -38,7 +38,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="wwwroot\Templates\ChangePassword.html" />
+	  <None Include="wwwroot\Templates\Auth\ChangePassword.html" />
 	  <None Include="wwwroot\Templates\Auth\Welcome\Welcome.html" />
 	</ItemGroup>
 
