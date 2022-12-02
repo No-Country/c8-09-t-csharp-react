@@ -22,6 +22,15 @@
     box-shadow: 0px 4px 4px 0px #00000040;
 }
 
+.login_form_subcontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* border: 1.8px solid rgb(167, 61, 61); */
+}
+
 .login_title{
     /* font-family: Poppins; */
     font-style: normal;

@@ -1,15 +1,70 @@
 .vendidosContainer{
-    height: 500px;
     background: linear-gradient(95.66deg, #FC4A88 0%, #942DBD 100.38%);
     padding: 5px 15px;
     display: flex;
     flex-direction: column;
 }
 
+.img{
+    height: 300px;
+    min-width: 1100px;
+    margin-left: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-position: center;
+}
+
+.img:hover .info {
+    transition: 0.5s;
+    opacity: 10;
+}
+
+.info{
+    position: absolute;
+    bottom: 0;
+    opacity: 0;
+    height: 180px;
+    width: 100%;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(253,187,45,0) 100%);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.info h1{
+    font-size: 20px;
+}
+
+.info h2{
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.buttonInfo{
+    display: flex;
+	align-items: center;
+	background-color: #fc4a88;
+	padding: 5px 10px;
+	border-radius: 10px;
+    color: white;
+    margin-top: 10px;
+}
+
 .vendidosContainer h1{
     font-weight: bold;
     color: white;
 }
+
+
 
 .topVendidos{
     display: flex;
@@ -48,12 +103,6 @@
     border-radius: 10px;  
 }
 
-
-.topVendidos img {
-    margin-left: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-}
 
 
 
