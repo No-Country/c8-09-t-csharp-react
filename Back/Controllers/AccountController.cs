@@ -28,7 +28,6 @@ public class AuthenticateController : ControllerBase
         _configuration = configuration;
         this.options = options;
         this.emailBusiness = email;
-        this.emailBusiness=emailBusiness;
     }
 
     [HttpGet]
