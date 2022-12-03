@@ -45,9 +45,6 @@ namespace CohorteApi.Controllers
             return @event;
         }
 
-
-
-
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEvent(int id, Event @event)
         {
@@ -112,7 +109,11 @@ namespace CohorteApi.Controllers
             return await Task.FromResult("not implemented yet");
         }
 
-
+        [HttpGet("admin")]
+        public async Task<ActionResult<IEnumerable<Event>>> GetEventsAdmin([FromQuery] int categoryId)
+        {             
+            return await _context.Events.Include(a => a.Category).ToListAsync(); ;
+        }
 
     }
 }

@@ -38,6 +38,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Include="wwwroot\images\event1FrontPage.jpg" />
+	  <None Include="wwwroot\images\event4FrontPage.jpg" />
 	  <None Include="wwwroot\Templates\Auth\ChangePassword.html" />
 	  <None Include="wwwroot\Templates\Auth\Welcome\Welcome.html" />
 	</ItemGroup>
