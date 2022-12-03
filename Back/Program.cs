@@ -48,14 +48,7 @@ builder.Services.AddSwaggerGen(c =>
     c.IncludeXmlComments(xmlPath);
 });
 
-//if (builder.Environment.IsDevelopment())
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Ticket")));
-//else
-//{
-//builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("SQLServer")));
-//AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-//}
-
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
@@ -96,6 +89,9 @@ builder.Services.AddCors(o =>
     });
 });
 builder.Services.AddDirectoryBrowser();
+builder.Services.AddScoped<INewsletterBusiness, NewsletterBusiness>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IEmailBusiness, EmailBusiness>();
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
