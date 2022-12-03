@@ -2,6 +2,8 @@
 using CohorteApi.Core.Models.Newsletter;
 using CohorteApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,9 +21,34 @@ namespace CohorteApi.Controllers
 
         // GET: api/<Newsletter>
         [HttpGet]
-        public IEnumerable<NewsletterDTO> Get()
+        public IActionResult Get()
         {
-           return  _newsletterBusiness.GetAll();
+            try
+            {
+                return Ok(_newsletterBusiness.GetAll());
+            }
+            catch (Exception e )
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<string> Post([Required] IFormFile file)
+        {
+            try
+            {
+                var stream = file.OpenReadStream();
+                string pathToNewsletter = await _newsletterBusiness.CreateNewsletter(stream);
+                return this.HttpContext.Request.Scheme + "://" +
+                    this.HttpContext.Request.Host + "/" +
+                    pathToNewsletter + "/index.html";
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
         }
 
         //// GET api/<Newsletter>/5
@@ -31,11 +58,7 @@ namespace CohorteApi.Controllers
         //    return "value";
         //}
 
-        //// POST api/<Newsletter>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
+        // POST api/<Newsletter>
 
         //// PUT api/<Newsletter>/5
         //[HttpPut("{id}")]
@@ -49,21 +72,20 @@ namespace CohorteApi.Controllers
         //{
         //}
 
-
         //POST api/
         [HttpPost("subscribe")]
         public Subscription Subscribe(SubscribeDTO dto)
         {
             //if subscribed, send email confirming
             //TODO : Send Email
-           return _newsletterBusiness.Subscribe(dto.Email);
+            return _newsletterBusiness.Subscribe(dto.Email);
         }
 
         //POST api/
         [HttpPost("unsubscribe")]
-        public async Task< bool> Unsubscribe(SubscribeDTO dto)
+        public async Task<bool> Unsubscribe(SubscribeDTO dto)
         {
-            var result = await  _newsletterBusiness.Unsubscribe(dto.Email);
+            var result = await _newsletterBusiness.Unsubscribe(dto.Email);
             return result;
         }
 
@@ -73,7 +95,7 @@ namespace CohorteApi.Controllers
         [Route("subscriptions")]
         public IEnumerable<Subscription> GetSubscriptions()
         {
-           return  _newsletterBusiness.GetAllSubscriptions();
+            return _newsletterBusiness.GetAllSubscriptions();
         }
 
     }

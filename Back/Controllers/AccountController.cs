@@ -8,6 +8,8 @@ using CohorteApi.Models.Identity;
 using CohorteApi.Core.Models.Auth;
 using CohorteApi.Data;
 using Microsoft.EntityFrameworkCore;
+using CohorteApi.Core.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -17,15 +19,23 @@ public class AuthenticateController : ControllerBase
     private readonly RoleManager<IdentityRole> roleManager;
     private readonly IConfiguration _configuration;
     private readonly DbContextOptions<ApplicationDbContext> options;
+    private readonly IEmailBusiness emailBusiness;
 
-    public AuthenticateController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, DbContextOptions<ApplicationDbContext> options)
+    public AuthenticateController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, DbContextOptions<ApplicationDbContext> options, IEmailBusiness email)
     {
         this.userManager = userManager;
         this.roleManager = roleManager;
         _configuration = configuration;
         this.options = options;
+        this.emailBusiness = email;
     }
 
+    [HttpGet]
+    [Route("Users")]
+    public async Task<IActionResult> GetUsers()
+    {
+        return Ok(userManager.Users.ToList());
+    }
     [HttpPost]
     [Route("Login")]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
@@ -68,7 +78,7 @@ public class AuthenticateController : ControllerBase
     [Route("Register")]
     public async Task<IActionResult> Register([FromBody] RegisterModel model)
     {
-       
+
         var userExists = await userManager.FindByNameAsync(model.Username);
         if (userExists != null)
             return StatusCode(StatusCodes.Status400BadRequest, new { Status = "Error", Message = "User already exists!" });
@@ -87,13 +97,57 @@ public class AuthenticateController : ControllerBase
         var result = await userManager.CreateAsync(user, model.Password);
 
         if (!result.Succeeded)
-            return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = $"User creation failed! Please check user details and try again. {String.Join(" | ",result.Errors.Select( x => x.Description))}" });
+            return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = $"User creation failed! Please check user details and try again. {String.Join(" | ", result.Errors.Select(x => x.Description))}" });
+
+        Task welcomeTask = emailBusiness.SendWelcomeEmailAsync(model.Username, model.Email);
 
         var resultRoleAssign = await userManager.AddToRoleAsync(user, UserRoles.User);
         var roleMessage = "";
-        if (resultRoleAssign.Succeeded) roleMessage = " as User Role";
 
+        //TODO not awaiting can lead mail not get delivered
+        //  await welcomeTask.WaitAsync(TimeSpan.FromSeconds(2));
+
+        if (resultRoleAssign.Succeeded) roleMessage = " as User Role";
         return Ok(new { Status = "Success", Message = $"User created{roleMessage} successfully!" });
+    }
+
+    [HttpPost("ForgotPassword")]
+    public async Task<IActionResult> ForgotPassword([EmailAddress][Required] string email)
+    {
+        var user = await userManager.FindByEmailAsync(email);
+        if (user == null)
+            //return Ok(); //dont let know user if email exists
+            return BadRequest();
+
+        var token = await userManager.GeneratePasswordResetTokenAsync(user);
+        try
+        {
+            var link = @$"https://tiketfan.vercel.app/resetpassword?t={token}&email={user.Email}";
+            await emailBusiness.SendRecoverPasswordEmailAsync(user.Email, user.UserName, link);
+            //TODO remove this only for debug
+            var model = new { Token = token, Email = user.Email };
+            return Ok(model);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+        }
+    }
+
+    [HttpPost("ResetPassword")]
+    public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
+    {
+        //if all ok
+        var user = await userManager.FindByEmailAsync(model.Email);
+        var result = await userManager.ResetPasswordAsync(user, model.Token, model.Password);
+        if (result.Succeeded)
+        {
+            return Ok();
+        }
+        else
+        {
+            return BadRequest(String.Join(" | ", result.Errors));
+        }
     }
 
 
@@ -114,40 +168,17 @@ public class AuthenticateController : ControllerBase
         //if (!await roleManager.RoleExistsAsync(model.Role))
         //    return StatusCode(StatusCodes.Status400BadRequest, new { Status = "Error", Message = "Role doesn´t exists, a valid role must be provided" });
 
-        var currentRoles =await  userManager.GetRolesAsync(userExists);
-        var removeResult =await userManager.RemoveFromRolesAsync(userExists, currentRoles);
+        var currentRoles = await userManager.GetRolesAsync(userExists);
+        var removeResult = await userManager.RemoveFromRolesAsync(userExists, currentRoles);
         if (!removeResult.Succeeded)
             return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "Role assignation  failed! Please report this error." });
-        
+
         var resultRoleAssign = await userManager.AddToRoleAsync(userExists, model.Role);
         if (!resultRoleAssign.Succeeded)
             return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "Role assignation  failed! Please report this error." });
 
         return Ok(new { Status = "Success", Message = $"User is now in role {model.Role}!" });
 
-    }
-
-    [Obsolete("")]
-    [HttpPost]
-    [Route("CreateRolesAdminUser")]
-    public async Task<IActionResult> AddRole()
-    {
-        //var user = await userManager.FindByNameAsync(name);
-        if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
-            await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-        if (!await roleManager.RoleExistsAsync(UserRoles.User))
-            await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
-        //if (await roleManager.RoleExistsAsync(UserRoles.Admin))
-        //{
-        //    await userManager.AddToRoleAsync(user, UserRoles.Admin);
-        //}
-        return Ok(new { Status = "Success", Message = "User and Admin roles created successfully!" });
-    }
-    [HttpGet]
-    [Route("Users")]
-    public async Task<IActionResult> GetUsers()
-    {
-        return Ok(userManager.Users.ToList());
     }
 
     [HttpGet]
@@ -159,6 +190,21 @@ public class AuthenticateController : ControllerBase
         ctx.Users.RemoveRange(ctx.Users);
         ctx.SaveChanges();
         userManager.Users.ToList().ForEach(x => userManager.DeleteAsync(x));
+    }
+
+    public class ResetPasswordModel
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        public string Password { get; set; }
+        [Required]
+        [Compare("Password")]
+        public string ConfirmPassword { get; set; }
+        [Required]
+        public string Token { get; set; }
+
     }
 }
 

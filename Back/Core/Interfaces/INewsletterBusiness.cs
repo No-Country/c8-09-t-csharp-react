@@ -13,5 +13,9 @@ namespace CohorteApi.Core.Interfaces
 
         IEnumerable<Subscription> GetAllSubscriptions();
         Subscription GetSubscriptionByEmail(string email);
+
+        Task<string> CreateNewsletter(string html,IList<IFormFile> file);
+        Task<string> CreateNewsletter(Stream file);
+
     }
 }

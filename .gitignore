@@ -4,8 +4,13 @@
 
 /.vs
 /Back/.vs
-/Back/bin/Debug/net6.0
 /Back/obj
+/Back/bin
+
+
+
+
+/Back/.config
 /Back/Properties
 /Back/CohorteApi.csproj.user
 /Back

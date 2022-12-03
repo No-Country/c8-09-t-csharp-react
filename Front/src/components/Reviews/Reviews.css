@@ -1,0 +1,106 @@
+.reviewsContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 30px;
+    margin-top: 20px;
+}
+
+.reviews{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.reviews h2{
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.listReviews{
+    display: flex;
+    align-items: center;
+}
+
+.review{
+    width: 250px;
+    height: 200px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    overflow: auto;
+}
+
+.review img{
+    margin-bottom: 5px;
+}
+
+.review h3{
+    font-size: 18px;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.userHour{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.review h5{
+    font-size: 15px;
+    color: rgb(63, 63, 63);
+}
+
+.sendReviews{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sendReviews img{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 300px;
+    cursor: pointer;
+}
+
+.sendReviews h2{
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.sendReviews h4{
+    font-size: 15px;
+    color: rgb(63, 63, 63);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.sendReviews input{
+    background-color:rgb(63, 63, 63);
+    height: 100px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.buttonSend{
+    display: flex;
+	align-items: center;
+	background-color: #fc4a88;
+	padding: 10px;
+	border-radius: 5px;
+    color: white;
+    width: fit-content;
+}
+
+.buttonSend:hover{
+    transition: 0.5s;
+	background-color: #cf2460;
+}

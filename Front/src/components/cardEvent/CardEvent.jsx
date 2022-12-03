@@ -17,14 +17,14 @@ const CardEvent = ({ evento }) => {
 		'Nov',
 		'Dic',
 	]
-	const description = evento.description.slice(0, 20)
-	const fechaSinFormatear = evento.time.slice(0, 10)
+	//const description = evento.eventDescription.slice(0, 20)
+	const fechaSinFormatear = evento.eventTime.slice(0, 10)
 	const fecha = fechaSinFormatear.split('-')
-	const horario = evento.time.slice(11, 16)
+	const horario = evento.eventTime.slice(11, 16)
 
 	return (
 		<div className='cardEvento'>
-			<img className='cardImagen' src={evento.image} alt={evento.title} />
+			<div className='cardImg' style={{backgroundImage: `url(${evento.frontPageImage})`}}></div>
 			<div className='infoEvento'>
 				<div className='containerInfo'>
 					<div className='fechaHoraContainer'>
@@ -38,13 +38,13 @@ const CardEvent = ({ evento }) => {
 						</div>
 					</div>
 					<div className='eventoArtista'>
-						<h2> {evento.title} </h2>
-						<h4> {description} </h4>
+						<h2> {evento.eventName} </h2>
+						<h4> {evento.eventDescription} </h4>
 					</div>
 				</div>
 				<div className='containerBotones'>
 					<Link to={'/'}> Saber mas </Link>
-					<Link to={'/'}>
+					<Link to={`/event/${evento.id}`}>
 						<div className='buttonComprar'>
 							<span>Comprar ahora</span>
 						</div>
