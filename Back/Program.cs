@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -28,7 +29,8 @@ builder.Services.AddScoped<IEmailBusiness, EmailBusiness>();
 
 
 //builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); ;
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -59,11 +61,11 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 //if (builder.Environment.IsDevelopment())
-//    builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Ticket")));
 //else
 //{
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("SQLServer")));
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+//builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("SQLServer")));
+//AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 //}
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
@@ -114,5 +116,5 @@ app.UseCors();
 app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();
+app.MapControllers(); 
 app.Run();

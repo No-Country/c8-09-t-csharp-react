@@ -26,7 +26,7 @@ namespace CohorteApi.Controllers
         {
             if (categoryId > 0)
             {
-                return await _context.Events.Where(x => x.CategoryId == categoryId).ToListAsync();
+                return await _context.Events.Include(i => i.Reviews).Where(x => x.CategoryId == categoryId).ToListAsync();
             }
             var previousResults = await _context.Events.ToListAsync();
             return previousResults;

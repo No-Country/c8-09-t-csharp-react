@@ -16,7 +16,9 @@ namespace CohorteApi.Models
         public int AvailableSeats { get; set; }
         public DateTime Created { get; init; } = DateTime.Now.ToUniversalTime();
         public DateTime EventTime { get; set; }
-        public ICollection<Tag>? EventTags { get; set; } 
+        public ICollection<Tag>? EventTags { get; set; }
+
+        public ICollection<Review> Reviews { get; set; }
 
         //public ICollection<Section>? Sections { get; set; }
 
@@ -26,6 +28,8 @@ namespace CohorteApi.Models
         
         public Event()
         {
+            this.Reviews = new List<Review>();
+
             //for tests
             //this.Sections = new List<Section>();
             //this.Sections.Add(new Section() { Name = "VIP" });
