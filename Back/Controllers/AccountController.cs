@@ -30,6 +30,12 @@ public class AuthenticateController : ControllerBase
         this.emailBusiness = email;
     }
 
+    [HttpGet]
+    [Route("Users")]
+    public async Task<IActionResult> GetUsers()
+    {
+        return Ok(userManager.Users.ToList());
+    }
     [HttpPost]
     [Route("Login")]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
@@ -105,72 +111,6 @@ public class AuthenticateController : ControllerBase
         return Ok(new { Status = "Success", Message = $"User created{roleMessage} successfully!" });
     }
 
-
-    /// <summary>
-    /// Add a role to a user
-    /// </summary>
-    /// <param name="role">can be admin or user</param>
-    /// <param name="idUser">the user email </param>
-    /// <returns></returns>
-    [HttpPost]
-    [Route("SetRole")]
-    public async Task<IActionResult> SetRoleToUser(AddRoleToUserModel model)
-    {
-        var userExists = await userManager.FindByEmailAsync(model.UserEmail);
-        if (userExists == null)
-            return StatusCode(StatusCodes.Status400BadRequest, new { Status = "Error", Message = "User doesn´t exists!" });
-
-        //if (!await roleManager.RoleExistsAsync(model.Role))
-        //    return StatusCode(StatusCodes.Status400BadRequest, new { Status = "Error", Message = "Role doesn´t exists, a valid role must be provided" });
-
-        var currentRoles = await userManager.GetRolesAsync(userExists);
-        var removeResult = await userManager.RemoveFromRolesAsync(userExists, currentRoles);
-        if (!removeResult.Succeeded)
-            return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "Role assignation  failed! Please report this error." });
-
-        var resultRoleAssign = await userManager.AddToRoleAsync(userExists, model.Role);
-        if (!resultRoleAssign.Succeeded)
-            return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "Role assignation  failed! Please report this error." });
-
-        return Ok(new { Status = "Success", Message = $"User is now in role {model.Role}!" });
-
-    }
-
-    [Obsolete("")]
-    [HttpPost]
-    [Route("CreateRolesAdminUser")]
-    public async Task<IActionResult> AddRole()
-    {
-        //var user = await userManager.FindByNameAsync(name);
-        if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
-            await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-        if (!await roleManager.RoleExistsAsync(UserRoles.User))
-            await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
-        //if (await roleManager.RoleExistsAsync(UserRoles.Admin))
-        //{
-        //    await userManager.AddToRoleAsync(user, UserRoles.Admin);
-        //}
-        return Ok(new { Status = "Success", Message = "User and Admin roles created successfully!" });
-    }
-    [HttpGet]
-    [Route("Users")]
-    public async Task<IActionResult> GetUsers()
-    {
-        return Ok(userManager.Users.ToList());
-    }
-
-    [HttpGet]
-    [Route("tests/deleteallusers")]
-    public void ResetUsers()
-    {
-        ApplicationDbContext ctx = new ApplicationDbContext(options);
-        ctx.UserRoles.RemoveRange(ctx.UserRoles);
-        ctx.Users.RemoveRange(ctx.Users);
-        ctx.SaveChanges();
-        userManager.Users.ToList().ForEach(x => userManager.DeleteAsync(x));
-    }
-
-
     [HttpPost("ForgotPassword")]
     public async Task<IActionResult> ForgotPassword([EmailAddress][Required] string email)
     {
@@ -208,6 +148,48 @@ public class AuthenticateController : ControllerBase
         {
             return BadRequest(String.Join(" | ", result.Errors));
         }
+    }
+
+
+    /// <summary>
+    /// Add a role to a user
+    /// </summary>
+    /// <param name="role">can be admin or user</param>
+    /// <param name="idUser">the user email </param>
+    /// <returns></returns>
+    [HttpPost]
+    [Route("SetRole")]
+    public async Task<IActionResult> SetRoleToUser(AddRoleToUserModel model)
+    {
+        var userExists = await userManager.FindByEmailAsync(model.UserEmail);
+        if (userExists == null)
+            return StatusCode(StatusCodes.Status400BadRequest, new { Status = "Error", Message = "User doesn´t exists!" });
+
+        //if (!await roleManager.RoleExistsAsync(model.Role))
+        //    return StatusCode(StatusCodes.Status400BadRequest, new { Status = "Error", Message = "Role doesn´t exists, a valid role must be provided" });
+
+        var currentRoles = await userManager.GetRolesAsync(userExists);
+        var removeResult = await userManager.RemoveFromRolesAsync(userExists, currentRoles);
+        if (!removeResult.Succeeded)
+            return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "Role assignation  failed! Please report this error." });
+
+        var resultRoleAssign = await userManager.AddToRoleAsync(userExists, model.Role);
+        if (!resultRoleAssign.Succeeded)
+            return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "Role assignation  failed! Please report this error." });
+
+        return Ok(new { Status = "Success", Message = $"User is now in role {model.Role}!" });
+
+    }
+
+    [HttpGet]
+    [Route("tests/deleteallusers")]
+    public void ResetUsers()
+    {
+        ApplicationDbContext ctx = new ApplicationDbContext(options);
+        ctx.UserRoles.RemoveRange(ctx.UserRoles);
+        ctx.Users.RemoveRange(ctx.Users);
+        ctx.SaveChanges();
+        userManager.Users.ToList().ForEach(x => userManager.DeleteAsync(x));
     }
 
     public class ResetPasswordModel

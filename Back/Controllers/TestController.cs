@@ -57,7 +57,7 @@ namespace CohorteApi.Controllers
         {
             var objs = new[] {
                 new Event() {
-                    //Id=1,
+                    CategoryId = new Random().Next(1,6),
                     FrontPageImage = "https://cohorteapi.azurewebsites.net/images/event1FrontPage.jpg",
                     Thumbnail = "https://cohorteapi.azurewebsites.net/images/event1-thumb.jpg",
                     EventName = "BIENVENIDO DICIEMBRE - UNA ALBORADA POR TODO LO ALTO",
@@ -69,6 +69,7 @@ namespace CohorteApi.Controllers
                     EventTime = DateTime.Parse("2022-11-30T13:42:42.55"),
                     },
                     new Event() {
+                         CategoryId =  new Random().Next(1,6),
                      FrontPageImage = "https://cohorteapi.azurewebsites.net/images/evento2-Front.jpg",
                      Thumbnail  =   "https://cohorteapi.azurewebsites.net/images/evento2-thumb.jpg",
                     EventName = "KEVIN JOHANSEN - TU VE TOUR",
@@ -80,6 +81,7 @@ namespace CohorteApi.Controllers
                     EventTime = DateTime.Parse("2022-12-03T13:42:42.55"),
                     },
                     new Event() {
+                         CategoryId =  new Random().Next(1,6),
                     FrontPageImage = "https://cohorteapi.azurewebsites.net/images/evento3%20(1).jpg",
                     Thumbnail  =   "https://cohorteapi.azurewebsites.net/images/evento3%20(2).jpg",
                     EventName = "NATALIA JIMÉNEZ 20 AÑOS - ANTOLOGÍA TOUR - MEDELLÍN",

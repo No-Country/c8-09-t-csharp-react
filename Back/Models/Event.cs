@@ -1,4 +1,6 @@
-﻿namespace CohorteApi.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace CohorteApi.Models
 {
     public class Event
     {
@@ -18,6 +20,9 @@
 
         //public ICollection<Section>? Sections { get; set; }
 
+        public Category Category { get; set; }
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
         
         public Event()
         {
