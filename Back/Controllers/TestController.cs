@@ -59,8 +59,8 @@ namespace CohorteApi.Controllers
             var objs = new[] {
                 new Event() {
                     CategoryId = new Random().Next(1,6),
-                    FrontPageImage = "https://cohorteapi.azurewebsites.net/images/event1FrontPage.jpg",
-                    Thumbnail = "https://cohorteapi.azurewebsites.net/images/event1-thumb.jpg",
+                    FrontPageImage = "https://cohorteapi.azurewebsites.net/images/Event_1_FrontPage.jpg",
+                    Thumbnail = "https://cohorteapi.azurewebsites.net/images/Event_1_Thumbnail.jpg",
                     EventName = "BIENVENIDO DICIEMBRE - UNA ALBORADA POR TODO LO ALTO",
                     EventDescription="Ven con nosotros a vivir una magnífica noche ubicada en la mejor zona de Medellín, con un acceso visual 360 de toda la ciudad, acompáñanos en esta noche mágica a vivir una alborada por todo lo alto, con una exquisita marranada gourmet.",
                     Price = 10,
@@ -71,8 +71,8 @@ namespace CohorteApi.Controllers
                     },
                     new Event() {
                          CategoryId =  new Random().Next(1,6),
-                     FrontPageImage = "https://cohorteapi.azurewebsites.net/images/evento2-Front.jpg",
-                     Thumbnail  =   "https://cohorteapi.azurewebsites.net/images/evento2-thumb.jpg",
+                     FrontPageImage = "https://cohorteapi.azurewebsites.net/images/Event_2_FrontPage.jpg",
+                     Thumbnail  =   "https://cohorteapi.azurewebsites.net/images/Event_2_Thumbnail.jpg",
                     EventName = "KEVIN JOHANSEN - TU VE TOUR",
                     EventDescription="",
                     Price = 25,
@@ -83,8 +83,8 @@ namespace CohorteApi.Controllers
                     },
                     new Event() {
                          CategoryId =  new Random().Next(1,6),
-                    FrontPageImage = "https://cohorteapi.azurewebsites.net/images/evento3%20(1).jpg",
-                    Thumbnail  =   "https://cohorteapi.azurewebsites.net/images/evento3%20(2).jpg",
+                    FrontPageImage = "https://cohorteapi.azurewebsites.net/images/Event_3_FrontPage.jpg",
+                    Thumbnail  =   "https://cohorteapi.azurewebsites.net/images/Event_3_Thumbnail.jpg",
                     EventName = "NATALIA JIMÉNEZ 20 AÑOS - ANTOLOGÍA TOUR - MEDELLÍN",
                     EventDescription="",
                     Price = 30,
@@ -93,8 +93,6 @@ namespace CohorteApi.Controllers
                     Created = DateTime.Parse("2022-11-24T13:42:42.55"),
                     EventTime = DateTime.Parse("2023-03-23T13:42:42.55"),
                     }};
-
-
             context.Events.AddRange(objs);
             context.SaveChanges();
             return objs;
