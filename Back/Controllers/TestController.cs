@@ -18,7 +18,7 @@ namespace CohorteApi.Controllers
         [HttpGet("GenerateRandomUsers")]
         public async Task<IActionResult> GenerateTestUsers([FromServices] ApplicationDbContext context, [FromServices] UserManager<IdentityUser> umanager)
         {
-            var password = "Tikefan123!";
+            var password = "Tiketfan123!";
             var user = RandomString(6);
             var admin = RandomString(6);
             //  umanager.CreateAsync()
@@ -28,13 +28,14 @@ namespace CohorteApi.Controllers
             var r2 = await umanager.CreateAsync(u2, password);
 
 
+            var a1 = await umanager.AddToRoleAsync(u1, "user");
+            var a2 = await umanager.AddToRoleAsync(u2, "admin");
+
             var result = new[]
             {
-                new {Username = user, Password = password, email =$"{user}@mailinator.com",  rol = "user", Succeeded = r1.Succeeded},
-                new {Username = admin, Password = password, email =$"{user}@mailinator.com", rol = "admin", Succeeded = r1.Succeeded},
+                new {Username = user, Password = password, email =$"{user}@mailinator.com",  rol = "User", Succeeded = r1.Succeeded},
+                new {Username = admin, Password = password, email =$"{admin}@mailinator.com", rol = "Admin", Succeeded = r2.Succeeded},
              };
-            await umanager.AddToRoleAsync(u2, "admin");
-            await umanager.AddToRoleAsync(u1, "user");
 
             return new JsonResult(result);
 

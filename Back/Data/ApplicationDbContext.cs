@@ -18,6 +18,7 @@ namespace CohorteApi.Data
         public virtual DbSet<Subscription> Subscriptions { get; set; }
         public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Review> Review { get; set; }
 
 
 
@@ -30,8 +31,8 @@ namespace CohorteApi.Data
             modelBuilder.Entity<Category>().HasData(CategoriesSeed.GetData());
             modelBuilder.Entity<Event>().HasData(EventsSeed.GetData());
 
-
         }
+
     }
 }
 

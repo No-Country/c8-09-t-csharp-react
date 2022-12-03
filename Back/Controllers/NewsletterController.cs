@@ -21,9 +21,16 @@ namespace CohorteApi.Controllers
 
         // GET: api/<Newsletter>
         [HttpGet]
-        public IEnumerable<NewsletterDTO> Get()
+        public IActionResult Get()
         {
-            return _newsletterBusiness.GetAll();
+            try
+            {
+                return Ok(_newsletterBusiness.GetAll());
+            }
+            catch (Exception e )
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPost]
