@@ -13,7 +13,8 @@ const initialState = {
     allEvents: [],
     singleUser: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : singleUserEmpty,
     userloginData: [],
-    isLogged: null
+    isLogged: null,
+    forgotPasswordToken: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -47,6 +48,19 @@ function rootReducer(state = initialState, action) {
                 isLogged: action.payload
             }
 
+        case "FORGOT_PASSWORD":
+            const forgotPassToken = action.payload
+            localStorage.setItem("forgotPasswordToken", JSON.stringify(forgotPassToken))
+            return {
+                ...state,
+                forgotPasswordToken: action.payload
+            }   
+
+        case "RESET_PASSWORD":
+            return{
+                ...state
+            }
+            
         default: return state;
     }
 }

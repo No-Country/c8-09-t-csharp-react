@@ -5,6 +5,7 @@ import Home from './pages/home/Home'
 import Login from './pages/login/login'
 import Register from './pages/register/register'
 import ForgotPassword from './pages/forgotPassword/forgotPassword'
+import ResetPassword from './pages/resetPassword/resetPassword'
 import PrePurchase from './components/prePurchase/prePurchase'
 import { AuthGuard } from './guards/AuthGuard'
 import { AuthRolesGuard } from './guards/AuthRolesGuard'
@@ -18,6 +19,7 @@ function App() {
 			<Route index element={<Home />} />
 			<Route element={<PrePurchase />} exact path={'/prePurchase'} />
 			<Route element={<ForgotPassword />} path={'/forgotPassword'} />
+			<Route element={<ResetPassword />} path={'/resetpassword'} />
 			<Route element={<Event />} path={'/event/:id'} />
 			<Route
 				element={
