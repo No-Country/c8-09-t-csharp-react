@@ -1,23 +1,6 @@
 import { Alert } from "../../utils/alert";
 import rejectionImg from '../../../src/rejection.svg'
 import responseImg from '../../../src/response.svg'
-
-// utilizarlo en el then
-// Alert.fire({
-//     title: '¡Listo! Revisar tu correo',
-//     html: `Las instrucciones fueron enviadas a: </br> <b>${email}</b>`,
-//     imageUrl: responseImg,
-//     imageAlt: 'confirm',
-//     confirmButtonText: `<button class="botonPrincipal" >Iniciar sesion</button>`,
-// })
-// // utilizarlo en el catch
-// Alert.fire({
-//     title: 'Ooops',
-//     html: `No hay ninguna cuenta de usuario asignada al correo: </br> <b>${email}</b>`,
-//     imageUrl: rejectionImg,
-//     imageAlt: 'error',
-//     confirmButtonText: `<button class="botonPrincipal" >Intentar de nuevo</button>`,
-// })
 import '../forgotPassword/forgotPassword.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';

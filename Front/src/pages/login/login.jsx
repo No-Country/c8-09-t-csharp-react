@@ -1,3 +1,6 @@
+import { Alert } from "../../utils/alert";
+import rejectionImg from '../../../src/rejection.svg'
+import responseImg from '../../../src/response.svg'
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from "react-router-dom";
@@ -7,7 +10,6 @@ import { checkLocalStorage } from "../../redux/actions";
 import "../login/login.css"
 import { loginUser } from "../../redux/actions";
 import { useEffect } from "react";
-
 
 
 const Login = function () {
@@ -35,12 +37,26 @@ const Login = function () {
             .then(val => {
                 if (val !== 200) {
                     // alert(`Error ${val.response.status}: ${val.response.statusText}`)
-                    alert("Error")
+                    // alert("Error")
+                    Alert.fire({
+                        title: 'Ooops',
+                        html: `Por favor verifica los datos: </br> <b>${input.email}</b>`,
+                        imageUrl: rejectionImg,
+                        imageAlt: 'error',
+                        confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
+                    })
+                    
                 } else {
                     try{
                         // const decode = jwt_decode(loginData.token)
                         // localStorage.setItem("user", JSON.stringify(decode))
-                        alert("Bienvenido!")
+                        Alert.fire({
+                            title: 'Bienvenido!',
+                            html: `Ingresaste con el correo: </br> <b>${input.email}</b>`,
+                            imageUrl: responseImg,
+                            imageAlt: 'confirm',
+                            confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
+                        })
                         dispatch(checkLocalStorage())
                         navigate("/")
                      

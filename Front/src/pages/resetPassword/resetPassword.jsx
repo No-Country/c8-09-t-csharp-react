@@ -1,8 +1,11 @@
+import { Alert } from "../../utils/alert";
+import rejectionImg from '../../../src/rejection.svg'
+import responseImg from '../../../src/response.svg'
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-import { resetPassword } from "../../redux/actions";
+import { checkLocalStorage } from "../../redux/actions";
+import { resetPassword, loginUser } from "../../redux/actions";
 
 
 
@@ -60,24 +63,43 @@ const ResetPassword = function(){
     }
 
 
-    async function submit(e) {
+     function submit(e) {
         e.preventDefault()
         dispatch(resetPassword(input))
             .then(val => {
             if(val !== 200){
                 console.log(val)
-                alert("Error: " + val)
+                
+                Alert.fire({
+                    title: 'Ooops',
+                    html: `Hubo un error, intenta de nuevo`,
+                    imageUrl: rejectionImg,
+                    imageAlt: 'error',
+                    confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
+                })
             } else{
                 console.log("Success with status: " + val)
-                alert("Cambio de contraseña exitoso!")
-                navigate("/")
+                Alert.fire({
+                    title: '¡Tu contraseña ha sido actualizada!',
+                    html: `Bienvenido </br> <b>${input.email}</b>`,
+                    imageUrl: responseImg,
+                    imageAlt: 'confirm',
+                    confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
+                })
+                localStorage.removeItem('forgotPasswordToken')
+                dispatch(loginUser({email: input.email, password: input.password}))
+                    .then(val => {
+                        dispatch(checkLocalStorage())
+                        navigate("/")
+                    })
             }
         })
+
     }
-    console.log(input.email)
-    console.log(input.password)
-    console.log(input.confirmPassword)
-    console.log(input.token)
+    // console.log(input.email)
+    // console.log(input.password)
+    // console.log(input.confirmPassword)
+    // console.log(input.token)
 
     return(
         <div className="forgotpassword_main">

@@ -14,12 +14,13 @@ import Error from "./pages/error/Error"
 import Event from './pages/event/event'
 
 function App() {
+
 	return (
 		<Routes>
 			<Route index element={<Home />} />
 			<Route element={<PrePurchase />} exact path={'/prePurchase'} />
 			<Route element={<ForgotPassword />} path={'/forgotPassword'} />
-			<Route element={<ResetPassword />} path={'/resetpassword'} />
+			<Route element={<ResetPassword />} exact path={'/resetpassword'} />
 			<Route element={<Event />} path={'/event/:id'} />
 			<Route
 				element={
