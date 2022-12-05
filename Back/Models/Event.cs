@@ -10,8 +10,6 @@ namespace CohorteApi.Models
         public string FrontPageImage { get; set; }
         public string Thumbnail { get; set; }
         public string Venue { get; set; }
-        public double Price { get; set; }
-        public int AvailableSeats { get; set; }
         public DateTime Created { get; init; } = DateTime.Now.ToUniversalTime();
         public DateTime EventTime { get; set; }
         public ICollection<Tag>? EventTags { get; set; }

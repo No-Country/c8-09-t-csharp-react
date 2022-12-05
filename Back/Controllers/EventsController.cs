@@ -26,9 +26,15 @@ namespace CohorteApi.Controllers
         {
             if (categoryId > 0)
             {
-                return await _context.Events.Include(i => i.Reviews).Where(x => x.CategoryId == categoryId).ToListAsync();
+                var eventsFromCat = await _context.Events.Include(i => i.Reviews)
+                    .Include(i => i.Category)
+                    .Where(x => x.CategoryId == categoryId).ToListAsync();
+                eventsFromCat.ForEach(x => x.Category.Events = null);
+                return eventsFromCat;
             }
-            var previousResults = await _context.Events.ToListAsync();
+            var previousResults = await _context.Events
+                .Include( i => i.Category).ToListAsync();
+            previousResults.ForEach(x => x.Category.Events = null);
             return previousResults;
         }
 
@@ -111,7 +117,7 @@ namespace CohorteApi.Controllers
 
         [HttpGet("admin")]
         public async Task<ActionResult<IEnumerable<Event>>> GetEventsAdmin([FromQuery] int categoryId)
-        {             
+        {
             return await _context.Events.Include(a => a.Category).ToListAsync(); ;
         }
 
