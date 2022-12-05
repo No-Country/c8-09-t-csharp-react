@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 const ListEvents = () => {
 
     const dispatch = useDispatch();
-    const events = useSelector(state => state.allEvents)
+    const events = useSelector(state => state.allEventsCopy)
 
     useEffect(()=>{
         dispatch(getEvents())

@@ -26,7 +26,8 @@ function rootReducer(state = initialState, action) {
         case "GET_EVENTS":
             return{
                 ...state,
-                allEvents: action.payload
+                allEvents: action.payload,
+                allEventsCopy: action.payload
                 }
         case "CLEAR_USER":
             return {
@@ -49,8 +50,8 @@ function rootReducer(state = initialState, action) {
             }
 
         case "FILTER_BY_GENRES":
-            const getGenres = state.allEventsCopy
-            const filtering = action.payload === "Todos" ? getGenres :
+            const getGenres = state.allEvents
+            const filtering = action.payload === "Todos" ? state.allEvents :
             state.allEvents.data.filter(e => {
                 if(e.categoryId){
                     if(e.categoryId == action.payload){
@@ -60,8 +61,8 @@ function rootReducer(state = initialState, action) {
             })
             return{
                 ...state,
-                allEvents: filtering,
-                allEventsCopy: getGenres
+                allEvents: getGenres,
+                allEventsCopy: filtering
             }
 
         default: return state;
