@@ -13,7 +13,8 @@ const initialState = {
     allEvents: [],
     singleUser: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : singleUserEmpty,
     userloginData: [],
-    isLogged: null
+    isLogged: null,
+    allEventsCopy: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -45,6 +46,22 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 isLogged: action.payload
+            }
+
+        case "FILTER_BY_GENRES":
+            const getGenres = state.allEventsCopy
+            const filtering = action.payload === "Todos" ? getGenres :
+            state.allEvents.data.filter(e => {
+                if(e.categoryId){
+                    if(e.categoryId == action.payload){
+                        return e
+                    }
+                }
+            })
+            return{
+                ...state,
+                allEvents: filtering,
+                allEventsCopy: getGenres
             }
 
         default: return state;

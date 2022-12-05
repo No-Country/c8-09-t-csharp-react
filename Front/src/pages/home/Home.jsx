@@ -11,10 +11,10 @@ const Home = () => {
 	return (
 		<div>
 			<Carousel />
-			<SeccionEvent seccion={'Proximos eventos'} ruta={"/"}/>
+			<SeccionEvent seccion={'Proximos eventos'} ruta={"/catalogo"}/>
 			<TopVendidos/>
 			<Comments />
-			<SeccionEvent seccion={'Lo mas buscado'} ruta={"/"}/>
+			<SeccionEvent seccion={'Lo mas buscado'} ruta={"/catalogo"}/>
 			<Newsletter />
 			<Footer />
 		</div>

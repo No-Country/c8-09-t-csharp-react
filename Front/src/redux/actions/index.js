@@ -62,3 +62,10 @@ export function checkLocalStorage(payload){
         }
     }
 }
+
+export function filterByGenres(payload){
+    return{
+        type: "FILTER_BY_GENRES",
+        payload
+    }
+}

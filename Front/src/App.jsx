@@ -11,6 +11,7 @@ import { AuthRolesGuard } from './guards/AuthRolesGuard'
 import { isUserAdmin, isUserLogged } from './utils/validations'
 import Error from "./pages/error/Error"
 import Event from './pages/event/event'
+import Catalogo from './pages/catalogo/Catalogo'
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 			<Route element={<PrePurchase />} exact path={'/prePurchase'} />
 			<Route element={<ForgotPassword />} path={'/forgotPassword'} />
 			<Route element={<Event />} path={'/event/:id'} />
+			<Route element={<Catalogo/>} path={'/catalogo'}/>
 			<Route
 				element={
 					<AuthGuard redirectPath={'/account'} isAllowed={!isUserLogged()} />

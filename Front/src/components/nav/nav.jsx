@@ -9,6 +9,7 @@ import { clearLocalStorage } from "../../utils/localStorage"
 import { Menu } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
+
 const Nav = () => {     
     
     const userInfo = useSelector(state => state.userloginData)
@@ -68,8 +69,7 @@ const Nav = () => {
                 </Link>
                 <ul>
                     <li className="active"><Link to={"/"} >Inicio</Link></li>
-                    <li><Link to={"/"}>Categorias</Link></li>
-                    <li><Link to={"/"}>Contacto</Link></li>
+                    <li className="active"><Link to={"/catalogo"} >Catalogo</Link></li>
                 </ul>
             </div>
             <div className="button-carrito">

@@ -15,9 +15,15 @@ const ListEvents = () => {
 
     return(
         <div className="containerEventos">
-            <div className="listaEventos">
-                {events.data?.map((event)=> <CardEvent key={event.id} evento={event}/>)}
-            </div>
+            {events.data === undefined ? 
+                <div className="listaEventos">
+                    {events.map((event)=> <CardEvent key={event.id} evento={event}/>)}
+                </div>
+            :
+                <div className="listaEventos">
+                    {events.data?.map((event)=> <CardEvent key={event.id} evento={event}/>)}
+                </div>
+        }
         </div>
        
     )
