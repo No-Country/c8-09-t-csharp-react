@@ -5,8 +5,16 @@ import Footer from '../../components/footer/Footer'
 import Comments from '../../components/Comments/Comments'
 import Carousel from '../../components/Carousel/Carousel'
 import TopVendidos from '../../components/TopVendidos/TopVendidos'
+import { useDispatch } from 'react-redux'
+import { getEvents } from '../../redux/actions'
 
 const Home = () => {
+
+	const dispatch = useDispatch();
+
+	useEffect(()=>{
+		dispatch(getEvents())
+	}, [])
 
 	return (
 		<div>
