@@ -29,16 +29,25 @@ const Catalogo = () => {
         <div className="catalogo-container">
             <Carousel />
             <form>
-                <select name="filter" onChange={(e)=> filterGenres(e)}>
-                    <option value="Todos" className="filter-option">Todos</option>
+                <select name="filter" onChange={(e)=> {
+                    filterGenres(e)
+                    console.log(e)
+                    }}>
+                    <option
+                    value="Todos"
+                    className="filter-option">Todos</option>
                     {categories?.map((c)=>{
                         return(
-                            <option key={c.id} value={c.id} className="filter-option">{c.name}</option>
+                            <option
+                            key={c.id}
+                            value={c.id}
+                            className="filter-option"
+                            >{c.name}</option>
                         )   
                     })}
                 </select>
             </form>
-            <SeccionEvent seccion={'Todos los eventos'} ruta={"/catalogo"}/>
+            <SeccionEvent seccion={"Eventos"} ruta={"/catalogo"}/>
         </div>
     )
 }
