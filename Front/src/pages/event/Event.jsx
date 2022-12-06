@@ -26,8 +26,7 @@ const Event = () => {
     const getEvent = async () => {
         const response = await axios.get(`https://cohorteapi.azurewebsites.net/api/Events/${id}`)
         setEvent(response.data)
-        //dispatch(filterByGenres(response.data.category.name))
-        console.log(response.data)
+        dispatch(filterByGenres(response.data.category.name))
     }   
 
     useEffect(()=>{
