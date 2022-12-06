@@ -19,17 +19,17 @@ namespace CohorteApi.Data
         public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Review> Review { get; set; }
+        public virtual DbSet<Section> Section { get; set; }
 
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.UseSerialColumns();
             base.OnModelCreating(modelBuilder);
             UsersSeed.GetData(modelBuilder);
             modelBuilder.Entity<Subscription>().HasData(SubscriptionsSeed.GetData());
             modelBuilder.Entity<Category>().HasData(CategoriesSeed.GetData());
-            modelBuilder.Entity<Event>().HasData(EventsSeed.GetData());
+            //modelBuilder.Entity<Event>().HasData(EventsSeed.GetData());
 
         }
 
