@@ -21,18 +21,18 @@ namespace CohorteApi.Data.Seeds
 
             var password = "Tiketfan123!";
 
-            PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();
+            PasswordHasher<AppUser> passwordHasher = new PasswordHasher<AppUser>();
 
             var objs = new[]
             {
-                new IdentityUser(){UserName = "nadir", Email = "nadir@mailinator.com"},
-                new IdentityUser(){UserName = "alex", Email = "alex@mailinator.com"},
-                new IdentityUser(){UserName = "diego", Email = "diego@mailinator.com"},
-                new IdentityUser(){UserName = "max", Email = "max@mailinator.com"},
-                new IdentityUser(){UserName = "manuel", Email = "manuel@mailinator.com"},
-                new IdentityUser(){UserName = "any", Email = "any@mailinator.com"},
-                new IdentityUser(){UserName = "bel", Email = "bel@mailinator.com"},
-                new IdentityUser(){UserName = "d", Email = "d@mailinator.com"},
+                new AppUser(){UserName = "nadir", Email = "nadir@mailinator.com"},
+                new AppUser(){UserName = "alex", Email = "alex@mailinator.com"},
+                new AppUser(){UserName = "diego", Email = "diego@mailinator.com"},
+                new AppUser(){UserName = "max", Email = "max@mailinator.com"},
+                new AppUser(){UserName = "manuel", Email = "manuel@mailinator.com"},
+                new AppUser(){UserName = "any", Email = "any@mailinator.com"},
+                new AppUser(){UserName = "bel", Email = "bel@mailinator.com"},
+                new AppUser(){UserName = "d", Email = "d@mailinator.com"},
             };
 
             var userRoleId = roles.Last().Id;
@@ -42,7 +42,7 @@ namespace CohorteApi.Data.Seeds
                 item.PasswordHash = passwordHasher.HashPassword(item, password);
                 item.NormalizedEmail = item.Email.ToUpper();
                 item.NormalizedUserName = item.UserName.ToUpper();
-                modelBuilder.Entity<IdentityUser>().HasData(item);
+                modelBuilder.Entity<AppUser>().HasData(item);
             }
 
             foreach (var item in objs)

@@ -17,14 +17,14 @@ namespace CohorteApi.Controllers
     {
 
         [HttpGet("GenerateRandomUsers")]
-        public async Task<IActionResult> GenerateTestUsers([FromServices] ApplicationDbContext context, [FromServices] UserManager<IdentityUser> umanager)
+        public async Task<IActionResult> GenerateTestUsers([FromServices] ApplicationDbContext context, [FromServices] UserManager<AppUser> umanager)
         {
             var password = "Tiketfan123!";
             var user = RandomString(6);
             var admin = RandomString(6);
             //  umanager.CreateAsync()
-            var u1 = new IdentityUser { UserName = user, Email = $"{user}@mailinator.com" };
-            var u2 = new IdentityUser { UserName = admin, Email = $"{admin}@mailinator.com" };
+            var u1 = new AppUser { UserName = user, Email = $"{user}@mailinator.com" };
+            var u2 = new AppUser { UserName = admin, Email = $"{admin}@mailinator.com" };
             var r1 = await umanager.CreateAsync(u1, password);
             var r2 = await umanager.CreateAsync(u2, password);
 
@@ -47,6 +47,31 @@ namespace CohorteApi.Controllers
                 return new string(Enumerable.Repeat(chars, length)
                     .Select(s => s[random.Next(s.Length)]).ToArray());
             }
+        }
+
+        [HttpGet("GetUsersTesting")]
+        public async Task<IActionResult> GetUsersTesting([FromServices] ApplicationDbContext context, [FromServices] UserManager<AppUser> umanager)
+        {
+            var result = await umanager.Users.Include(a => a.Sales).ThenInclude(a=>a.Event).ThenInclude(a=>a.Category).Include(a => a.Reviews).ToListAsync();
+            return new JsonResult(result);
+        }
+
+        [HttpGet("GenerateSales")]
+        public async Task<IActionResult> GenerateSale([FromServices] ApplicationDbContext context, [FromServices] UserManager<AppUser> umanager)
+        {            
+            var user = await umanager.FindByEmailAsync("manuel@mailinator.com");
+            var _event = await context.Events.FirstAsync();
+            Sale sale = new() 
+            {
+                CreatedAt= DateTime.Now,
+                Event= _event,
+                Price = (decimal)49.99,
+                Qty=1,
+                User = user,
+                Section = "Platea"
+            };
+            context.Add(sale);           
+            return new JsonResult(await context.SaveChangesAsync());
         }
     }
 

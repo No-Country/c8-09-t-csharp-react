@@ -10,18 +10,19 @@ using CohorteApi.Data;
 using Microsoft.EntityFrameworkCore;
 using CohorteApi.Core.Interfaces;
 using System.ComponentModel.DataAnnotations;
+using CohorteApi.Models;
 
 [Route("api/[controller]")]
 [ApiController]
 public class AuthenticateController : ControllerBase
 {
-    private readonly UserManager<IdentityUser> userManager;
+    private readonly UserManager<AppUser> userManager;
     private readonly RoleManager<IdentityRole> roleManager;
     private readonly IConfiguration _configuration;
     private readonly DbContextOptions<ApplicationDbContext> options;
     private readonly IEmailBusiness emailBusiness;
 
-    public AuthenticateController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, DbContextOptions<ApplicationDbContext> options, IEmailBusiness email)
+    public AuthenticateController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, DbContextOptions<ApplicationDbContext> options, IEmailBusiness email)
     {
         this.userManager = userManager;
         this.roleManager = roleManager;
@@ -87,7 +88,7 @@ public class AuthenticateController : ControllerBase
         if (emailExists != null)
             return StatusCode(StatusCodes.Status400BadRequest, new { Status = "Error", Message = "Email is already associated with an account!" });
 
-        IdentityUser user = new IdentityUser()
+        AppUser user = new AppUser()
         {
             Email = model.Email,
             SecurityStamp = Guid.NewGuid().ToString(),

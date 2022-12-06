@@ -17,7 +17,7 @@ namespace CohorteApi.Models
         [Required]
         [ForeignKey("User")]
         public string UserId { get; set; }
-        public IdentityUser User { get; set; }
+        public AppUser User { get; set; }
         public string UserName { get; set; }
 
         [Required]
