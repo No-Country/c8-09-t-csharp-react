@@ -10,6 +10,7 @@ import axios from "axios"
 const Catalogo = () => {
 
     const [categories, setCategories] = useState([])
+    const [nameCategorie, setNameCategorie] = useState("Todos")
     const dispatch = useDispatch()
 
     const getCategories = async () => {
@@ -19,6 +20,7 @@ const Catalogo = () => {
 
     const filterGenres = (e) => {
         dispatch(filterByGenres(e.target.value))
+        setNameCategorie(e.target.value)
     }
 
     useEffect(()=> {
@@ -31,7 +33,6 @@ const Catalogo = () => {
             <form>
                 <select name="filter" onChange={(e)=> {
                     filterGenres(e)
-                    console.log(e)
                     }}>
                     <option
                     value="Todos"
@@ -40,14 +41,14 @@ const Catalogo = () => {
                         return(
                             <option
                             key={c.id}
-                            value={c.id}
+                            value={c.name}
                             className="filter-option"
                             >{c.name}</option>
                         )   
                     })}
                 </select>
             </form>
-            <SeccionEvent seccion={"Eventos"} ruta={"/catalogo"}/>
+            <SeccionEvent seccion={nameCategorie} ruta={"/catalogo"}/>
         </div>
     )
 }

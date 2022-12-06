@@ -26,7 +26,8 @@ const Event = () => {
     const getEvent = async () => {
         const response = await axios.get(`https://cohorteapi.azurewebsites.net/api/Events/${id}`)
         setEvent(response.data)
-        dispatch(filterByGenres(response.data.categoryId))
+        //dispatch(filterByGenres(response.data.category.name))
+        console.log(response.data)
     }   
 
     useEffect(()=>{
@@ -100,9 +101,9 @@ const Event = () => {
                                 </div>
                                 <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right bg-transparent shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="py-1">
-                                            {cantidad.map((c)=>{
+                                            {cantidad.map((c, index)=>{
                                                 return(
-                                                <Menu.Item>
+                                                <Menu.Item key={index}>
                                                     <a
                                                     href="#"
                                                     className={'bg-gray-800 border-gray-600 border-solid border-2 text-white block px-4 py-2 text-md font-semibold'}

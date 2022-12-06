@@ -53,8 +53,8 @@ function rootReducer(state = initialState, action) {
             const getGenres = state.allEvents
             const filtering = action.payload === "Todos" ? state.allEvents :
             state.allEvents.data.filter(e => {
-                if(e.categoryId){
-                    if(e.categoryId == action.payload){
+                if(e.category.name){
+                    if(e.category.name == action.payload){
                         return e
                     }
                 }
