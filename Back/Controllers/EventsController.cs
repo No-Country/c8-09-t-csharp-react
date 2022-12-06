@@ -29,12 +29,10 @@ namespace CohorteApi.Controllers
                 var eventsFromCat = await _context.Events.Include(i => i.Reviews)
                     .Include(i => i.Category)
                     .Where(x => x.CategoryId == categoryId).ToListAsync();
-                eventsFromCat.ForEach(x => x.Category.Events = null);
+
                 return eventsFromCat;
             }
-            var previousResults = await _context.Events
-                .Include( i => i.Category).ToListAsync();
-            previousResults.ForEach(x => x.Category.Events = null);
+            var previousResults = await _context.Events.Include( i => i.Category).ToListAsync();
             return previousResults;
         }
 
