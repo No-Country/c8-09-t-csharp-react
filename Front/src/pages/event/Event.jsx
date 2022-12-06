@@ -5,20 +5,17 @@ import { useEffect } from "react";
 import "./event.css"
 import SeccionEvent from '../../components/seccionEvents/SeccionEvent'
 import Footer from '../../components/footer/Footer'
-import {useDispatch, useSelector} from "react-redux"
-import { filterByGenres } from "../../redux/actions";
+
 //Tailwind components
 import { Menu } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Reviews from "../../components/Reviews/Reviews";
-
+import dropdown from './dropdown.jsx'
 const Event = () => {
 
     const [event, setEvent] = useState({})
     const [total, setTotal] = useState(0)
     const { id } = useParams()
-    
-    const dispatch = useDispatch();
 
     const ubicacion = ["Platea izquierda", "Platea central", "Platea derecha", "Palco izquierdo", "Palco derecho"]
     const cantidad = [ 1,2,3,4,5]
@@ -26,14 +23,15 @@ const Event = () => {
     const getEvent = async () => {
         const response = await axios.get(`https://cohorteapi.azurewebsites.net/api/Events/${id}`)
         setEvent(response.data)
-        dispatch(filterByGenres(response.data.category.name))
     }   
 
     useEffect(()=>{
         getEvent()
+        console.log(event)
     }, [])
 
     return(
+        
         <div>
             <div className="imageHeader" style={{backgroundImage: `url(${event.frontPageImage})`}}></div>
             <div className="eventInfo">
@@ -75,9 +73,9 @@ const Event = () => {
                                 </div>
                                 <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right bg-transparent shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="py-1">
-                                            {ubicacion.map((u, index)=>{
+                                            {ubicacion.map((u)=>{
                                                 return(
-                                                <Menu.Item key={index}>
+                                                <Menu.Item>
                                                     <a
                                                     href="#"
                                                     className={'bg-gray-800 border-gray-600 border-solid border-2 text-white block px-4 py-2 text-md font-semibold'}
@@ -100,9 +98,9 @@ const Event = () => {
                                 </div>
                                 <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right bg-transparent shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="py-1">
-                                            {cantidad.map((c, index)=>{
+                                            {cantidad.map((c)=>{
                                                 return(
-                                                <Menu.Item key={index}>
+                                                <Menu.Item>
                                                     <a
                                                     href="#"
                                                     className={'bg-gray-800 border-gray-600 border-solid border-2 text-white block px-4 py-2 text-md font-semibold'}
