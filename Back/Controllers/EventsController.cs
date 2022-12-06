@@ -112,7 +112,7 @@ namespace CohorteApi.Controllers
         [HttpGet("admin")]
         public async Task<ActionResult<IEnumerable<Event>>> GetEventsAdmin([FromQuery] int categoryId)
         {             
-            return await _context.Events.Include(a => a.Category).ToListAsync(); ;
+            return await _context.Events.Include(a => a.Category).Include(a=>a.Sections).Include(a=>a.Reviews).ToListAsync(); ;
         }
 
     }

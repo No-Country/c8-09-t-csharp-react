@@ -11,7 +11,6 @@ namespace CohorteApi.Models
         public string? Description { get; set; }
         public string? Image { get; set; }
         private string? Slug { get; set; }
-
-        public List<Event> Events { get; set; }
+        private List<Event> Events { get; set; }
     }
 }

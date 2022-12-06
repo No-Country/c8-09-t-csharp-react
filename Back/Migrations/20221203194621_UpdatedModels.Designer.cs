@@ -4,19 +4,23 @@ using CohorteApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace CohorteApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221203194621_UpdatedModels")]
+    partial class UpdatedModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -97,6 +101,9 @@ namespace CohorteApi.Migrations
 
                     b.Property<string>("FrontPageImage")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<string>("Thumbnail")
                         .HasColumnType("nvarchar(max)");
@@ -308,14 +315,14 @@ namespace CohorteApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "460cad28-5d69-461f-bc6d-c6ab79efe7ab",
+                            Id = "e0238212-ada9-40a9-bcf0-587347f6ad9a",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "233efe61-93e9-4428-a60e-e8355c338e8b",
+                            Id = "100e66ac-ecf3-414f-aa2f-c342bedb0331",
                             ConcurrencyStamp = "2",
                             Name = "User",
                             NormalizedName = "USER"
@@ -414,129 +421,129 @@ namespace CohorteApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5140f1d9-b80a-4fc4-87a6-86ecd759e191",
+                            Id = "07c2bb53-5e7f-498e-88e7-e6f42e9be447",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "50c349d0-79cd-497a-b573-1431b26a0668",
+                            ConcurrencyStamp = "4df1368e-39b0-4c55-bc5c-d2bf4b1037d8",
                             Email = "nadir@mailinator.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "NADIR@MAILINATOR.COM",
                             NormalizedUserName = "NADIR",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPgskpgXja2jjbcaJpBund8l10jpDdrPOTHxRuEukoPFMqa25ZcfJRsozaguoapE1g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKGnf/vao/BPqyRGaoO/o00AupzpO/1UMjNZTzpQsaeXBFCMg9lO2qxDrMOmddyA4g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8bf3e57b-f9a7-451e-a835-fd3b020bd91f",
+                            SecurityStamp = "ab7cd2ff-ab4d-4600-b364-1cc6b246615c",
                             TwoFactorEnabled = false,
                             UserName = "nadir"
                         },
                         new
                         {
-                            Id = "00fb242a-8289-491c-bc80-dbebc94746fb",
+                            Id = "1483b6b3-a5f0-42f6-b9a7-f3980c5a8dec",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6474a095-3747-42fe-bcb1-5ed4e426615f",
+                            ConcurrencyStamp = "03f27db4-e59c-45ad-8250-f60d0793d80c",
                             Email = "alex@mailinator.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ALEX@MAILINATOR.COM",
                             NormalizedUserName = "ALEX",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDOtvA49oC2Rmyif8D4v8YAH/Zkl1uydNJFO/nPP8/IZdD2Ib7WephvRP+5pQD80zA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHyrkhwIkVGQptGR5yStsnPWZY5G5HqiSQ6npOWm6AQ5e5uOlGYUPrPNDwKmntuNjQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f08d5f9b-b4fa-45ac-b31d-81d0104cfe95",
+                            SecurityStamp = "82d5c1ba-f8d4-4cd5-a84d-5a0d4aa9f347",
                             TwoFactorEnabled = false,
                             UserName = "alex"
                         },
                         new
                         {
-                            Id = "da726c41-2151-49bc-9b41-aa5a6ef32963",
+                            Id = "a00492b9-5aa8-422f-83c4-a87108183324",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1548814c-333d-4e17-933d-0c632c57e9b6",
+                            ConcurrencyStamp = "c8af0470-1482-407d-831e-b846fab01288",
                             Email = "diego@mailinator.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DIEGO@MAILINATOR.COM",
                             NormalizedUserName = "DIEGO",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN/Bzw/4+Wq4nuqsXWH4EzqizE+G3EXMa1DmZGUrVlMlMW9i86lXOD3DfC/GqvYS7Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKVvA9GtwjdbPs0H9KNZ/znhHVHTBKsHSQtezyQgGH5FbMQCteO8ytbBC5ryzSig8A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "df138583-e7e8-48db-a59a-bd1a648f200c",
+                            SecurityStamp = "a7a9ed8d-52dc-49fa-8486-e1ecccc7bfe8",
                             TwoFactorEnabled = false,
                             UserName = "diego"
                         },
                         new
                         {
-                            Id = "4b07b3da-c5d4-49da-852b-8c3ce8082390",
+                            Id = "40867f0b-de28-470e-bace-eba0a7be5577",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e0e400a4-ef3d-4fb0-be3a-7ee31375de4b",
+                            ConcurrencyStamp = "75a5a5eb-0f9a-4fda-999f-f7d69fb15469",
                             Email = "max@mailinator.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "MAX@MAILINATOR.COM",
                             NormalizedUserName = "MAX",
-                            PasswordHash = "AQAAAAEAACcQAAAAEESm26RdWKAhB54WXeQN5R5ATE1hJDQhoTsf+5QG+QkHEiqnt52NwoaBcYUEdK0EJQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBj12kMBxTchb/PoT1LJnXggj0xz7gEi5BsUTM1HxKPl9bZdqjNtEvtvCn/nrL6Agw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "315e1226-e90b-47d2-b2c7-180fd606c013",
+                            SecurityStamp = "d59f18e9-32c0-45ee-ab0e-9586faf44b44",
                             TwoFactorEnabled = false,
                             UserName = "max"
                         },
                         new
                         {
-                            Id = "b402dac2-bbfd-4ccb-bee0-174732561647",
+                            Id = "cb0ebf82-fe6d-4638-9b94-353f97239554",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "551dc9eb-737d-4ef4-80d3-682e50dfc8b3",
+                            ConcurrencyStamp = "16723d32-06e9-4b34-a2b3-bbbb1710951d",
                             Email = "manuel@mailinator.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "MANUEL@MAILINATOR.COM",
                             NormalizedUserName = "MANUEL",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN3qBvvPYSwt9uOQeHmmnu+j4t0+KHrzd305o7wtnr4d9TvJe0OIV6uzIYLjJHlnfQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFZIcLkxgXOra2gLBE/2KZM8ZgMUGM4kcLVjw9HCbzQSn/uWbj8ykVfRniD29X3gTg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d17e2cf6-5237-465d-a666-eef22fcbb38b",
+                            SecurityStamp = "8ac4fe76-6349-45df-a610-b342a1c84c68",
                             TwoFactorEnabled = false,
                             UserName = "manuel"
                         },
                         new
                         {
-                            Id = "ebff4eed-5138-4ff8-bd7b-b47bca53a0e0",
+                            Id = "bcd0f007-ddf1-4e42-8788-4e1a05403681",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1d218995-4860-45ef-bf31-d218b4097f87",
+                            ConcurrencyStamp = "624bb4c3-877a-4e5a-b9a7-d016d76f912f",
                             Email = "any@mailinator.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ANY@MAILINATOR.COM",
                             NormalizedUserName = "ANY",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMQI26nnbBhG41J+gOrJwtGfu8nbfB5KGKRPi2flPTpUAHzVcE2chIVV3AUSH4U1FA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJHqABcRNvYGpGA3qaahM/2GbEB5rVpyiaa8BmxwwSvYjmA7gtYPvKF8ExbdwGhhPQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "58137fa0-7489-437e-a191-2a4ec230201f",
+                            SecurityStamp = "eda630c8-0037-4f68-8088-768613413403",
                             TwoFactorEnabled = false,
                             UserName = "any"
                         },
                         new
                         {
-                            Id = "0c5a8f1c-cdef-4b26-b4c9-d251127b7130",
+                            Id = "76c1bcd6-35f6-475b-be0e-d99a6f1327aa",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5521f23d-3644-461d-a975-e652d0415ae2",
+                            ConcurrencyStamp = "6e26f274-5855-49d0-9bfc-2552f2095acf",
                             Email = "bel@mailinator.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "BEL@MAILINATOR.COM",
                             NormalizedUserName = "BEL",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJRCNP8TK8FqP9Env8KQ4xqoDFkgBqNaLkN76ioo/hliw9ZP9qMs0nRjPQtsNvNQWw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGPHAFbJcYh0oZRpvDjecVXNYd4aLtt8nQ8e1danX7ud7PVzUiQDlkEyzQ75M/alCg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0168ddf3-4258-4b7c-a67e-5c2bc20f95d6",
+                            SecurityStamp = "457b1718-e935-44ae-874e-5cb747871a1d",
                             TwoFactorEnabled = false,
                             UserName = "bel"
                         },
                         new
                         {
-                            Id = "3f4d842f-7629-4183-848d-27d394168e43",
+                            Id = "213bcaca-8cd3-405a-8961-985b3d71b43b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "afb200f1-abac-435f-8d27-b8f4d58974a6",
+                            ConcurrencyStamp = "e657f0ea-51f0-4266-ae14-12e7e7f9c191",
                             Email = "d@mailinator.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "D@MAILINATOR.COM",
                             NormalizedUserName = "D",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOrLrFRz1x97WDjPQBIcnQdkTwyAZ6swcZRFGnzMyxkXr+agCJkCQSCZ88LipnYwnQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL+lEUJEuqjUXGAbTYnlcgifZfrxJqW6iJmqRPyXLKetsz1x+9/BIf7eM+3ghT4U7w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e55192f5-71f9-43e4-b385-199edde8bf29",
+                            SecurityStamp = "b4d9f10b-626b-4659-9c0a-fc13650dcae4",
                             TwoFactorEnabled = false,
                             UserName = "d"
                         });
@@ -606,43 +613,43 @@ namespace CohorteApi.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "5140f1d9-b80a-4fc4-87a6-86ecd759e191",
-                            RoleId = "233efe61-93e9-4428-a60e-e8355c338e8b"
+                            UserId = "07c2bb53-5e7f-498e-88e7-e6f42e9be447",
+                            RoleId = "100e66ac-ecf3-414f-aa2f-c342bedb0331"
                         },
                         new
                         {
-                            UserId = "00fb242a-8289-491c-bc80-dbebc94746fb",
-                            RoleId = "233efe61-93e9-4428-a60e-e8355c338e8b"
+                            UserId = "1483b6b3-a5f0-42f6-b9a7-f3980c5a8dec",
+                            RoleId = "100e66ac-ecf3-414f-aa2f-c342bedb0331"
                         },
                         new
                         {
-                            UserId = "da726c41-2151-49bc-9b41-aa5a6ef32963",
-                            RoleId = "233efe61-93e9-4428-a60e-e8355c338e8b"
+                            UserId = "a00492b9-5aa8-422f-83c4-a87108183324",
+                            RoleId = "100e66ac-ecf3-414f-aa2f-c342bedb0331"
                         },
                         new
                         {
-                            UserId = "4b07b3da-c5d4-49da-852b-8c3ce8082390",
-                            RoleId = "233efe61-93e9-4428-a60e-e8355c338e8b"
+                            UserId = "40867f0b-de28-470e-bace-eba0a7be5577",
+                            RoleId = "100e66ac-ecf3-414f-aa2f-c342bedb0331"
                         },
                         new
                         {
-                            UserId = "b402dac2-bbfd-4ccb-bee0-174732561647",
-                            RoleId = "233efe61-93e9-4428-a60e-e8355c338e8b"
+                            UserId = "cb0ebf82-fe6d-4638-9b94-353f97239554",
+                            RoleId = "100e66ac-ecf3-414f-aa2f-c342bedb0331"
                         },
                         new
                         {
-                            UserId = "ebff4eed-5138-4ff8-bd7b-b47bca53a0e0",
-                            RoleId = "233efe61-93e9-4428-a60e-e8355c338e8b"
+                            UserId = "bcd0f007-ddf1-4e42-8788-4e1a05403681",
+                            RoleId = "100e66ac-ecf3-414f-aa2f-c342bedb0331"
                         },
                         new
                         {
-                            UserId = "0c5a8f1c-cdef-4b26-b4c9-d251127b7130",
-                            RoleId = "233efe61-93e9-4428-a60e-e8355c338e8b"
+                            UserId = "76c1bcd6-35f6-475b-be0e-d99a6f1327aa",
+                            RoleId = "100e66ac-ecf3-414f-aa2f-c342bedb0331"
                         },
                         new
                         {
-                            UserId = "3f4d842f-7629-4183-848d-27d394168e43",
-                            RoleId = "233efe61-93e9-4428-a60e-e8355c338e8b"
+                            UserId = "213bcaca-8cd3-405a-8961-985b3d71b43b",
+                            RoleId = "100e66ac-ecf3-414f-aa2f-c342bedb0331"
                         });
                 });
 

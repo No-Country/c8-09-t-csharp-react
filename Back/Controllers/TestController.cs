@@ -4,6 +4,7 @@ using CohorteApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
 using System.Web;
@@ -56,43 +57,93 @@ namespace CohorteApi.Controllers
         [HttpGet("GenerateEvents")]
         public IEnumerable<Event> GenerateEvents([FromServices] ApplicationDbContext context)
         {
-            var objs = new[] {
+            var objs = new[] { 
                 new Event() {
                     CategoryId = new Random().Next(1,6),
                     FrontPageImage = "https://cohorteapi.azurewebsites.net/images/Event_1_FrontPage.jpg",
                     Thumbnail = "https://cohorteapi.azurewebsites.net/images/Event_1_Thumbnail.jpg",
                     EventName = "BIENVENIDO DICIEMBRE - UNA ALBORADA POR TODO LO ALTO",
                     EventDescription="Ven con nosotros a vivir una magnífica noche ubicada en la mejor zona de Medellín, con un acceso visual 360 de toda la ciudad, acompáñanos en esta noche mágica a vivir una alborada por todo lo alto, con una exquisita marranada gourmet.",
-                    Price = 10,
-                    AvailableSeats = 500,
-                    Venue  = "stadio garcia",
+                    Sections = new List<Section>
+                    {
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Platea",
+                            AvailableSeats = 50,
+                            TotalSeats = 50
+                        },
+
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Vip",
+                            AvailableSeats = 200,
+                            TotalSeats = 200
+                        },
+                    },
+                    Venue  = "Estadio Garcia",
                     Created = DateTime.Parse("2022-11-01T13:42:42.55"),
                     EventTime = DateTime.Parse("2022-11-30T13:42:42.55"),
                     },
                     new Event() {
-                         CategoryId =  new Random().Next(1,6),
+
+                        CategoryId = new Random().Next(1,6),
                      FrontPageImage = "https://cohorteapi.azurewebsites.net/images/Event_2_FrontPage.jpg",
                      Thumbnail  =   "https://cohorteapi.azurewebsites.net/images/Event_2_Thumbnail.jpg",
                     EventName = "KEVIN JOHANSEN - TU VE TOUR",
-                    EventDescription="",
-                    Price = 25,
+                    EventDescription="two nights with two different sets and two different opening acts",
                     Venue  = "Teatro Jorge Eliécer Gaitán",
-                    AvailableSeats = 250,
+                    Sections = new List<Section>
+                    {
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Platea",
+                            AvailableSeats = 100,
+                            TotalSeats = 100
+                        },
+
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Diamante",
+                            AvailableSeats = 180,
+                            TotalSeats = 180
+                        },
+                    },
                     Created = DateTime.Parse("2022-11-24T13:42:42.55"),
                     EventTime = DateTime.Parse("2022-12-03T13:42:42.55"),
                     },
                     new Event() {
-                         CategoryId =  new Random().Next(1,6),
+
+                     CategoryId = new Random().Next(1,6),
                     FrontPageImage = "https://cohorteapi.azurewebsites.net/images/Event_3_FrontPage.jpg",
                     Thumbnail  =   "https://cohorteapi.azurewebsites.net/images/Event_3_Thumbnail.jpg",
                     EventName = "NATALIA JIMÉNEZ 20 AÑOS - ANTOLOGÍA TOUR - MEDELLÍN",
-                    EventDescription="",
-                    Price = 30,
+                    EventDescription="two nights with two different sets and two different opening acts",
                     Venue  = "Teatro de la Universidad de Medellín",
-                    AvailableSeats = 250,
+                    Sections = new List<Section>
+                    {
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Oro",
+                            AvailableSeats = 15,
+                            TotalSeats = 15
+                        },
+
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Platinum",
+                            AvailableSeats = 100,
+                            TotalSeats = 100
+                        },
+                    },
                     Created = DateTime.Parse("2022-11-24T13:42:42.55"),
                     EventTime = DateTime.Parse("2023-03-23T13:42:42.55"),
-                    }};
+                    }};   
             context.Events.AddRange(objs);
             context.SaveChanges();
             return objs;
@@ -100,7 +151,7 @@ namespace CohorteApi.Controllers
         [HttpPost("DeleteEvents")]
         public IActionResult DeleteEvents([FromServices] ApplicationDbContext context)
         {
-            context.Events.RemoveRange(context.Events);
+            context.RemoveRange(context.Events.Include(a => a.Sections).ToList());
             var count = context.SaveChanges();
             return Ok($"Deleted {count} rows");
         }
