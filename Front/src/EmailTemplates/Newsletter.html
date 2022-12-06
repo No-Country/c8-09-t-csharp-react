@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+  <title>Newsletter</title>
+</head>
+<body style="margin: 0">
+  <div class="Logo">
+    <img src="../../public/logo-ticketfan-negro.svg" alt="Logo" width="200px" height="62px"/>
+  </div>
+  <div class="Data">
+      <div class="Titulo" ><h1>TicketFan presenta:</h2></div>
+        <div style="padding:2rem 0 ;">
+          <img src="../../public/imageportada.png" alt="Logo" />
+        </div>
+        <div class="Descripcion">
+          <p>La Última Vuelta World Tour es la octava y última gira musical del rapero puertorriqueño Daddy Yankee, realizada con el fin de promocionar su séptimo y final álbum de estudio Legendaddy.</p>
+        </div>
+        <button class="BotonEvento" > Ir al evento</button>
+        <h2 class="tituloVideo" >Disfruta lo ultimo de Daddy Yankee</h2>
+        <iframe width="594" height="284" src="https://www.youtube.com/embed/t7gsVuW8AtY" title="Daddy Yankee - Rumbatón (Official Video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        <p class="TituloRedSocial" >Seguinos en nuestras redes</p>
+        <div class="RedSocial">
+          <a href="#">
+            <img src="../../public/facebook2.svg" alt="Logo" align="left" />
+          </a>
+          <a href="#">
+            <img src="../../public/instagram2.svg" alt="Logo" align="left" />
+          </a>
+          <a href="#">
+            <img src="../../public/youtube.svg" alt="Logo" align="left" />
+          </a>
+        </div>
+      </div>
+  <div class="linkAlaWeb-cont">
+    <a id="link" href="https://tiketfan.vercel.app/">ticketfan.com</a>
+  </div>
+</body>
+<style type="text/css">
+
+  .Logo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 110px;
+    top: 0px;
+    left: 0px;
+    gap: 10px;
+    background: linear-gradient(95.66deg, #FC4A88 0%, #942DBD 100.38%);
+
+  }
+
+  .Data{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 3rem 14rem;
+    overflow: hidden;
+  }
+
+  .Titulo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    padding: 0.5rem 5rem;
+    width: 100%;
+    background: #942DBD;
+  }
+  .Titulo h1{
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 64px;
+    font-style: normal;
+    letter-spacing: -1.5px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  
+  .Descripcion{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #000000;
+  }
+
+  .BotonEvento{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.75px;
+    padding: 8px 24px;
+    gap: 8px;
+    color: #FFFFFF;
+    width: 100%;
+    background-color: #FC4A88;
+    border-radius: 100px;
+    border: none;
+  }
+  
+  .BotonEvento:hover{
+    cursor: pointer;
+  }
+
+  .tituloVideo{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 31px;
+    line-height: 64px;
+    text-align: center;
+    letter-spacing: -1.5px;
+    color: #000000;
+  }
+
+  .TituloRedSocial{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #000000;
+  }
+
+  .RedSocial {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .RedSocial a{
+    margin: 0 1rem;
+  }
+
+  .linkAlaWeb-cont{
+    display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+    width: 100%;
+  height: 66px;
+  background: #942DBD;
+  }
+
+  #link{
+    		font-family: "Poppins";
+			font-style: normal;
+			font-weight: 900;
+			font-size: 32px;
+			line-height: 40px;
+			letter-spacing: 0.0025em;
+			color: #FFFFFF;
+    		text-decoration: none;
+    	}
+</style>
+</html>
