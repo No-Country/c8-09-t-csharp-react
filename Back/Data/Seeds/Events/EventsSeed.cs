@@ -49,9 +49,25 @@ namespace CohorteApi.Data.Seeds
                     Thumbnail = "https://cohorteapi.azurewebsites.net/images/event1-thumb.jpg",
                     EventName = "BIENVENIDO DICIEMBRE - UNA ALBORADA POR TODO LO ALTO",
                     EventDescription="Ven con nosotros a vivir una magnífica noche ubicada en la mejor zona de Medellín, con un acceso visual 360 de toda la ciudad, acompáñanos en esta noche mágica a vivir una alborada por todo lo alto, con una exquisita marranada gourmet.",
-                    //Price = 10,
-                    //AvailableSeats = 500,
-                    Venue  = "stadio garcia",
+                    Sections = new List<Section>
+                    {
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Platea",
+                            AvailableSeats = 50,
+                            TotalSeats = 50
+                        },
+                                              
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Vip",
+                            AvailableSeats = 200,
+                            TotalSeats = 200
+                        },
+                    },
+                    Venue  = "Estadio Garcia",
                     Created = DateTime.Parse("2022-11-01T13:42:42.55"),
                     EventTime = DateTime.Parse("2022-11-30T13:42:42.55"),
                     },
@@ -61,10 +77,26 @@ namespace CohorteApi.Data.Seeds
                      FrontPageImage = "https://cohorteapi.azurewebsites.net/images/evento2-Front.jpg",
                      Thumbnail  =   "https://cohorteapi.azurewebsites.net/images/evento2-thumb.jpg",
                     EventName = "KEVIN JOHANSEN - TU VE TOUR",
-                    EventDescription="",
-                    //Price = 25,
+                    EventDescription="two nights with two different sets and two different opening acts",
                     Venue  = "Teatro Jorge Eliécer Gaitán",
-                    //AvailableSeats = 250,
+                    Sections = new List<Section>
+                    {
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Platea",
+                            AvailableSeats = 100,
+                            TotalSeats = 100
+                        },
+
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Diamante",
+                            AvailableSeats = 180,
+                            TotalSeats = 180
+                        },
+                    },
                     Created = DateTime.Parse("2022-11-24T13:42:42.55"),
                     EventTime = DateTime.Parse("2022-12-03T13:42:42.55"),
                     },
@@ -74,14 +106,30 @@ namespace CohorteApi.Data.Seeds
                     FrontPageImage = "https://cohorteapi.azurewebsites.net/images/evento3%20(1).jpg",
                     Thumbnail  =   "https://cohorteapi.azurewebsites.net/images/evento3%20(2).jpg",
                     EventName = "NATALIA JIMÉNEZ 20 AÑOS - ANTOLOGÍA TOUR - MEDELLÍN",
-                    EventDescription="",
-                    //Price = 30,
+                    EventDescription="two nights with two different sets and two different opening acts",
                     Venue  = "Teatro de la Universidad de Medellín",
-                    //AvailableSeats = 250,
+                    Sections = new List<Section>
+                    {
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Oro",
+                            AvailableSeats = 15,
+                            TotalSeats = 15
+                        },
+
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Platinum",
+                            AvailableSeats = 100,
+                            TotalSeats = 100
+                        },
+                    },
                     Created = DateTime.Parse("2022-11-24T13:42:42.55"),
                     EventTime = DateTime.Parse("2023-03-23T13:42:42.55"),
-                    }};
-
+                    }
+            };
             return objs;
         }
     }
