@@ -26,20 +26,30 @@ namespace CohorteApi.Controllers
         {
             if (categoryId > 0)
             {
-                var eventsFromCat = await _context.Events.Include(i => i.Reviews)
+                var eventsFromCat = await _context.Events
+                    .Include(i => i.Reviews)
                     .Include(i => i.Category)
+                    .Include(i => i.Sections)
                     .Where(x => x.CategoryId == categoryId).ToListAsync();
 
                 return eventsFromCat;
             }
-            var previousResults = await _context.Events.Include( i => i.Category).ToListAsync();
+            var previousResults = await _context.Events
+                .Include(i => i.Reviews)
+                .Include(i => i.Category)                    
+                .Include(i => i.Sections)
+                .ToListAsync();
             return previousResults;
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Event>> GetEvent(int id)
         {
-            var @event = await _context.Events.FindAsync(id);
+            var @event = await _context.Events
+                .Include(i => i.Reviews)
+                .Include(i => i.Category)
+                .Include(i => i.Sections)
+                .FirstAsync(a=>a.Id == id);
 
             if (@event == null)
             {
@@ -115,8 +125,8 @@ namespace CohorteApi.Controllers
 
         [HttpGet("admin")]
         public async Task<ActionResult<IEnumerable<Event>>> GetEventsAdmin([FromQuery] int categoryId)
-        {             
-            return await _context.Events.Include(a => a.Category).Include(a=>a.Sections).Include(a=>a.Reviews).ToListAsync(); 
+        {
+            return await _context.Events.Include(a => a.Category).Include(a => a.Sections).Include(a => a.Reviews).ToListAsync();
         }
     }
 }
