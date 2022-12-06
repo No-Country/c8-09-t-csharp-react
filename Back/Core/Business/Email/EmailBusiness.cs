@@ -10,7 +10,7 @@ namespace CohorteApi.Core.Business.Email
     {
         readonly IEmailService _service;
         string templatesPath = "wwwroot/templates/auth";
-        public EmailBusiness( IEmailService service)
+        public EmailBusiness(IEmailService service)
         {
             _service = service;
         }
@@ -23,7 +23,7 @@ namespace CohorteApi.Core.Business.Email
 
         public async Task SendEmailAsync(Message emailModel)
         {
-           await  _service.SendEmailAsync(emailModel);
+            await _service.SendEmailAsync(emailModel);
         }
 
         public Task SendNewsLetterAsync(int id, List<string> emails)
@@ -31,20 +31,31 @@ namespace CohorteApi.Core.Business.Email
             throw new NotImplementedException();
         }
 
-        public async Task SendRecoverPasswordEmailAsync(string email,string userName, string link,string title = "Recover your password")
+        public async Task SendRecoverPasswordEmailAsync(string email, string userName, string link, string title = "Recover your password")
         {
             var recoverypasswordTemplate = System.IO.File.ReadAllText($"{templatesPath}/ChangePassword.html");
 
             //get base url from settings
-          
-            var content = string.Format(recoverypasswordTemplate, new[] { userName, link });
+            string content = "";
+            try
+            {
+                recoverypasswordTemplate = recoverypasswordTemplate.Replace("#user#", userName.ToUpper());
+                recoverypasswordTemplate = recoverypasswordTemplate.Replace("#url#", link);
+
+                //content = string.Format(@recoverypasswordTemplate, new[] { userName, @link });
+                content = recoverypasswordTemplate;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
 
             var recipients = new[] { email };
             var message = new Message(recipients, title, content);
             await _service.SendEmailAsync(message);
         }
 
-        public async  Task SendWelcomeEmailAsync(string name,string email)
+        public async Task SendWelcomeEmailAsync(string name, string email)
         {
             //TODO validations of emailadresss
 
