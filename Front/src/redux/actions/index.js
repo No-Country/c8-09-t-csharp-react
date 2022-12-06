@@ -69,3 +69,42 @@ export function filterByGenres(payload){
         payload
     }
 }
+
+export function forgotPassword(payload){
+    return async function(dispatch){
+        try {
+            const response = await axios.post(`https://cohorteapi.azurewebsites.net/api/Authenticate/ForgotPassword?email=${payload}`, payload)
+
+            dispatch({
+                type: "FORGOT_PASSWORD",
+                payload: response.data
+            })
+
+            console.log(response.status)
+            return response.status
+            
+        } catch(error){
+            return error
+        }
+        
+    }
+}
+
+export function resetPassword(payload){
+    return async function(dispatch){
+        try{    
+            const response = await axios.post("https://cohorteapi.azurewebsites.net/api/Authenticate/ResetPassword", payload)
+
+            dispatch({
+                type: "RESET_PASSWORD",
+                payload: response.data
+            })
+
+            console.log(response.status)
+            return response.status
+
+        } catch(error){
+            return error
+        }
+    }
+}

@@ -1,24 +1,27 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 
-import Home from './pages/home/Home'
+import Home from './pages/home/home'
 import Login from './pages/login/login'
 import Register from './pages/register/register'
 import ForgotPassword from './pages/forgotPassword/forgotPassword'
+import ResetPassword from './pages/resetPassword/resetPassword'
 import PrePurchase from './components/prePurchase/prePurchase'
 import { AuthGuard } from './guards/AuthGuard'
 import { AuthRolesGuard } from './guards/AuthRolesGuard'
 import { isUserAdmin, isUserLogged } from './utils/validations'
-import Error from "./pages/error/Error"
+import Error from "./pages/error/error"
 import Event from './pages/event/event'
-import Catalogo from './pages/catalogo/Catalogo'
+import Catalogo from './pages/catalogo/catalogo'
 
 function App() {
+
 	return (
 		<Routes>
 			<Route index element={<Home />} />
 			<Route element={<PrePurchase />} exact path={'/prePurchase'} />
 			<Route element={<ForgotPassword />} path={'/forgotPassword'} />
+			<Route element={<ResetPassword />} exact path={'/resetpassword'} />
 			<Route element={<Event />} path={'/event/:id'} />
 			<Route element={<Catalogo/>} path={'/catalogo'}/>
 			<Route
