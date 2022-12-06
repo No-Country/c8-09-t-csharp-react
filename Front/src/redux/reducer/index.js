@@ -14,11 +14,8 @@ const initialState = {
     singleUser: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : singleUserEmpty,
     userloginData: [],
     isLogged: null,
-<<<<<<< HEAD
-    allEventsCopy: []
-=======
+    allEventsCopy: [],
     forgotPasswordToken: []
->>>>>>> 0bca1c78f094f3dabfa5b10149e09bbf437dfefe
 }
 
 function rootReducer(state = initialState, action) {
