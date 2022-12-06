@@ -1,8 +1,8 @@
 import "./Nav.css"
-import {Link} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState} from "react"
 import { checkLocalStorage } from "../../redux/actions"
+import { Link, useNavigate } from "react-router-dom"
 import { clearLocalStorage } from "../../utils/localStorage"
 
 //Tailwind components
@@ -11,42 +11,34 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 
 const Nav = () => {     
-    
+    const navigate = useNavigate()
     const userInfo = useSelector(state => state.userloginData)
     const userStorage = useSelector(state => state.singleUser)
+    const token = useSelector(state => state.token)
     const [userName, setUserName] = useState("Nadir Blanco")
     const dispatch = useDispatch()
     const isLogged = useSelector(state => state.isLogged)
 
+    //const [encodedData, setEncodedData] = useState("")
+    //const [decodedData, setDecodedData] = useState("")
+
     const items = [
         {
-            name: "Mis entradas",
-            action: function(){
-                console.log("Mis entradas")
-            }
-        },
-        {
             name: "Mi cuenta",
+            ruta: `https://ticketfanadmin.netlify.app/login/${token}`,
             action: function(){
-                console.log("Mis cuenta")
-            }
-        },
-        {
-            name: "Mi historial",
-            action: function(){
-                console.log("Mis historial")
-            }
-        },
-        {
-            name: "Mi suscripcion",
-            action: function(){
-                console.log("Mis suscripcion")
+                console.log(token)
+                /* console.log(userStorage.jti)
+                console.log(encodedData)
+                console.log(decodedData) */
             }
         },
         {
             name: "Cerrar sesion",
+            ruta: "/",
             action: function(){
                 clearLocalStorage("user")
+                clearLocalStorage("token")
                 dispatch(checkLocalStorage())
             }
         },
@@ -56,10 +48,17 @@ const Nav = () => {
         dispatch(checkLocalStorage())
     }, [])
 
+    /* useEffect(()=>{
+        setEncodedData(btoa(userStorage.jti))
+    }, [userStorage])
+
+    useEffect(()=>{
+        setDecodedData(atob(encodedData))
+    }, [encodedData]) */
+
     useEffect(()=> {
         setUserName(userInfo["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"])
     }, [userInfo])
-
 
     return(
         <nav>
@@ -91,7 +90,7 @@ const Nav = () => {
                                     i.action()
                                 }}>
                                     <a
-                                    href="#"
+                                    href={i.ruta}
                                     className={'bg-gray-100 text-gray-900 block px-4 py-2 text-md font-semibold'}
                                     >
                                     {i.name}
