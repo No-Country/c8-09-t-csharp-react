@@ -17,12 +17,11 @@ const Event = () => {
     const [total, setTotal] = useState(0)
     const { id } = useParams()
 
-    const ubicacion = ["Platea izquierda", "Platea central", "Platea derecha", "Palco izquierdo", "Palco derecho"]
-    const cantidad = [ 1,2,3,4,5]
-
     const getEvent = async () => {
         const response = await axios.get(`https://cohorteapi.azurewebsites.net/api/Events/${id}`)
         setEvent(response.data)
+        dispatch(filterByGenres(response.data.category.name))
+        console.log(response.data)
     }   
 
     useEffect(()=>{
@@ -40,102 +39,38 @@ const Event = () => {
             </div>
             <div className="escenario">
                 <h2>Sectores y precios</h2>
-                <img src="/esquema-escenario.png" alt="esquema-escenario" />
+                <img src={`/${event.category?.name}.png`} alt={event.category?.name} />
             </div>
             <div className="eleccion">
-                <div className="opciones">
-                            <Menu as="div" className="relative inline-block text-left">
-                                <div>
-                                    <Menu.Button className="inline-flex w-full justify-center bg-transparent border-gray-600 border-solid border-2 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-pink-800">
-                                    Precio
-                                    <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-                                    </Menu.Button>
-                                </div>
-                                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right bg-transparent shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                    <div className="py-1">
-                                            <Menu.Item>
-                                                <a
-                                                href="#"
-                                                className={'bg-gray-800 border-gray-600 border-solid border-2 text-white block px-4 py-2 text-md font-semibold'}
-                                                >
-                                                ${event.price}
-                                                </a>
-                                            </Menu.Item>
-                                    </div>
-                                </Menu.Items>
-                            </Menu>
-                            <Menu as="div" className="relative inline-block text-left">
-                                <div>
-                                    <Menu.Button className="inline-flex w-full justify-center bg-transparent border-gray-600 border-solid border-2 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-pink-800">
-                                    Ubicacion
-                                    <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-                                    </Menu.Button>
-                                </div>
-                                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right bg-transparent shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                    <div className="py-1">
-                                            {ubicacion.map((u)=>{
-                                                return(
-                                                <Menu.Item>
-                                                    <a
-                                                    href="#"
-                                                    className={'bg-gray-800 border-gray-600 border-solid border-2 text-white block px-4 py-2 text-md font-semibold'}
-                                                    >
-                                                    {u}
-                                                    </a>
-                                                </Menu.Item>
-                                                )
-                                            })}
-                                            
-                                    </div>
-                                </Menu.Items>
-                            </Menu>
-                            <Menu as="div" className="relative inline-block text-left">
-                                <div>
-                                    <Menu.Button className="inline-flex w-full justify-center bg-transparent border-gray-600 border-solid border-2 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-pink-800">
-                                    Cantidad
-                                    <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-                                    </Menu.Button>
-                                </div>
-                                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right bg-transparent shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                    <div className="py-1">
-                                            {cantidad.map((c)=>{
-                                                return(
-                                                <Menu.Item>
-                                                    <a
-                                                    href="#"
-                                                    className={'bg-gray-800 border-gray-600 border-solid border-2 text-white block px-4 py-2 text-md font-semibold'}
-                                                    >
-                                                    {c}
-                                                    </a>
-                                                </Menu.Item>
-                                                )   
-                                            })}
-                                            
-                                    </div>
-                                </Menu.Items>
-                            </Menu>
-                            <Menu as="div" className="relative inline-block text-left">
-                                <div>
-                                    <Menu.Button className="inline-flex w-full justify-center bg-transparent border-gray-600 border-solid border-2 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-pink-800">
-                                    Precio total
-                                    <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-                                    </Menu.Button>
-                                </div>
-                                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right bg-transparent shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                    <div className="py-1">
-                                            <Menu.Item>
-                                                <a
-                                                href="#"
-                                                className={'bg-gray-800 border-gray-600 border-solid border-2 text-white block px-4 py-2 text-md font-semibold'}
-                                                >
-                                                ${total}
-                                                </a>
-                                            </Menu.Item>
-                                    </div>
-                                </Menu.Items>
-                            </Menu>
-                </div>
-                <button className="buttonComprar">Comprar</button>  
+                <form className="opciones">
+                    <div className="select">
+                        <label htmlFor="Ubicacion y precio">Ubicacion y precio</label>
+                        <select name="Ubicacion y precio">
+                            {event.sections?.map((s, index)=>{
+                                return(
+                                    <option key={index} value={s.name}> {s.name} ${s.price} </option>
+                                )
+                            })}
+                        </select>
+                    </div>
+                    <div className="select">
+                        <label htmlFor="Cantidad">Cantidad</label>
+                        <select name="Cantidad" aria-label="Cantidad">
+                            <option value="1">1</option>
+                            <option value="1">2</option>
+                            <option value="1">3</option>
+                            <option value="1">4</option>
+                            <option value="1">5</option>
+                        </select>
+                    </div>
+                    <div className="totalContainer">
+                        <h5>Precio total</h5>
+                        <div className="total">
+                            <h5>${total}</h5>
+                        </div>
+                    </div>
+                    <input className="buttonComprar" type="submit" value="Comprar"/>
+                </form>
             </div>
             <Reviews />
             <SeccionEvent seccion={"Te puede interesar"} ruta={"/"} />
