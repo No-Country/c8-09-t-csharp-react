@@ -6,6 +6,7 @@ import { checkLocalStorage } from '../../redux/actions';
 import moment from 'moment';
 import '../prePurchase/prePurchase.css'
 import { loginUser, eventDetails } from '../../redux/actions';
+import CheckoutForm from '../CheckoutForm/checkoutForm';
 
 // import Login from '../../pages/login/login';
 
@@ -77,7 +78,7 @@ const PrePurchase = function () {
                 {askLogin ?
 
                     (<div className='login_ask_container'>
-                        <h1>User Info</h1>
+                        <CheckoutForm />
                     </div>)
 
                     :
