@@ -40,7 +40,7 @@ const Event = () => {
             </div>
             <div className="escenario">
                 <h2>Sectores y precios</h2>
-                <img src="/esquema-escenario.png" alt="esquema-escenario" />
+                <img src={`/${event.category?.name}.png`} alt={event.category?.name} />
             </div>
             <div className="eleccion">
                 <form className="opciones">
