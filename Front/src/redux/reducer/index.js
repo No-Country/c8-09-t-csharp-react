@@ -17,7 +17,7 @@ const initialState = {
     allEventsCopy: [],
     forgotPasswordToken: [],
     token: localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : null,
-    singleEventDetail: []
+    singleEventDetail: [],
 }
 
 function rootReducer(state = initialState, action) {

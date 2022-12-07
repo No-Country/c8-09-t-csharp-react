@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios'
 import { useState } from "react";
 import { useEffect } from "react";
@@ -15,6 +15,7 @@ import Reviews from "../../components/Reviews/Reviews";
 import dropdown from './dropdown.jsx'
 const Event = () => {
 
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const event = useSelector(state => state.singleEventDetail)
     const [total, setTotal] = useState(0)
@@ -41,9 +42,12 @@ const Event = () => {
             price: pr,
             [e.target.name]: e.target.value,
         })
-
-        setTotal(input.price * parseInt(input.quantity))
     }
+
+    useEffect(() => {
+        setTotal(input.price * parseInt(input.quantity))
+    },[input.quantity])
+
 
 
     useEffect(()=>{
@@ -70,15 +74,28 @@ const Event = () => {
         let amount = []
         for(let i = 1; i < 11; i++){
             amount.push(
-                <option key={i} value={i} name="quantity">{i}</option>
+                <option key={i} value={i} name={"quantity"}>{i}</option>
             )
         }
         return amount
     }
 
-    console.log(input)
-    console.log(total)
+    function submit(e){
+        e.preventDefault()
 
+        let infoToPass = 
+            {
+                eventId: event.id,
+                eventTotal: total,
+                ...input
+            }
+
+        localStorage.setItem("prePurchase",JSON.stringify(infoToPass))
+        navigate("/prepurchase")
+
+    }
+
+    // console.log(infoToPass)
 
     return(
         
@@ -93,13 +110,13 @@ const Event = () => {
                 <img src={`/${event.category?.name}.png`} alt={event.category?.name} />
             </div>
             <div className="eleccion">
-                <form className="opciones">
+                <form className="opciones" onSubmit={submit}>
                     <div className="select">
                         <label htmlFor="Ubicacion y precio">Ubicacion y precio</label>
                         <select name="section" onChange={e => handleInput(e)}>
                             {event.sections?.map((s, index)=>{
                                 return(
-                                    <option key={index} value={s.name}> {s.name}  <p id="sectionPrice">{s.price}</p> </option>
+                                    <option id="sectionName" key={index} value={s.name}> {s.name}  <p id="sectionPrice">{s.price}</p> </option>
                                 )
                             })}
                         </select>
@@ -108,11 +125,6 @@ const Event = () => {
                         <label htmlFor="Cantidad">Cantidad</label>
                         <select name="quantity" aria-label="Cantidad" onChange={e => handleInput(e)}>
                             {count()}
-                            {/* <option value="1">1</option>
-                            <option value="1">2</option>
-                            <option value="1">3</option>
-                            <option value="1">4</option>
-                            <option value="1">5</option> */}
                         </select>
                     </div>
                     <div className="totalContainer">
