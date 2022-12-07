@@ -105,7 +105,6 @@ const Login = function () {
 
                     <button className="login_button">Iniciar Sesión</button>
                 </form>
-                <Dropdown />
                 <div>¿No tienes una cuenta? <Link className="register_link" to="/register">Regístrate</Link></div>
             </div>
                 </div>
