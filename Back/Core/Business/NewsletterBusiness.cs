@@ -13,10 +13,12 @@ namespace CohorteApi.Core.Business
         ApplicationDbContext _context;
         private readonly string path = "wwwroot/newsletters";
         private readonly string dateFormat = "yyyy-MM-ddTHHmm";
+        private readonly IEmailBusiness _emailS;
 
-        public NewsletterBusiness(ApplicationDbContext context)
+        public NewsletterBusiness(ApplicationDbContext context,IEmailBusiness emailS)
         {
             _context = context;
+            _emailS = emailS;
         }
 
         //public async Task<string> CreateNewsletter([FromForm] string html, [FromForm] List<IFormFile> images)
@@ -157,7 +159,11 @@ namespace CohorteApi.Core.Business
             }
             else
             {
-                if (exists.IsActive) return exists;
+                if (exists.IsActive)
+                {
+                    _emailS.SendNewsletterOptInEmail(email).Wait();
+                    return exists;
+                }
                 exists.IsActive = true;
                 exists.DateSubscribed = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
             }
@@ -165,6 +171,7 @@ namespace CohorteApi.Core.Business
             try
             {
                 var rows = _context.SaveChanges();
+                 _emailS.SendNewsletterOptInEmail(email).Wait();    
                 return exists != null ? exists : newSubscription;
             }
             catch (Exception)
