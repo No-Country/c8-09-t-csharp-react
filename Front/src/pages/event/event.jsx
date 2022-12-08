@@ -27,13 +27,6 @@ const Event = () => {
        quantity: 1
     })
 
-    // const getEvent = async () => {
-    //     const response = await axios.get(`https://cohorteapi.azurewebsites.net/api/Events/${id}`)
-    //     setEvent(response.data)
-    //     // dispatch(filterByGenres(response.data.category.name))
-    //     // console.log(response.data)
-    // }   
-
     // let filtered = await event.sections.filter(e => e.name === e.target.name)[0]
     function handleInput(e){
         let pr = parseInt(document.getElementById("sectionPrice").innerText)
@@ -44,11 +37,13 @@ const Event = () => {
         })
     }
 
+    useEffect(()=>{
+        dispatch(filterByGenres(event.category?.name))
+    }, [event])
+
     useEffect(() => {
         setTotal(input.price * parseInt(input.quantity))
     },[input.quantity])
-
-
 
     useEffect(()=>{
         dispatch(eventDetails(id))
