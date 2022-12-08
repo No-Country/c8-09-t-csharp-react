@@ -109,6 +109,10 @@
     font-size: 25px;
 }
 
+.img{
+    min-width: 360px;
+}
+
 
 }
 
