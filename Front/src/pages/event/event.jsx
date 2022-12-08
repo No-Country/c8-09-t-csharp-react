@@ -108,7 +108,7 @@ const Event = () => {
             </div>
             <div className="escenario">
                 <h2>Sectores y precios</h2>
-                <img src={`/${event.category?.name}.png`} alt={event.category?.name} />
+                <img src={event.venueImage} alt={event.category?.name} />
             </div>
             <div className="eleccion">
                 <form className="opciones" onSubmit={submit}>
@@ -117,7 +117,7 @@ const Event = () => {
                         <select name="section" onChange={e => handleInput(e)}>
                             {event.sections?.map((s, index)=>{
                                 return(
-                                    <option id="sectionName" key={index} value={s.name}> {s.name}  <p id="sectionPrice">${s.price}</p> </option>
+                                    <option id="sectionName" style={{backgroundColor: `${s.color}`}} key={index} value={s.name}> {s.name}  <p id="sectionPrice">${s.price}</p> </option>
                                 )
                             })}
                         </select>

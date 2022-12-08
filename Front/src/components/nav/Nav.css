@@ -24,9 +24,13 @@ nav ul {
     width: 40%;
 }
 
+a{
+    font-weight: 800;
+}
+
 nav ul li {
     color: white;
-    font-size: 18px;
+    font-size: 23px;
     padding: 3px 10px;
     border-radius: 10px;
 }

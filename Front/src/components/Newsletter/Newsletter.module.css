@@ -28,6 +28,7 @@
 
 .formInput {
 	width: 70%;
+	height: 80px;
 	border-radius: 10px;
 	margin: 0 0.4rem;
 	padding: 0 0.5rem;
@@ -41,7 +42,7 @@
 	background-color: #fc4a88;
 	border-radius: 20px;
 	font-weight: 600;
-	padding: 6px 30px;
+	padding: 12px 20px;
 	letter-spacing: 2px;
 }
 
