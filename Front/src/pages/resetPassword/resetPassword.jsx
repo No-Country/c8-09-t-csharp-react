@@ -1,3 +1,4 @@
+import './resetPassword.css'
 import { Alert } from "../../utils/alert";
 import rejectionImg from '../../../src/rejection.svg'
 import responseImg from '../../../src/response.svg'
@@ -102,42 +103,46 @@ const ResetPassword = function(){
     // console.log(input.token)
 
     return(
-        <div className="forgotpassword_main">
-        <div className="forgotpassword_form_main">
+        <div className="resetpassword_main">
+        <div className="resetpassword_form_main">
 
-            <div className='forgotpassword_data'>
-                <div className="forgotpassword_title">Ingresar nueva contraseña</div>
+            <div className='resetpassword_data'>
+                <div className="resetpassword_title">Ingresar nueva contraseña</div>
 
-                <div className='reset_description'>
+                <div className='resetpassword_description'>
                     <p>
                         Por tu seguridad la contraseña debe contener al menos una letra mayúscula, 
-                        una minúscula, un número, un caracter especial
+                        una minúscula, un número, y un caracter especial
                     </p>
                 </div>
 
-                <form className="forgotpassword_form" onSubmit={submit}>
+                <form className="resetpassword_form" onSubmit={submit}>
+                    <div className="resetpassword_form_inputContainer">
+                    <div>{formErrors.password && (<p className="forgotpassword_warning">{formErrors.password}</p>)}</div>
                     <input 
-                    className="forgotpassword_email"
+                    className="resetpassword_email"
                     type="text"
                     name="password"
                     placeholder="Contraseña nueva"
                     value={input.password}
                     onChange={handleInput}
                     />
-                    {formErrors.password && (<p className="warning">{formErrors.password}</p>)}
+                    
 
+                    <div>{formErrors.confirmPassword && (<p className="forgotpassword_warning">{formErrors.confirmPassword}</p>) || formErrors.passwordValidation && (<p className="forgotpassword_warning">{formErrors.passwordValidation}</p>)}</div>     
                     <input 
-                    className="forgotpassword_email"
+                    className="resetpassword_email"
                     type="text"
                     name="confirmPassword"
                     placeholder="Confirmar contraseña"
                     value={input.confirmPassword}
                     onChange={handleInput}
                     />  
-                    {formErrors.confirmPassword && (<p className="warning">{formErrors.confirmPassword}</p>) || formErrors.passwordValidation && (<p className="warning">{formErrors.passwordValidation}</p>)}
+                
+                    </div>
 
-                    <div className='forgot_buttons'>
-                        <button className="reset_button">Restablecer contraseña</button>
+                    <div className='reset_buttons'>
+                        <button className="passwordreset_button">Restablecer contraseña</button>
                     </div>
                 </form>
 
