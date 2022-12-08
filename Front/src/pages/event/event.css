@@ -72,6 +72,10 @@ form select{
     color: white;
 }
 
+form select option:hover{
+    background-color: #1f1f1f;
+}
+
 form .select{
     display: flex;
     flex-direction: column;
