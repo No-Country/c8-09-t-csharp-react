@@ -16,7 +16,8 @@ const initialState = {
     isLogged: null,
     allEventsCopy: [],
     forgotPasswordToken: [],
-    token: localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : null
+    token: localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : null,
+    singleEventDetail: [],
 }
 
 function rootReducer(state = initialState, action) {
@@ -83,6 +84,12 @@ function rootReducer(state = initialState, action) {
         case "RESET_PASSWORD":
             return{
                 ...state
+            }
+
+        case "GET_AN_EVENT":
+            return{
+                ...state,
+                singleEventDetail: action.payload
             }
             
         default: return state;

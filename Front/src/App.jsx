@@ -13,13 +13,15 @@ import { isUserAdmin, isUserLogged } from './utils/validations'
 import Error from "./pages/error/error"
 import Event from './pages/event/event'
 import Catalogo from './pages/catalogo/catalogo'
+import Checkout from './components/Checkout/Checkout'
 
 function App() {
 
 	return (
 		<Routes>
 			<Route index element={<Home />} />
-			<Route element={<PrePurchase />} exact path={'/prePurchase'} />
+			<Route element={<PrePurchase />} exact path={'/prePurchase/'} />
+			<Route element={<Checkout />} exact path={'/checkout'}/>
 			<Route element={<ForgotPassword />} path={'/forgotPassword'} />
 			<Route element={<ResetPassword />} exact path={'/resetpassword'} />
 			<Route element={<Event />} path={'/event/:id'} />

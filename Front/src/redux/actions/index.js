@@ -108,3 +108,15 @@ export function resetPassword(payload){
         }
     }
 }
+
+export function eventDetails(id){
+    return async function(dispatch){
+        const response = await axios.get(`https://cohorteapi.azurewebsites.net/api/Events/${id}`)
+        dispatch({
+            type: "GET_AN_EVENT",
+            payload: response.data
+        })
+
+        return response.data
+    }
+}
