@@ -6,9 +6,6 @@ import { Alert } from "../../utils/alert";
 import rejectionImg from '../../../src/rejection.svg'
 import responseImg from '../../../src/response.svg'
 import '../register/register.css'
-import { Alert } from "../../utils/alert";
-import rejectionImg from '../../../src/rejection.svg'
-import  responseImg  from '../../../src/response.svg';
 
 function validateEmail(email) {
     return email.match(
