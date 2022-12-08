@@ -27,16 +27,9 @@ const Event = () => {
        quantity: 1
     })
 
-    // const getEvent = async () => {
-    //     const response = await axios.get(`https://cohorteapi.azurewebsites.net/api/Events/${id}`)
-    //     setEvent(response.data)
-    //     // dispatch(filterByGenres(response.data.category.name))
-    //     // console.log(response.data)
-    // }   
-
     // let filtered = await event.sections.filter(e => e.name === e.target.name)[0]
     function handleInput(e){
-        let pr = parseInt(document.getElementById("sectionPrice").innerText)
+        let pr = (document.getElementById("sectionPrice").innerText).split("$")[1]
         setInput({
             ...input,
             price: pr,
@@ -44,14 +37,22 @@ const Event = () => {
         })
     }
 
+    useEffect(()=>{
+        dispatch(filterByGenres(event.category?.name))
+    }, [event])
+
     useEffect(() => {
         setTotal(input.price * parseInt(input.quantity))
     },[input.quantity])
 
-
-
     useEffect(()=>{
         dispatch(eventDetails(id))
+            .then(val => {
+              setInput({
+                section: val.sections[0].name,
+                quantity: 1
+            })
+            })
     }, [dispatch, id])
 
     function getSections(sectionArray){
@@ -95,7 +96,7 @@ const Event = () => {
 
     }
 
-    // console.log(infoToPass)
+    // console.log(input)
 
     return(
         
@@ -116,7 +117,7 @@ const Event = () => {
                         <select name="section" onChange={e => handleInput(e)}>
                             {event.sections?.map((s, index)=>{
                                 return(
-                                    <option id="sectionName" key={index} value={s.name}> {s.name}  <p id="sectionPrice">{s.price}</p> </option>
+                                    <option id="sectionName" key={index} value={s.name}> {s.name}  <p id="sectionPrice">${s.price}</p> </option>
                                 )
                             })}
                         </select>

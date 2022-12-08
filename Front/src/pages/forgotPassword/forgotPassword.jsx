@@ -42,13 +42,19 @@ const ForgotPassword = function () {
                         confirmButtonText: `<button class="botonPrincipal" > OK </button>`,
                     })
                 } catch(error){
-                    console.log(error)
+                    Alert.fire({
+                        title: 'Lo siento',
+                        html: `Ha ocurrido un error </br> Por favor inténtelo de nuevo más tarde`,
+                        icon:"error",
+                        confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
+                    })
+                    return (error)
                 }
             }
         })
     }
 
-    console.log(forgotPassData)
+    // console.log(forgotPassData)
     // 
     return (
         <div className="forgotpassword_main">

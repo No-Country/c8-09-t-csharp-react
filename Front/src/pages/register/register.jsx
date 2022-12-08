@@ -2,7 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser } from "../../redux/actions";
-
+import { Alert } from "../../utils/alert";
+import rejectionImg from '../../../src/rejection.svg'
+import responseImg from '../../../src/response.svg'
 import '../register/register.css'
 
 function validateEmail(email) {
@@ -98,11 +100,23 @@ const Register = function () {
         
         create.then(val => {
             if(val !== 200){
-                console.log(val)
-                alert("Error: " + val)
+                // console.log(val)
+                Alert.fire({
+                    title: 'Ooops',
+                    html: `Hubo un error, intente de nuevo </br>`,
+                    imageUrl: rejectionImg,
+                    imageAlt: 'error',
+                    confirmButtonText: `<button class="botonPrincipal" > OK </button>`,
+                })
             } else{
-                console.log("Success with status: " + val)
-                alert("Usuario creado con exito")
+                // console.log("Success with status: " + val)
+                Alert.fire({
+                    title: '¡Listo!',
+                    html: `Usuario creado con exito!: </br> <b>${input.username}</b>`,
+                    imageUrl: responseImg,
+                    imageAlt: 'confirm',
+                    confirmButtonText: `<button class="botonPrincipal" > OK </button>`,
+                })
                 navigate("/")
             }
         })

@@ -7,8 +7,14 @@ import moment from 'moment';
 import '../prePurchase/prePurchase.css'
 import { loginUser, eventDetails } from '../../redux/actions';
 import CheckoutForm from '../CheckoutForm/checkoutForm';
+//import { Alert } from "../../utils/alert";
+//import rejectionImg from '../../../src/rejection.svg'
+//import responseImg from '../../../src/response.svg'
 
 // import Login from '../../pages/login/login';
+// import  rejectionImg  from '../../rejection.svg';
+// import { Alert } from '../../utils/alert';
+// import  responseImg from '../../response.svg';
 
 const PrePurchase = function () {
 
@@ -50,7 +56,13 @@ const PrePurchase = function () {
             .then(val => {
                 if (val !== 200) {
                     // alert(`Error ${val.response.status}: ${val.response.statusText}`)
-                    alert("Error")
+                    Alert.fire({
+                        title: 'Ooops',
+                        html: `Por favor verifica los datos: </br> <b>${input.email}</b>`,
+                        imageUrl: rejectionImg,
+                        imageAlt: 'error',
+                        confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
+                    })
                 } else {
                     try{
                         // const decode = jwt_decode(loginData.token)
@@ -59,7 +71,13 @@ const PrePurchase = function () {
                         alert("Bienvenido!")
                      
                     } catch(error){
-                        console.log(error)
+                        Alert.fire({
+                            title: 'Lo siento',
+                            html: `Ha ocurrido un error </br> Por favor inténtelo de nuevo más tarde`,
+                            icon:"error",
+                            confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
+                        })
+                        return (error)
                     }
                 }
             })

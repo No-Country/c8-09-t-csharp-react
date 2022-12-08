@@ -85,17 +85,20 @@ nav ul li:hover{
 
     nav{
         height: 80px;
-        justify-content: space-around;
-        padding: 0px 1px;
+        justify-content: space-between;
+        padding: 0px 5px;
     }
     
-    .logo {
-        width: 100px;
+    .logo img{
+        max-width: 30vw;
         padding-left: 1px;
+        justify-content: center;
     }
 
+
+
     .logo-links{
-        max-width: 200px;
+        max-width: 70%;
     }
 
 
@@ -118,20 +121,21 @@ nav ul li:hover{
    
     .buttonIngresar{
         display:flex;
-        justify-content: center;
+        justify-content:right;
         align-items: center;
         background-color: #FC4A88;
         color: white;
-        padding: 10px 30px;
+        padding: 8px 30px;
         border-radius: 20px;
         cursor: pointer;
         text-align: center;
+        width: 100%;
     }
     
     .buttonIngresar span {
-        font-size: 16px;
+        font-size: 14px;
+        text-align: center;
         margin-left: 0px;
-        margin-right: 30px;
     }
 
 

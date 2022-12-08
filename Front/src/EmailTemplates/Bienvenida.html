@@ -3,26 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="../../public/logo-ticketfan-negro.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-  <title>Newsletter</title>
+  <title>Bienvenido a TicketFAN</title>
 </head>
 <body style="margin: 0">
   <div class="Logo">
     <img src="../../public/logo-ticketfan-negro.svg" alt="Logo" width="200px" height="62px"/>
   </div>
   <div class="Data">
-      <div class="Titulo" ><h1>TicketFan presenta:</h2></div>
-        <div style="padding:2rem 0 ;">
-          <img src="../../public/imageportada.png" alt="Logo" />
-        </div>
-        <div class="Descripcion">
-          <p>La Última Vuelta World Tour es la octava y última gira musical del rapero puertorriqueño Daddy Yankee, realizada con el fin de promocionar su séptimo y final álbum de estudio Legendaddy.</p>
-        </div>
-        <button class="BotonEvento" > Ir al evento</button>
-        <h2 class="tituloVideo" >Disfruta lo ultimo de Daddy Yankee</h2>
-        <iframe width="594" height="284" src="https://www.youtube.com/embed/t7gsVuW8AtY" title="Daddy Yankee - Rumbatón (Official Video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+      
+        <div><h2 id="Title">¡Bienvenido!</h2></div> 
+
+  			<div id="text">
+  				<h4>Hola ¡Gracias por registrarte en TicketFan.com!</h4>
+
+  				<p>
+                    Somos la plataforma de venta de tickets online donde podrás encontrar una gran variedad de eventos y recomendaciones personalizadas según tus intereses.
+                </br>
+            </br>
+            ¿Qué esperas para disfrutar de los mejores planes?
+  				</p>
+
+  			</div>
+              <a href="https://tiketfan.vercel.app/" class="BotonEvento" > Visitar la página</a>
         <p class="TituloRedSocial" >Seguinos en nuestras redes</p>
         <div class="RedSocial">
           <a href="#">
@@ -65,26 +70,39 @@
     overflow: hidden;
   }
 
-  .Titulo{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 80px;
-    padding: 0.5rem 5rem;
-    width: 100%;
-    background: #942DBD;
+  .detalle p{
+    font-family: 'Poppins';
+    line-height: 27px;
+    color: #333333;
+    font-size: 18px;
+    margin: 0;
   }
-  .Titulo h1{
+  #Title{
+    		font-family: 'Poppins';
+/*			font-style: normal;*/
+			font-weight: 700;
+			font-size: 32px;
+			line-height: 40px;
+			text-align: center;
+			letter-spacing: 0.0025em;
+			color: #1F1F1F;
+    	}
+
+    	#text{
+    		font-family: 'Poppins';
+			font-style: normal;
+			font-weight: 400;
+			font-size: 18px;
+			line-height: 24px;
+			letter-spacing: 0.0015em;
+			color: #1F1F1F;
+    	}
+  .Titulo{
+    font-size: 26px;
     font-family: 'Poppins';
     font-weight: 600;
-    font-size: 40px;
-    line-height: 64px;
-    font-style: normal;
-    letter-spacing: -1.5px;
-    text-align: center;
-    color: #FFFFFF;
   }
+  
 
   
   .Descripcion{
@@ -107,25 +125,15 @@
     padding: 8px 24px;
     gap: 8px;
     color: #FFFFFF;
-    width: 100%;
     background-color: #FC4A88;
     border-radius: 100px;
     border: none;
+    text-decoration:none ;
+    margin: 1rem 0;
   }
   
   .BotonEvento:hover{
     cursor: pointer;
-  }
-
-  .tituloVideo{
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 31px;
-    line-height: 64px;
-    text-align: center;
-    letter-spacing: -1.5px;
-    color: #000000;
   }
 
   .TituloRedSocial{

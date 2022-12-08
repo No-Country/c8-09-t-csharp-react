@@ -103,6 +103,18 @@
     border-radius: 10px;  
 }
 
+@media screen and (min-width:424px) and (max-width:768px){
+
+.vendidosContainer h1{
+    font-size: 25px;
+}
+
+.img{
+    min-width: 360px;
+}
+
+
+}
 
 
 

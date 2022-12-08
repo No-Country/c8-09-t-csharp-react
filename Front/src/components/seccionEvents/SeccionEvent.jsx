@@ -7,7 +7,7 @@ const SeccionEvent = ({seccion, ruta}) => {
         <div className="containerNext">
             <div className="titulo">
                 <h3>{seccion}</h3>
-                <Link to={ruta}>Ver mas eventos {">"}</Link>
+                <Link to={ruta}>Ver mas {">"}</Link>
             </div>
             <div className="eventos">
                 <ListEvents/>

@@ -19,10 +19,10 @@ const Home = () => {
 	return (
 		<div>
 			<Carousel />
-			<SeccionEvent seccion={'Proximos eventos'} ruta={"/catalogo"}/>
+			<SeccionEvent seccion={'Todos los eventos'} ruta={"/catalogo"}/>
 			<TopVendidos/>
 			<Comments />
-			<SeccionEvent seccion={'Lo mas buscado'} ruta={"/catalogo"}/>
+			{/* <SeccionEvent seccion={'Lo mas buscado'} ruta={"/catalogo"}/> */}
 			<Newsletter />
 			<Footer />
 		</div>

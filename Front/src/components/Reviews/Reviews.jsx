@@ -17,13 +17,13 @@ const Reviews = () => {
                     </div>
                 </div>
             </div>
-            <div className="sendReviews">
+            {/* <div className="sendReviews">
                 <h2>Agrega tu rating y review!</h2>
                 <img src="/applyRating.png" alt="applyRating" />
                 <h4>Tap to add your rating</h4>
                 <input type="text" placeholder="Escribe tu review..."/>
                 <button className="buttonSend">Enviar review {">"}</button>
-            </div>
+            </div> */}
         </div>
     )
 }
