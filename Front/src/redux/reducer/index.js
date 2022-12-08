@@ -18,6 +18,7 @@ const initialState = {
     forgotPasswordToken: [],
     token: localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : null,
     singleEventDetail: [],
+    purchaseEventResponse: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -90,6 +91,12 @@ function rootReducer(state = initialState, action) {
             return{
                 ...state,
                 singleEventDetail: action.payload
+            }
+
+        case "PURCHASE_EVENT":
+            return {
+                ...state,
+                purchaseEventResponse: action.payload
             }
             
         default: return state;

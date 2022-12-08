@@ -14,18 +14,37 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    border: 1.8px solid black;
+    /* border: 1.8px solid black; */
     width: 80%;
 }
 
 .checkoutForm_title_container{
-    /* width: 100%; */
-    border: 1.8px solid rgb(167, 61, 61);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /* border: 1.8px solid rgb(167, 61, 61); */
+}
+
+.checkoutForm_title{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    color: #1F1F1F;
+    margin-bottom: 40px;
 }
 
 .form_inputs_container{
     width: 100%;
-    border: 1.8px solid rgb(167, 61, 61);
+    margin-bottom: 30px;
+    /* border: 1.8px solid rgb(167, 61, 61); */
 }
 
 .checkoutForm_input{
@@ -49,7 +68,13 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border: 1.8px solid rgb(167, 61, 61);
+    /* border: 1.8px solid rgb(167, 61, 61); */
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .checkoutForm_input_card{
@@ -63,6 +88,7 @@
     margin-bottom: 10px;
 }
 .checkoutForm_input_cardLogo{
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 4px;
@@ -74,6 +100,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: auto;
+    /* text-indent: 20px; */
 }
 
 .checkoutForm_fecha_container{
@@ -81,13 +108,24 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    /* border: 1.8px solid rgb(167, 61, 61); */
+    
+}
+
+.checkoutForm_fecha_subcontainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+    /* border: 1.8px solid rgb(167, 61, 61); */
 }
 
 .checkoutForm_input_fecha{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     padding: 0px;
     gap: 10px;
     width: 18%;
@@ -99,3 +137,96 @@
     margin-bottom: 10px;
 }
 
+.checkoutForm_CVV_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0px;
+    gap: 10px;
+    
+    /* border: 1.8px solid rgb(167, 61, 61); */
+}
+
+.checkoutForm_CVV_Title{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-right: 52px;
+    
+}
+
+.checkoutForm_input_CVV{
+    gap: 4px;
+    height: 41px;
+    /* width: 35%; */
+    background: #FFFFFF;
+    border: 1px solid #FC4A88;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: auto;
+}
+
+.checkoutForm_buttons_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    /* border: 1.8px solid rgb(167, 61, 61); */
+}
+
+.checkoutForm_button_cancel{
+    /* display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; */
+    padding: 8px 24px;
+    gap: 8px;
+    width: 276px;
+    height: 35px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.75px;
+    color: #FC4A88;
+
+    /* border: 1.8px solid rgb(167, 61, 61); */
+
+}
+
+.checkoutForm_button_finish{
+    /* display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; */
+    padding: 8px 24px;
+    gap: 8px;
+    width: 276px;
+    height: 35px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #FC4A88;
+    border-radius: 100px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.75px;
+    color: white;
+    /* opacity: 0.38; */
+
+    margin-right: 15px;
+}
+
+.checkoutForm_button_finish:disabled{
+    background-color: #A0A0A0;
+    color: #1F1F1F;
+}
