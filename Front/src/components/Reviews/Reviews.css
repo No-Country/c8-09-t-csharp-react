@@ -1,7 +1,6 @@
 .reviewsContainer{
     display: flex;
     align-items: center;
-    justify-content: center;
     width: 100%;
     padding: 30px;
     margin-top: 20px;
