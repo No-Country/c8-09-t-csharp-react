@@ -211,3 +211,42 @@
 	text-align: right;
 	color: #fc4a88;
 }
+
+@media screen and (min-width:424px) and (max-width:768px){
+	.checkout{
+		flex-direction: column;
+	}
+
+	.bgImg{
+		width: 100%;
+	}
+
+	.rightContainer{
+		width: 100%;
+		min-height: 90%;
+	}
+
+	.rightContainerButtons{
+		margin: 3rem 0rem;
+		gap: 20px;
+	}
+
+	.rightContainerButtonBuy{
+		padding: 5px 10px;
+		
+	}
+
+	.rightContainerButtonCancel{
+		padding: 5px 10px;
+
+	}
+
+	.detailEventColum{
+		width: 80%;
+	}
+
+	.detailEventTotal{
+		width: 80%;
+	}
+}
+
