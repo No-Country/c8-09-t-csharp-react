@@ -175,3 +175,18 @@
     margin: 0px;
     color: red;
 }
+
+@media screen and (min-width:424px) and (max-width:768px){
+    .register_form_main{
+        width: 80%;
+    }
+
+    .create_button{
+        width: 70%;
+    }
+
+    .register_title{
+        font-weight: 100;
+        text-align: center;
+    }
+}

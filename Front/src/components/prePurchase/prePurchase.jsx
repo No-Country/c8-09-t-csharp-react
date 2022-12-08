@@ -1,18 +1,24 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { isUserLogged } from '../../utils/validations';
 import { checkLocalStorage } from '../../redux/actions';
-
+import moment from 'moment';
 import '../prePurchase/prePurchase.css'
-import { loginUser } from '../../redux/actions';
+import { loginUser, eventDetails } from '../../redux/actions';
+import CheckoutForm from '../CheckoutForm/checkoutForm';
 
 // import Login from '../../pages/login/login';
 
 const PrePurchase = function () {
 
+    let eventJSON = localStorage.getItem("prePurchase")
+    let eventInfo = JSON.parse(eventJSON)
+
     const askLogin = useSelector(state => state.isLogged)
+    const event = useSelector(state => state.singleEventDetail)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [input, setInput] = useState({
         email: "",
         password: ""
@@ -21,6 +27,12 @@ const PrePurchase = function () {
 
     useEffect(() => {
         dispatch(checkLocalStorage())
+
+        if(eventInfo){
+            dispatch(eventDetails(eventInfo.eventId))
+        } else{
+            return
+        }
     }, [])
 
 
@@ -53,6 +65,10 @@ const PrePurchase = function () {
             })
     }
 
+    function onclick(){
+        navigate("/checkout")
+    }
+
     return (
         <div className="prepurchase_main">
 
@@ -62,7 +78,7 @@ const PrePurchase = function () {
                 {askLogin ?
 
                     (<div className='login_ask_container'>
-                        <h1>User Info</h1>
+                        <CheckoutForm />
                     </div>)
 
                     :
@@ -117,53 +133,84 @@ const PrePurchase = function () {
                     </div>
                     )}
 
+                {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////// PRE PURCHASE DETAILS START HERE  //////////////////////////////////////////////// */}
+                
                 <div className='details_container'>
 
                     <div className='details_subcontainer'>
                         <div className='title_container'>
                             <h4>Detalle de tu pedido</h4>
+                            {/* <div>
+                            <button className='purchase_button' onClick={onclick}>Proceder al pago</button>
+                            </div> */}
                         </div>
 
 
 
                         <div className='event_container'>
                             <div>
-                                <img src="https://i.ibb.co/NFQGy1h/Put-In.jpg" alt="Put-In" border="0"  className='event_image'/>
+                                <img src={event.frontPageImage} alt="Put-In" border="0"  className='event_image' onError={(e)=>{e.target.onerror = null; e.target.src="https://www.dafont.com/forum/attach/orig/9/9/997801.gif"}}/>
                             </div>
 
-                            <div className='event_deatils_container'>
-                                <p>Concert Details</p>
+                            <div className='event_data_container'>
+                            <div className='event_title_container'>
+                                <p>{event.eventName}</p>
+                            </div>
+
+                            <div className='event_venue_container'>
+                                <img src='../../src/ubicacion.png'/>
+                                <p className='event_icon'>{event.venue}</p>
+                            </div>
+
+                            <div className='event_venue_container'>
+                                 <img src='../../src/calendario.png'/>
+                                    <p className='event_icon'>{moment(event.eventTime).format('D MMM, YYYY')}</p>
+                            </div> 
+
+                             <div className='event_venue_container'>
+                                 <img src='../../src/schedule.png'/>
+                                    <p className='event_icon'>{moment(event.eventTime).format('h:mm a')}</p>
+                            </div>
+
+                              <div className='event_venue_container'>
+                                 <img src='../../src/money.png'/>
+                                <p className='event_icon'>$ {eventInfo.price} C/U</p>
+                            </div>
+
                             </div>
                         </div>
+
+                        
 
 
                         <div className='subtotal_container'>
                             <div className='subtotal_details'>
                                <div className='subtotal_isolated'>
                                     <h5 className='subtotal_headings'>Cantidad</h5>
-                                    <p className='subtotal_description'>1 Entrada</p>
+                                    <p className='subtotal_description'>{eventInfo.quantity}</p>
                                </div>
 
                                <div className='subtotal_isolated'>
                                     <h5 className='subtotal_headings'>Ubicación</h5>
-                                    <p className='subtotal_description'>La casa de tu mama</p>
+                                    <p className='subtotal_description'>{eventInfo.section}</p>
                                </div>
 
                                <div className='subtotal_isolated'>
                                     <h5 className='subtotal_headings'>Valor unitario</h5>
-                                    <p className='subtotal_description'>Gratis!</p>
+                                    <p className='subtotal_description'>$ {eventInfo.price}</p>
                                </div>
 
                                <div className='total_container'>
 
                                <div className='subtotal_isolated'>
                                     <h5 className='subtotal_headings'>Subtotal</h5>
-                                    <p className='subtotal_description'>100</p>
+                                    <p className='subtotal_description'>$ {eventInfo.eventTotal}</p>
                                </div>
 
                                <div className='subtotal_isolated'>
                                     <h5 className='subtotal_headings'>Total</h5>
-                                    <p className='subtotal_description'>Gratis!</p>
+                                    <p className='subtotal_description'>$ {eventInfo.eventTotal}</p>
                                </div>
 
                                </div>
