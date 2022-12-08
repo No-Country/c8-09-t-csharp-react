@@ -1,0 +1,213 @@
+.checkout {
+	font-family: 'Poppins';
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	padding-top: 6.6rem;
+	padding-bottom: 1.5rem;
+	overflow: hidden;
+	justify-content: center;
+	border-radius: 30px;
+}
+
+.leftContainer {
+	border-radius: 30px;
+	border-bottom-right-radius: 0px;
+	border-top-right-radius: 0px;
+	height: 100%;
+	min-height: 437px;
+	overflow: hidden;
+}
+
+.bgImg {
+	width: auto;
+	height: 100%;
+	z-index: -99;
+	opacity: 0.7;
+}
+
+.rightContainer {
+	width: 470px;
+	height: 100%;
+	min-height: 437px;
+	background: white;
+	border-radius: 30px;
+	border-bottom-left-radius: 0px;
+	border-top-left-radius: 0px;
+	padding: 1.7rem;
+}
+
+.rightContainerTitle {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 40px;
+	line-height: 56px;
+	margin-bottom: 1.5rem;
+	color: #fc4a88;
+}
+
+.dataTitle {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 20px;
+	margin-bottom: 0.8rem 0;
+	line-height: 32px;
+	color: #a0a0a0;
+}
+
+.dataSubTitle {
+	margin-bottom: 0.8rem 0;
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 30px;
+}
+.dataTarjeta {
+	display: flex;
+	justify-content: space-between;
+	padding-right: 1rem;
+	align-items: stretch;
+}
+
+.dataTarjetaVenc {
+	width: 80%;
+	border-bottom: 1px solid #a0a0a0;
+}
+
+.dataTarjetaVenc select {
+	width: 50%;
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 30px;
+	color: #1f1f1f;
+}
+
+.dataTarjetaCVV {
+	width: 15%;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: center;
+	border-bottom: 1px solid #a0a0a0;
+}
+
+.tarjetaPassword {
+	width: 100%;
+	text-align: center;
+}
+.tarjetaPassword::placeholder {
+	text-align: left;
+}
+
+.rightContainerButtons {
+	display: flex;
+	margin: 3rem 1.5rem;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
+}
+
+.rightContainerButtons button {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 24px;
+	letter-spacing: 0.75px;
+}
+
+.rightContainerButtonCancel {
+	background: #fc4a8833;
+	border-radius: 100px;
+	color: #fc4a88;
+	padding: 0.5rem 1rem;
+	border: 1px solid transparent;
+}
+
+.rightContainerButtonCancel:hover {
+	transition: 0.5s;
+	border: 1px solid #fc4a88;
+}
+
+.rightContainerButtonBuy {
+	color: white;
+	border: 1px solid transparent;
+	background: #fc4a88;
+	padding: 0.5rem 1rem;
+	border-radius: 100px;
+}
+.rightContainerButtonBuy:hover {
+	transition: 0.5s;
+	border: 1px solid #fc4a88;
+	background-color: #fc4a8833;
+	color: #fc4a88;
+}
+
+/* detalle del evento parte izquierda */
+
+.detailTicket {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	margin: -13rem 2.5rem;
+}
+
+.detailEvent {
+	position: absolute;
+	display: flex;
+	height: 100%;
+	width: 100%;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: stretch;
+}
+
+.detailEvent h5 {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 32px;
+	color: #ffffff;
+}
+
+.detailEvent span {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 24px;
+	letter-spacing: 0.0015em;
+	color: #ffffff;
+}
+
+.detailEventColum {
+	width: 100%;
+	display: flex;
+	padding: 0.5rem 0;
+	align-items: flex-end;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	border-bottom: 2px solid #a0a0a0;
+}
+.detailEventTotal {
+	text-align: right;
+	padding: 1rem 0;
+}
+.detailEventTotal span {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 32px;
+	text-align: right;
+	color: #fc4a88;
+}

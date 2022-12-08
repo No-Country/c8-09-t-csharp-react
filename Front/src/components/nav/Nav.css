@@ -75,17 +75,6 @@ nav ul li:hover{
     color: #FC4A88;
 }
 
-.carrito{
-    padding: 10px;
-    margin-left: 10px;
-}
-
-.carrito:hover{
-    transition: 0.5s;
-    border-radius: 10px;
-    background-color: #fc4a8825;
-}
-
 .buttonIngresar span {
     margin-left: 8px;
     font-size: 20px;

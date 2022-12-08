@@ -17,7 +17,7 @@ const CardEvent = ({ evento }) => {
 		'Nov',
 		'Dic',
 	]
-	//const description = evento.eventDescription.slice(0, 20)
+	//const name = evento.eventName.slice(0, 30)
 	const fechaSinFormatear = evento.eventTime.slice(0, 10)
 	const fecha = fechaSinFormatear.split('-')
 	const horario = evento.eventTime.slice(11, 16)
@@ -39,11 +39,9 @@ const CardEvent = ({ evento }) => {
 					</div>
 					<div className='eventoArtista'>
 						<h2> {evento.eventName} </h2>
-						<h4> {evento.eventDescription} </h4>
 					</div>
 				</div>
 				<div className='containerBotones'>
-					<Link to={'/'}> Saber mas </Link>
 					<Link to={`/event/${evento.id}`}>
 						<div className='buttonComprar'>
 							<span>Comprar ahora</span>
