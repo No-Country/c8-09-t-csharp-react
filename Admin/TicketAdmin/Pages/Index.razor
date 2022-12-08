@@ -1,0 +1,93 @@
+﻿@page "/"
+@attribute [Authorize(Roles = $"{UserRoles.User},{UserRoles.Admin}")]
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject IAuthService AuthService
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
+@inject EventService _EvService
+<PageTitle>Inicio - TicketFan</PageTitle>
+<TitleDesc Title="Inicio" Description="Eventos Proximos"></TitleDesc>
+<MudExpansionPanels DisableBorders="true" Elevation="0" DisableGutters="true" Square="true" MultiExpansion="true">
+    <MudExpansionPanel @bind-IsExpanded="exp1" Style="background-color:transparent" Text="Proximos Eventos">
+        <MudDivider Class="mt-2 mb-4"></MudDivider>
+        <MudGrid>
+            @foreach (var item in User.sales.Where(a => a.Event.EventTime > DateTime.Now).ToList())
+            {
+                <MudItem xs="12" sm="12" md="6" lg="4" xl="2">
+                    <MudCard Style="height:100%">
+                        <MudCardHeader>
+                            <CardHeaderAvatar>
+                                <MudAvatar Color="Color.Secondary">@($"{User.userName.Substring(0, 2)}")</MudAvatar>
+                                </CardHeaderAvatar>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.body1">@($"{User.userName}")</MudText>
+                                    <MudText Typo="Typo.body2">@($"{User.email}")</MudText>
+                                </CardHeaderContent>
+                            </MudCardHeader>
+                            <MudCardMedia Image="@item.Event.Thumbnail" Height="250" />
+                            <MudCardContent>
+                                <MudText Typo="Typo.body2">@($"{item.Event.EventName}")</MudText>
+                                <MudText Typo="Typo.body2">@($"{item.Event.EventDescription.Substring(0, 50)}...")</MudText>
+                                <MudText Typo="Typo.body2">@($"Fecha: {item.Event.EventTime.ToString("D", CultureInfo.GetCultureInfo("es-MX"))}")</MudText>
+                                <MudText Typo="Typo.body2">@($"Hora: {item.Event.EventTime.ToString("t")}")</MudText>
+                                <MudText Typo="Typo.body2">@($"Lugar: {item.Event.Venue}")</MudText>
+                            </MudCardContent>
+                            <MudCardActions>
+                            </MudCardActions>
+                        </MudCard>
+                    </MudItem>
+            }
+        </MudGrid>
+    </MudExpansionPanel>
+
+    <MudExpansionPanel @bind-IsExpanded="exp2" Style="background-color:transparent" Text="Eventos Pasados">
+        <MudDivider Class="mt-2 mb-4"></MudDivider>
+
+        <MudGrid>
+            @foreach (var item in User.sales.Where(a => a.Event.EventTime < DateTime.Now))
+            {
+                <MudItem xs="12" sm="12" md="6" lg="4" xl="2" >
+                    <MudCard Style="height:100%">
+                        <MudCardHeader>
+                            <CardHeaderAvatar>
+                                <MudAvatar Color="Color.Secondary">@($"{User.userName.Substring(0, 2)}")</MudAvatar>
+                                </CardHeaderAvatar>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.body1">@($"{User.userName}")</MudText>
+                                    <MudText Typo="Typo.body2">@($"{User.email}")</MudText>
+                                </CardHeaderContent>
+                            </MudCardHeader>
+                            <MudImage Src="@item.Event.Thumbnail" ObjectPosition="ObjectPosition.Center" ObjectFit="ObjectFit.Cover" Fluid="true"></MudImage>
+                            <MudCardContent>
+                                <MudText Typo="Typo.body2">@($"{item.Event.EventName}")</MudText>
+                                <MudText Typo="Typo.body2">@($"{item.Event.EventDescription.Substring(0, 50)}...")</MudText>
+                                <MudText Typo="Typo.body2">@($"Fecha: {item.Event.EventTime.ToString("D", CultureInfo.GetCultureInfo("es-MX"))}")</MudText>
+                                <MudText Typo="Typo.body2">@($"Hora: {item.Event.EventTime.ToString("t")}")</MudText>
+                                <MudText Typo="Typo.body2">@($"Lugar: {item.Event.Venue}")</MudText>
+                            </MudCardContent>
+                            <MudCardActions>
+                                <MudIconButton Icon="@Icons.Material.Filled.RateReview" Color="Color.Default" />
+                            </MudCardActions>
+                        </MudCard>
+                    </MudItem>
+            }
+        </MudGrid>
+    </MudExpansionPanel>
+</MudExpansionPanels>
+@code
+{
+
+    public User User { get; set; } = new();
+    public bool exp1 { get; set; } = true;
+    public bool exp2 { get; set; } = true;
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var email = authState.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+        if (!string.IsNullOrEmpty(email))
+        {
+            User = await _EvService.GetDash(email);
+        }
+    }
+}

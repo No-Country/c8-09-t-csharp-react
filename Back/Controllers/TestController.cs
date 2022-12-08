@@ -1,6 +1,7 @@
 ﻿using CohorteApi.Core.Interfaces;
 using CohorteApi.Data;
 using CohorteApi.Models;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -50,27 +51,29 @@ namespace CohorteApi.Controllers
         }
 
         [HttpGet("GetUsersTesting")]
-        public async Task<IActionResult> GetUsersTesting([FromServices] ApplicationDbContext context, [FromServices] UserManager<AppUser> umanager)
+        public async Task<IActionResult> GetUsersTesting([FromServices] ApplicationDbContext context, [FromServices] UserManager<AppUser> umanager, [FromQuery] string email)
         {
-            var result = await umanager.Users.Include(a => a.Sales).ThenInclude(a=>a.Event).ThenInclude(a=>a.Category).Include(a => a.Reviews).ToListAsync();
+            var result = await umanager.Users.Include(a => a.Sales).ThenInclude(a=>a.Event).ThenInclude(a=>a.Category).Include(a => a.Reviews).FirstAsync(a=>a.Email == email);
             return new JsonResult(result);
         }
 
-        [HttpGet("GenerateSales")]
-        public async Task<IActionResult> GenerateSale([FromServices] ApplicationDbContext context, [FromServices] UserManager<AppUser> umanager)
+        [HttpGet("GenerateSales/{email}")]
+        public async Task<IActionResult> GenerateSale([FromServices] ApplicationDbContext context, [FromServices] UserManager<AppUser> umanager, string email)
         {            
-            var user = await umanager.FindByEmailAsync("manuel@mailinator.com");
-            var _event = await context.Events.FirstAsync();
-            Sale sale = new() 
+            var user = await umanager.FindByEmailAsync(email);
+            var _event = await context.Events.FirstAsync(a=>a.Id == 7);
+            var _event2 = await context.Events.FirstAsync(a=>a.Id == 8);
+            var _event3 = await context.Events.FirstAsync(a=>a.Id == 9);
+            Sale sale3 = new()
             {
                 CreatedAt= DateTime.Now,
-                Event= _event,
+                Event= _event3,
                 Price = (decimal)49.99,
                 Qty=1,
                 User = user,
                 Section = "Platea"
-            };
-            context.Add(sale);           
+            };           
+            context.Add(sale3);           
             return new JsonResult(await context.SaveChangesAsync());
         }
     }
@@ -182,7 +185,7 @@ namespace CohorteApi.Controllers
         }
 
         [HttpPost("UploadFiles")]
-        public IActionResult UploadImages([FromForm] List<IFormFile> files, string folder = "images")
+        public IActionResult UploadImages([FromForm] IEnumerable<IFormFile> files, string folder = "images")
         {
             var path = $"wwwroot/{folder}";
             //create folder if not exist
@@ -218,7 +221,7 @@ namespace CohorteApi.Controllers
                 }
             }
 
-            var json = results.Select(x => new { File = x.Item1, Url = x.Item2, Success = x.Item3 });
+            var json = results.Select(x => new { File = x.Item1, Url = x.Item2, Success = x.Item3 }).First();
             return new JsonResult(json);
         }
     }

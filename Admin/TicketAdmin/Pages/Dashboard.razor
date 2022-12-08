@@ -1,0 +1,134 @@
+﻿@page "/Dashboard"
+@attribute [Authorize(Roles = UserRoles.Admin)]
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject IAuthService AuthService
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
+<PageTitle>Index</PageTitle>
+<TitleDesc Title="Dashboard" Description="Metricas en tiempo real"></TitleDesc>
+
+
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudGrid>
+        <MudItem xs="12" sm="6" md="3">
+            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Height="100px">
+                <MudIcon Icon="@Icons.Material.Filled.ViewCarousel" Color="Color.Primary" Class="mx-4"
+                     Style="width:54px; height:54px;"></MudIcon>
+                <div>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Eventos Activos</MudText>
+@*                    <MudText Typo="Typo.h5">@DashObj.VentasPagadas</MudText>
+*@                </div>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Height="100px">
+                <MudIcon Icon="@Icons.Material.Filled.PanoramaPhotosphereSelect" Color="Color.Secondary" Class="mx-4"
+                     Style="width:54px; height:54px;"></MudIcon>
+                <div>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Eventos Vendidos</MudText>
+@*                    <MudText Typo="Typo.h5">@DashObj.VentasNoPagadas</MudText>
+*@                </div>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Height="100px">
+                <MudIcon Icon="@Icons.Material.Filled.Face" Color="Color.Success" Class="mx-4"
+                     Style="width:54px; height:54px;"></MudIcon>
+                <div>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
+                        Clientes
+                    </MudText>
+@*                    <MudText Typo="Typo.h5">@DashObj.Clientes</MudText>
+*@                </div>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Height="100px">
+                <MudIcon Icon="@Icons.Material.Filled.Groups" Color="Color.Warning" Class="mx-4"
+                     Style="width:54px; height:54px;"></MudIcon>
+                <div>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">
+                        Ventas Totales
+                    </MudText>
+@*                    <MudText Typo="Typo.h5">@TotalVentas.ToString("C",CultureInfo.GetCultureInfo("en-US"))</MudText>
+*@                </div>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="6">
+            <MudPaper Elevation="25" Class="pa-4" Height="600">
+@*                <ApexChart TItem="Sale" XAxisType="XAxisType.Datetime" Height="@("100%")" Width="@("100%")" Title="Ventas Por Dia">
+
+                    <ApexPointSeries TItem="Sale"
+                                 Items="DashObj.Sales"
+                                 Name="Total"
+                                 XValue="@(e => e.Created_at.Date.ToUnixTimeMilliseconds())"
+                                 YAggregate="@(e => e.Sum(e => (decimal)e.Total))"
+                                 SeriesType="SeriesType.Bar" />
+
+
+                </ApexChart>*@
+
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="6">
+            <MudPaper Elevation="25" Class="pa-4" Height="600">
+@*                <ApexChart TItem="Sale" XAxisType="XAxisType.Datetime" Height="@("100%")" Width="@("100%")" Title="Ventas Por Mes">
+
+                    <ApexPointSeries TItem="Sale"
+                                 Items="DashObj.Sales"
+                                 Name="Total Del Dia"
+                                 XValue="@(e => e.Created_at.Month)"
+                                 YAggregate="@(e => e.Sum(e => (decimal)e.Total))"
+                                 SeriesType="SeriesType.Bar" />
+                </ApexChart>*@
+
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+}
+@code {
+    private bool _loaded;
+    private string searchString ="";
+    protected override async Task OnInitializedAsync()
+    {
+        LoadDataAsync();
+
+    }
+    private async void LoadDataAsync()
+    {
+        _loaded = true;
+        StateHasChanged();
+    }
+    private bool FilterFunc(string element)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if ($"{element} {element}".Contains(searchString))
+            return true;
+        return false;
+    }
+
+    private async void Details()
+    {
+        var options = new DialogOptions
+            {
+                CloseOnEscapeKey = false,
+                CloseButton = false,
+                Position = DialogPosition.Center,
+                DisableBackdropClick = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Large
+            }; 
+        DialogParameters parameters = new();
+        //var dialogresult2 = await DialogService.Show<SaleDetailsModal>("Detalles", parameters, options).Result;
+        StateHasChanged();
+    }
+}

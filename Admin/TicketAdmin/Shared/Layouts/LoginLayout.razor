@@ -1,0 +1,30 @@
+﻿@using TicketFanAdmin.Theme
+@inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject IAuthService AuthService
+@inject ISnackbar Snackbar
+
+<MudThemeProvider Theme="_currentTheme" />
+<MudSnackbarProvider />
+<style>
+    html, body {
+        background: linear-gradient(rgba(252,74,136),rgba(148,45,189));
+    }
+</style>
+<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
+    <div class="d-flex flex-column mud-width-full">
+        <MudPaper Elevation="25" Class="pa-8 justify-center rounded-lg" Width="100%" MaxWidth="500px">
+            <div class="d-flex justify-center">
+                <MudImage ObjectPosition="ObjectPosition.Center" Style="width: 100%;" Src="./Img/logo-ticketfan.svg" />
+            </div>
+            @Body
+        </MudPaper>
+    </div>
+
+</MudContainer>
+
+@code {
+    private MudTheme _currentTheme = new MudBlazorAdminDashboard();
+
+}
