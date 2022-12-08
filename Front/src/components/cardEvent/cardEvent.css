@@ -11,7 +11,7 @@
 }
 
 .infoEvento {
-	background-image: url('./fondo.png');
+	background-image: url('/fondo.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	border-radius: 0px 0px 10px 10px;
