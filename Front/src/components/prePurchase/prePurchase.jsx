@@ -7,6 +7,9 @@ import moment from 'moment';
 import '../prePurchase/prePurchase.css'
 import { loginUser, eventDetails } from '../../redux/actions';
 import CheckoutForm from '../CheckoutForm/checkoutForm';
+import { Alert } from "../../utils/alert";
+import rejectionImg from '../../../src/rejection.svg'
+import responseImg from '../../../src/response.svg'
 
 // import Login from '../../pages/login/login';
 
@@ -50,13 +53,25 @@ const PrePurchase = function () {
             .then(val => {
                 if (val !== 200) {
                     // alert(`Error ${val.response.status}: ${val.response.statusText}`)
-                    alert("Error")
+                    Alert.fire({
+                        title: 'Ooops',
+                        html: `Por favor verifica los datos: </br> <b>${input.email}</b>`,
+                        imageUrl: rejectionImg,
+                        imageAlt: 'error',
+                        confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
+                    })
                 } else {
                     try{
                         // const decode = jwt_decode(loginData.token)
                         // localStorage.setItem("user", JSON.stringify(decode))
                         dispatch(checkLocalStorage())
-                        alert("Bienvenido!")
+                        Alert.fire({
+                            title: 'Bienvenido!',
+                            html: `Ingresaste con el correo: </br> <b>${input.email}</b>`,
+                            imageUrl: responseImg,
+                            imageAlt: 'confirm',
+                            confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
+                        })
                      
                     } catch(error){
                         console.log(error)

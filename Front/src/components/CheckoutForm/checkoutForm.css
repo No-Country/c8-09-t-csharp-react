@@ -70,6 +70,8 @@
     border-radius: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+
+    text-align: center;
 }
 
 .checkoutForm_card_container{
@@ -86,6 +88,11 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+::-webkit-input-placeholder {
+    text-align: center;
+  }
+  
+
 .checkoutForm_input_card{
     gap: 4px;
     height: 41px;
@@ -95,6 +102,8 @@ input::-webkit-inner-spin-button {
     border-radius: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    text-align: center;
+    
 }
 .checkoutForm_input_cardLogo{
     display: flex;
@@ -132,7 +141,10 @@ input::-webkit-inner-spin-button {
 }
 
 .checkoutForm_input_fecha{
-    /* padding: 0px; */
+    /* display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; */
     gap: 10px;
     width: 20%;
     height: 41px;
@@ -142,6 +154,7 @@ input::-webkit-inner-spin-button {
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 8px;
+    text-align: center;
 }
 
 .checkoutForm_CVV_container{
@@ -194,6 +207,7 @@ input::-webkit-inner-spin-button {
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 5px;
+    text-align: center;
 }
 
 .checkoutForm_buttons_container{
