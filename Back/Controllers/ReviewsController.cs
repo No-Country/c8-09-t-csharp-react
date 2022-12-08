@@ -21,8 +21,8 @@ namespace CohorteApi.Controllers
     public class ReviewsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
-        public ReviewsController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        private readonly UserManager<AppUser> _userManager;
+        public ReviewsController(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -153,7 +153,7 @@ namespace CohorteApi.Controllers
             return  await _context.Review.AnyAsync(e => e.Id == id);
         }
 
-        private async Task<IdentityUser> GetUserFromContext()
+        private async Task<AppUser> GetUserFromContext()
         {
             var userEmail = this.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
             var user = await _userManager.FindByEmailAsync(userEmail);
