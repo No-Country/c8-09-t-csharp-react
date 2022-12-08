@@ -112,6 +112,7 @@ const CheckoutForm = function(){
 
                 <div className="form_inputs_container">
                     <form onSubmit={submit}>
+                        <div className='checkoutForm_cardName_container'>
                         <input 
                         type="text" 
                         placeholder="Titular de la tarjeta" 
@@ -120,18 +121,20 @@ const CheckoutForm = function(){
                         value={input.CardName}
                         onChange={handleInput}
                         />
+                        </div>
 
                         <div className='checkoutForm_card_container'>
                             <input 
                             type="number"
                             placeholder="Numero de tarjeta" 
+                            maxlength="16"
                             className='checkoutForm_input_card'
                             name='CardNumber'
                             value={input.CardNumber}
                             onChange={handleInput}
                             /> 
 
-                            <div>-</div>
+                            <div className='checkoutForm_hyphen'>-</div>
                             <div type="text" className='checkoutForm_input_cardLogo'><img src='../../src/Logos.png'/></div>
                         </div>
 
@@ -142,16 +145,18 @@ const CheckoutForm = function(){
                                 <input 
                                 type="number" 
                                 placeholder="MM" 
+                                maxlength="2"
                                 className='checkoutForm_input_fecha'
                                 name='CardMonth'
                                 value={input.CardMonth}
                                 onChange={handleInput}
                                 />
 
-                                <div>-</div>
+                                <div className='checkoutForm_hyphen'>-</div>
                                 <input 
                                 type="number" 
                                 placeholder="AA" 
+                                maxlength="2"
                                 className='checkoutForm_input_fecha'
                                 name='CardYear'
                                 value={input.CardYear}
@@ -167,6 +172,7 @@ const CheckoutForm = function(){
                                 <input 
                                 type="number" 
                                 placeholder="CVC" 
+                                maxlength="3"
                                 className='checkoutForm_input_CVV'
                                 name='CVV'
                                 value={input.CVV}
