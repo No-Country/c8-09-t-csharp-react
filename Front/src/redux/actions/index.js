@@ -120,3 +120,19 @@ export function eventDetails(id){
         return response.data
     }
 }
+
+export function purchaseEvent(payload){
+    return async function(dispatch){
+        try{
+            const response = await axios.post('https://cohorteapi.azurewebsites.net/api/Sales', payload)
+            dispatch({
+                type: "PURCHASE_EVENT",
+                payload: response.data
+            })
+            console.log(response.status)
+            return response.status
+        } catch(error){
+            return error
+        }
+    }
+}
