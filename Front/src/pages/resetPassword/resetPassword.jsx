@@ -69,7 +69,7 @@ const ResetPassword = function(){
         dispatch(resetPassword(input))
             .then(val => {
             if(val !== 200){
-                console.log(val)
+                // console.log(val)
                 
                 Alert.fire({
                     title: 'Ooops',
@@ -79,7 +79,7 @@ const ResetPassword = function(){
                     confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
                 })
             } else{
-                console.log("Success with status: " + val)
+                // console.log("Success with status: " + val)
                 Alert.fire({
                     title: '¡Tu contraseña ha sido actualizada!',
                     html: `Bienvenido </br> <b>${input.email}</b>`,

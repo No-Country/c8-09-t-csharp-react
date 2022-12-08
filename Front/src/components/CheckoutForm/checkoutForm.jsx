@@ -92,18 +92,18 @@ const CheckoutForm = function(){
                             imageAlt: 'confirm',
                             confirmButtonText: `<button class="botonPrincipal" >Regresar al inicio</button>`,
                         })
-                        console.log(purchase)
+                        // console.log(purchase)
                         localStorage.removeItem("prepurchase")
                      
                     } catch(error){
-                        console.log(error)
+                        // console.log(error)
                     }
                 }
             })
             // cancelPurchase()
     }
 
-    console.log(input)
+    // console.log(input)
 
     return(
         <div className="checkoutForm_main_container">

@@ -42,13 +42,13 @@ const ForgotPassword = function () {
                         confirmButtonText: `<button class="botonPrincipal" > OK </button>`,
                     })
                 } catch(error){
-                    console.log(error)
+                    return (error)
                 }
             }
         })
     }
 
-    console.log(forgotPassData)
+    // console.log(forgotPassData)
     // 
     return (
         <div className="forgotpassword_main">

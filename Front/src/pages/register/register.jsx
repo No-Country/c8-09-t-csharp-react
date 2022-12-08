@@ -100,7 +100,7 @@ const Register = function () {
         
         create.then(val => {
             if(val !== 200){
-                console.log(val)
+                // console.log(val)
                 Alert.fire({
                     title: 'Ooops',
                     html: `Hubo un error, intente de nuevo </br>`,
@@ -109,7 +109,7 @@ const Register = function () {
                     confirmButtonText: `<button class="botonPrincipal" > OK </button>`,
                 })
             } else{
-                console.log("Success with status: " + val)
+                // console.log("Success with status: " + val)
                 Alert.fire({
                     title: '¡Listo!',
                     html: `Usuario creado con exito!: </br> <b>${input.username}</b>`,

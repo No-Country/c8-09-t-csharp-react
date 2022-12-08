@@ -101,7 +101,7 @@ const Event = () => {
 
     }
 
-    console.log(input)
+    // console.log(input)
 
     return(
         
