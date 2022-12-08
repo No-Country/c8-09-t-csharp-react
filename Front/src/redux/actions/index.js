@@ -80,7 +80,7 @@ export function forgotPassword(payload){
                 payload: response.data
             })
 
-            console.log(response.status)
+            // console.log(response.status)
             return response.status
             
         } catch(error){
@@ -100,7 +100,7 @@ export function resetPassword(payload){
                 payload: response.data
             })
 
-            console.log(response.status)
+            // console.log(response.status)
             return response.status
 
         } catch(error){
@@ -129,7 +129,7 @@ export function purchaseEvent(payload){
                 type: "PURCHASE_EVENT",
                 payload: response.data
             })
-            console.log(response.status)
+            // console.log(response.status)
             return response.status
         } catch(error){
             return error
