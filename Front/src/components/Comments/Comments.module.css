@@ -3,7 +3,7 @@
 	height: 300px;
 	background: linear-gradient(
 		185.87deg,
-		rgba(10, 30, 38, 0.17) 12.77%,
+		rgba(10, 30, 38, 0.31) 12.77%,
 		rgba(10, 30, 38, 0.859) 94.3%
 	);
 	display: flex;
@@ -51,9 +51,10 @@
 
 .container div h3 {
 	text-align: left;
-	font-size: 40px;
+	font-size: 30px;
 	font-weight: 600;
 }
+
 
 .description {
 	position: relative;
