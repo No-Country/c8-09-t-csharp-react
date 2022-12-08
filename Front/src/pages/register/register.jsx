@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { createUser } from "../../redux/actions";
 
 import '../register/register.css'
+import { Alert } from "../../utils/alert";
+import rejectionImg from '../../../src/rejection.svg'
+import  responseImg  from '../../../src/response.svg';
 
 function validateEmail(email) {
     return email.match(
@@ -98,12 +101,24 @@ const Register = function () {
         
         create.then(val => {
             if(val !== 200){
-                console.log(val)
-                alert("Error: " + val)
+                // console.log(val)
+                // alert("Error: " + val)
+                Alert.fire({
+                    title: 'Lo siento',
+                    html: `Ha ocurrido un error </br> Por favor inténtelo de nuevo`,
+                    imageUrl:rejectionImg ,
+                    imageAlt: 'confirm',
+                    confirmButtonText: `<button class="botonPrincipal" >Reintentar</button>`,
+                })
             } else{
                 console.log("Success with status: " + val)
-                alert("Usuario creado con exito")
-                navigate("/")
+                Alert.fire({
+                    title: '¡ Bienvenido !',
+                    html: `Usuario <b>${input.username}</b> creado correctamente. </br> Porfavor inicie sesión`,
+                    imageUrl: responseImg,
+                    imageAlt: 'confirm',
+                    confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
+                }).then(res=>navigate("/login"))
             }
         })
     }
