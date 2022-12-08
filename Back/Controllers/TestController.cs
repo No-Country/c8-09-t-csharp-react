@@ -250,7 +250,7 @@ namespace CohorteApi.Controllers
         /// <param name="recipient">The email</param>
 
         [HttpPost]
-        public async Task<bool> SendEmail(string recipient = "tiketfan-TestEmailContent@mailinator.com", string content = "<h1>Test Content</h1>")
+        public async Task<bool> SendEmail(string recipient = "tiketfan-TestEmailContent@mailinator.com", [FromBody] string content = "<h1>Test Content</h1>")
         {
             var body = content;
             if (body == "")
