@@ -99,7 +99,11 @@ namespace CohorteApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEvent(int id)
         {
-            var @event = await _context.Events.FindAsync(id);
+            var @event = await _context.Events
+                .Include(i => i.Reviews)
+                .Include(i => i.Category)
+                .Include(i => i.Sections)
+                .FirstAsync(a => a.Id == id);
             if (@event == null)
             {
                 return NotFound();
@@ -107,7 +111,6 @@ namespace CohorteApi.Controllers
 
             _context.Events.Remove(@event);
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
 

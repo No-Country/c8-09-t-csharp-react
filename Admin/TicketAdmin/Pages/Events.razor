@@ -1,0 +1,175 @@
+﻿@page "/Events"
+@inject IAuthService authservice
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
+@inject EventService Client
+
+@attribute [Authorize(Roles = @UserRoles.Admin)]
+
+<TitleDesc Title="Administrador de Eventos" Description="Permite Modificar, Agregar y Borrar los Eventos"></TitleDesc>
+
+<MudTable CustomHeader="true" CustomFooter="false" Items="@EventsList" Loading="loading" LoadingProgressColor="Color.Primary" SortLabel="Sort By" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="new Func<Event,bool>(FilterFunc)">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Eventos</MudText>
+        <MudSpacer />
+        <div style="width:35%">
+            <MudTextField Clearable="true" @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </div>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTHeadRow>
+            <MudTh Class="pa-2" colspan="5">
+                <MudToolBar DisableGutters="true">
+                    <MudTooltip Text="Create">
+                        <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="Add"/>
+                    </MudTooltip>
+                    <MudTooltip Text="Export Excel">
+                        <MudIconButton Icon="@Icons.Material.Filled.SaveAlt" Color="Color.Inherit" />
+                    </MudTooltip>
+                    <MudSpacer />
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert" Variant="Variant.Text" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopRight" Color="Color.Default">
+                        <div class="ma-2">
+                            <MudSwitch Class="ma-auto" @bind-Checked="@hover" Color="Color.Primary">Hover</MudSwitch>
+                            <MudSwitch Class="ma-auto" @bind-Checked="@dense" Color="Color.Secondary">Dense</MudSwitch>
+                            <MudSwitch Class="ma-auto" @bind-Checked="@striped" Color="Color.Tertiary">Striped</MudSwitch>
+                            <MudSwitch Class="ma-auto" @bind-Checked="@bordered" Color="Color.Warning">Bordered</MudSwitch>
+                        </div>
+                    </MudMenu>
+                </MudToolBar>
+            </MudTh>
+        </MudTHeadRow>
+        <MudTHeadRow>
+            <MudTh Style="text-align:center"><MudTableSortLabel SortBy="new Func<Event, object>(x=>x.EventTime)">Fecha</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:center"><MudTableSortLabel SortBy="new Func<Event, object>(x=>x.EventName)">Nombre Del Evento</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:center"><MudTableSortLabel SortBy="new Func<Event, object>(x=>x.Venue)">Lugar</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:center">Category</MudTh>
+            <MudTh Style="text-align:center">Options</MudTh>
+        </MudTHeadRow>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd Style="text-align:center" DataLabel="Fecha">@context.EventTime.Date.ToString("d",CultureInfo.GetCultureInfo("es-MX")) @context.EventTime.ToString("t")</MudTd>
+        <MudTd Style="text-align:center" DataLabel="Nombre Del Evento">@context.EventName</MudTd>
+        <MudTd Style="text-align:center" DataLabel="Lugar">@context.Venue</MudTd>
+        <MudTd Style="text-align:center" DataLabel="Categoria">          
+                <MudChip OnClick="(()=>  ClickFilter(context))">@context.Category.Name</MudChip>            
+        </MudTd>
+        <MudTd Style="text-align:center" DataLabel="Options">
+            <MudIconButton Icon="@Icons.Material.Filled.Edit" />
+            <MudIconButton Icon="@Icons.Material.Filled.DeleteForever" OnClick="(()=>Delete(context.Id))" />
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[]{5, 10}" />
+    </PagerContent>
+</MudTable>
+@code {
+    private bool dense = true;
+    private bool hover = true;
+    private bool loading = true;
+    private bool striped = false;
+    private bool bordered = false;
+    private string searchString = "";
+
+    private IEnumerable<Event> EventsList = new List<Event>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            EventsList = await Client.Get();
+        }
+        catch (Exception)
+        {
+            await authservice.CheckForExpiry();
+        }
+
+        loading = !loading;
+    }
+
+    private bool FilterFunc(Event element)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.EventName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if ($"{element.Category.Name} {element.Venue}".Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        return false;
+    }
+    private void ClickFilter(Event element)
+    {
+        searchString = element.Category.Name;
+    }
+
+    //private async void Edit(Event a)
+    //{
+
+    //    var options = new DialogOptions
+    //        {
+    //            CloseOnEscapeKey = true,
+    //            CloseButton = true,
+    //            Position = DialogPosition.Center,
+    //            DisableBackdropClick = true,
+    //            FullWidth = true,
+    //            MaxWidth = MaxWidth.Small
+    //        };
+    //    DialogParameters parameters = new();
+    //    parameters.Add("garment", a);
+    //    var dialogresult = await DialogService.Show<EditGarment>("Edit", parameters, options).Result;
+    //    if (!dialogresult.Cancelled)
+    //    {
+    //        if ((Garment)dialogresult.Data != null)
+    //        {
+    //            Garment obj = (Garment)dialogresult.Data;
+    //            await Client.Put(obj);
+    //            Snackbar.Add("Edit Succesful", Severity.Success, config =>
+    //           {
+    //               config.ShowCloseIcon = true;
+    //           });
+    //        }
+    //    }
+    //    GarmentsList = await Client.Get();
+    //    StateHasChanged();
+    //}
+    private async void Add()
+    {
+        var options = new DialogOptions
+            {
+                CloseOnEscapeKey = true,
+                CloseButton = true,
+                Position = DialogPosition.Center,
+                DisableBackdropClick = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Small
+            };
+        var dialogresult = await DialogService.Show<AddEventModal>("Add", options).Result;
+        if (!dialogresult.Cancelled)
+        {
+            if ((Event)dialogresult.Data != null)
+            {
+                Event obj = (Event)dialogresult.Data;
+               // await Client.Post(obj);
+                Snackbar.Add("Added Succesfully", Severity.Success, config =>
+               {
+                   config.ShowCloseIcon = true;
+               });
+            }
+        }
+        EventsList = await Client.Get();
+        StateHasChanged();
+    }
+    private async void Delete(int a)
+    {
+        bool? result = await DialogService.ShowMessageBox(
+        "Warning",
+        "Deleting can not be undone!",
+        yesText: "Delete!", cancelText: "Cancel");
+        if (result == true)
+        {
+            await Client.Delete(a);
+            Snackbar.Add("Deleted Succesfully", Severity.Success, config => { config.ShowCloseIcon = true; });
+        }
+        EventsList = await Client.Get();
+        StateHasChanged();
+    }
+}

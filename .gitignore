@@ -10,3 +10,6 @@
 /Back/Properties
 /Back/CohorteApi.csproj.user
 
+/Admin/TicketAdmin/.vs
+/Admin/TicketAdmin/bin
+/Admin/TicketAdmin/obj

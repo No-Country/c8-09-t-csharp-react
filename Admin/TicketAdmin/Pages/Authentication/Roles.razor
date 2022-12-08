@@ -1,0 +1,46 @@
+﻿@page "/roles"
+@inject AuthenticationStateProvider authenticationStateProvider
+
+
+<h3>ClaimsPrincipal Data</h3>
+
+<MudButton Variant="Variant.Filled" Color="Color.Secondary" @onclick="GetClaimsPrincipalData">Get ClaimsPrincipal Data</MudButton>
+
+<p>@authMessage</p>
+
+@if (claims.Count() > 0)
+{
+    <ul>
+        @foreach (var claim in claims)
+        {
+            <li>@claim.Type: @claim.Value</li>
+        }
+    </ul>
+}
+
+
+@code {
+    private string authMessage;
+    private IEnumerable<Claim> claims = Enumerable.Empty<Claim>();
+    protected override void OnInitialized()
+    {
+
+    }
+
+    private async Task GetClaimsPrincipalData()
+    {
+        var authState = await ((AuthStateProvider)authenticationStateProvider).GetAuthenticationStateAsync();
+        var user = authState.User;
+        var roleIn = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+        var userid = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+        if (user.Identity.IsAuthenticated)
+        {
+            authMessage = $"{user.Identity.Name} is authenticated.";
+            claims = user.Claims; 
+        }
+        else
+        {
+            authMessage = "The user is NOT authenticated.";
+        }
+    }
+}

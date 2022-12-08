@@ -1,0 +1,397 @@
+﻿@using TicketFanAdmin.Models;
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
+@inject EventService eventService
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Event" Class="mr-3 mb-n1" />
+            Create Event
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText Class="mt-3" Typo="Typo.h6">Detalles del Evento</MudText>
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudTextField  @bind-Value="@_event.EventName" Label="Nombre" />
+                <MudSelect T="int?" @bind-Value="_event.CategoryId" Label="Categorias" AnchorOrigin="Origin.BottomCenter">
+                    <MudSelectItem T="int?" Value="1">Musica</MudSelectItem>
+                    <MudSelectItem T="int?" Value="2">Familiar</MudSelectItem>
+                    <MudSelectItem T="int?" Value="3">Deporte</MudSelectItem>
+                    <MudSelectItem T="int?" Value="4">Seminarios</MudSelectItem>
+                    <MudSelectItem T="int?" Value="5">Cursos y Talleres</MudSelectItem>
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudTextField Lines="4" @bind-Value="@_event.EventDescription" Label="Descripcion" />
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-MX")" @bind-Date="@Date" Label="Fecha" />
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudTimePicker @ref="_picker" AutoClose="false" AmPm="true" @bind-Time="@Time" Label="Hora">
+                    <PickerActions>
+                        <MudButton Class="mr-auto align-self-start" OnClick="@(() => _picker.Clear())">Clear</MudButton>
+                        <MudButton OnClick="@(() => _picker.Close(false))">Cancel</MudButton>
+                        <MudButton Color="Color.Primary" OnClick="@(() => _picker.Close())">Ok</MudButton>
+                    </PickerActions>
+                </MudTimePicker>
+            </MudItem>
+        </MudGrid>
+        <MudText Class="mt-3" Typo="Typo.h6">Lugar</MudText>
+        <MudGrid>
+            <MudItem xs="12" sm="12">
+                <MudSelect @bind-Value="SelectedVenue" T="Venue" Label="Lugar" AnchorOrigin="Origin.BottomCenter">
+                    <MudSelectItem T="Venue" Value="@Concierto">Explanada Las Gaviotas</MudSelectItem>
+                    <MudSelectItem T="Venue" Value="@Familiar">Estadio Luna Park</MudSelectItem>
+                    <MudSelectItem T="Venue" Value="@Estadio">Estadio Movistar Arena</MudSelectItem>
+                    <MudSelectItem T="Venue" Value="@Seminario">Salon de Eventos 'Jose Maria Juarez'</MudSelectItem>
+                    <MudSelectItem T="Venue" Value="@Teatro">Teatro Frida Khalo</MudSelectItem>
+                </MudSelect>
+                @if (SelectedVenue is not null)
+                {
+                    <div Class="mt-2 pa-2">
+                        <MudChipSet AllClosable="false">
+                            @foreach (var item in SelectedVenue.Sections)
+                            {
+                                <MudChip Color="Color.Inherit" Label="true" Value="item" Variant="Variant.Filled">@item.Name</MudChip>
+                            }
+                        </MudChipSet>
+                    </div>
+                }
+            </MudItem>
+        </MudGrid>
+        <MudText Class="mt-3" Typo="Typo.h6">Imagenes</MudText>
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudFileUpload T="IBrowserFile" OnFilesChanged="OnInputFileChanged" Hidden="false" Class="flex-1" InputClass="absolute mud-width-full mud-height-full overflow-hidden z-20" InputStyle="opacity:0">
+                    <ButtonTemplate>
+                        <MudText>Imagen Principal</MudText>
+                        @if (imgUrl is null)
+                        {
+                            <MudPaper Outlined="true" Class="@DefaultDragClass">
+                                <MudText Typo="Typo.h6">Drag and drop files here or click</MudText>
+                            </MudPaper>
+                        }
+
+                    </ButtonTemplate>
+                    <SelectedTemplate>
+                        @if (imgUrl is not null)
+                        {
+                            <MudText Class="mt-2" Typo="Typo.subtitle2">Preview:</MudText>
+                            <div class="pa-4">
+                                <MudImage Width="225" Height="127" Src="@imgUrl" Alt="Preview" Elevation="25" Class="rounded-lg" />
+                            </div>
+                        }
+                    </SelectedTemplate>
+                </MudFileUpload>
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudFileUpload T="IBrowserFile" OnFilesChanged="OnInputFileChanged2" Hidden="false" Class="flex-1" InputClass="absolute mud-width-full mud-height-full overflow-hidden z-20" InputStyle="opacity:0">
+                    <ButtonTemplate>
+                        <MudText>Imagen Secundaria</MudText>
+
+                        @if (imgUrl2 is null)
+                        {
+                            <MudPaper Outlined="true" Class="@DefaultDragClass">
+                                <MudText Typo="Typo.h6">Drag and drop files here or click</MudText>
+                            </MudPaper>
+                        }
+                        <InputFile OnChange="OnInputFileChanged2" multiple />
+                    </ButtonTemplate>
+                    <SelectedTemplate>
+                        @if (imgUrl2 is not null)
+                        {
+                            <MudText Class="mt-2" Typo="Typo.subtitle2">Preview:</MudText>
+                            <div class="pa-4">
+                                <MudImage Width="225" Height="127" Src="@imgUrl2" Alt="Preview" Elevation="25" Class="rounded-lg" />
+                            </div>
+                        }
+                    </SelectedTemplate>
+                </MudFileUpload>
+            </MudItem>
+        </MudGrid>
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancelar</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Crear Evento</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+@code {
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; }
+    MudTimePicker _picker;
+
+    public Event _event { get; set; } = new();
+    public DateTime? Date { get; set; }
+    public TimeSpan? Time { get; set; }
+    public int? CategoryId { get; set; }
+    public Venue SelectedVenue { get; set; }
+    public Venue Estadio { get; set; } = new()
+        {
+            VenueName = "Estadio Movistar Arena",
+            VenueThumbnail ="https://cohorteapi.azurewebsites.net/images/Deporte.png",
+            Sections = new List<Section>
+        {
+            new Section()
+            {
+                Name="Platea VIP",
+                TotalSeats = 50,
+                AvailableSeats = 50,
+                Price = (decimal)79.99
+            },
+            new Section()
+            {
+                Name="Platea Preferencial",
+                TotalSeats = 100,
+                AvailableSeats = 100,
+                Price = (decimal)49.99
+            },
+            new Section()
+            {
+                Name="Platea General",
+                TotalSeats = 200,
+                AvailableSeats = 200,
+                Price = (decimal)34.99
+            },
+            new Section()
+            {
+                Name="Campo General",
+                TotalSeats = 100,
+                AvailableSeats = 100,
+                Price = (decimal)24.99
+            },
+        }
+        };
+    public Venue Teatro { get; set; } = new()
+        {
+            VenueName = "Teatro Frida Khalo",
+            VenueThumbnail ="https://cohorteapi.azurewebsites.net/images/Teatro.png",
+            Sections = new List<Section>
+        {
+            new Section()
+            {
+                Name="Diamante",
+                TotalSeats = 50,
+                AvailableSeats = 50,
+                Price = (decimal)79.99
+            },
+            new Section()
+            {
+                Name="Oro",
+                TotalSeats = 100,
+                AvailableSeats = 100,
+                Price = (decimal)49.99
+            },
+            new Section()
+            {
+                Name="Plata",
+                TotalSeats = 200,
+                AvailableSeats = 200,
+                Price = (decimal)34.99
+            },
+            new Section()
+            {
+                Name="General A",
+                TotalSeats = 100,
+                AvailableSeats = 100,
+                Price = (decimal)24.99
+            },
+            new Section()
+            {
+                Name="General B",
+                TotalSeats = 100,
+                AvailableSeats = 100,
+                Price = (decimal)24.99
+            },
+        }
+        };
+    public Venue Familiar { get; set; } = new()
+        {
+            VenueName = "Estadio Luna Park",
+            VenueThumbnail ="https://cohorteapi.azurewebsites.net/images/Familiar.png",
+            Sections = new List<Section>
+        {
+            new Section()
+            {
+                Name="Preferente A",
+                TotalSeats = 50,
+                AvailableSeats = 50,
+                Price = (decimal)79.99
+            },
+            new Section()
+            {
+                Name="Preferente B",
+                TotalSeats = 100,
+                AvailableSeats = 100,
+                Price = (decimal)49.99
+            },
+            new Section()
+            {
+                Name="General A",
+                TotalSeats = 100,
+                AvailableSeats = 100,
+                Price = (decimal)24.99
+            },
+            new Section()
+            {
+                Name="General B",
+                TotalSeats = 100,
+                AvailableSeats = 100,
+                Price = (decimal)24.99
+            },
+        }
+        };
+    public Venue Seminario { get; set; } = new()
+        {
+            VenueName = "Salon de Eventos 'Jose Maria Juarez'",
+            VenueThumbnail ="https://cohorteapi.azurewebsites.net/images/Seminarios.png",
+            Sections = new List<Section>
+        {
+                        new Section()
+            {
+                Name="Vip",
+                TotalSeats = 50,
+                AvailableSeats = 50,
+                Price = (decimal)79.99
+            },
+            new Section()
+            {
+                Name="Preferente A",
+                TotalSeats = 50,
+                AvailableSeats = 50,
+                Price = (decimal)79.99
+            },
+            new Section()
+            {
+                Name="Preferente B",
+                TotalSeats = 100,
+                AvailableSeats = 100,
+                Price = (decimal)49.99
+            },
+            new Section()
+            {
+                Name="General A",
+                TotalSeats = 100,
+                AvailableSeats = 100,
+                Price = (decimal)24.99
+            },
+            new Section()
+            {
+                Name="General B",
+                TotalSeats = 100,
+                AvailableSeats = 100,
+                Price = (decimal)24.99
+            },
+        }
+        };
+    public Venue Concierto { get; set; } = new()
+        {
+            VenueName = "Explanada Las Gaviotas",
+            VenueThumbnail ="https://cohorteapi.azurewebsites.net/images/M%C3%BAsica.png",
+            Sections = new List<Section>
+        {
+                        new Section()
+            {
+                Name="Vip",
+                TotalSeats = 50,
+                AvailableSeats = 50,
+                Price = (decimal)79.99
+            },
+            new Section()
+            {
+                Name="Luneta",
+                TotalSeats = 50,
+                AvailableSeats = 50,
+                Price = (decimal)79.99
+            },
+            new Section()
+            {
+                Name="Balcon",
+                TotalSeats = 100,
+                AvailableSeats = 100,
+                Price = (decimal)49.99
+            },
+            new Section()
+            {
+                Name="General A",
+                TotalSeats = 100,
+                AvailableSeats = 100,
+                Price = (decimal)24.99
+            },
+            new Section()
+            {
+                Name="General B",
+                TotalSeats = 100,
+                AvailableSeats = 100,
+                Price = (decimal)24.99
+            },
+        }
+        };
+    private static string DefaultDragClass = "relative rounded-lg border-2 border-dashed pa-4 mt-4 mud-width-full mud-height-full z-10";
+    private string Image1 { get; set; } = "";
+    private string imgUrl { get; set; }
+    private string Image2 { get; set; } = "";
+    private string imgUrl2 { get; set; }
+    private IBrowserFile file1;
+    private IBrowserFile file2;
+    public class Venue
+    {
+        public string VenueThumbnail { get; set; }
+        public string VenueName { get; set; }
+        public List<Section> Sections { get; set; }
+    }
+    private async void OnInputFileChanged(InputFileChangeEventArgs e)
+    {
+        IBrowserFile imgFile = e.File;
+        var buffers = new byte[imgFile.Size];
+        await imgFile.OpenReadStream(maxAllowedSize: imgFile.Size).ReadAsync(buffers);
+        string imageType = imgFile.ContentType;
+        imgUrl =$"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
+        file1 = imgFile;
+        Image1 = imgFile.Name;
+        StateHasChanged();
+    }
+    private async void OnInputFileChanged2(InputFileChangeEventArgs e)
+    {
+        IBrowserFile imgFile = e.File;
+        var buffers = new byte[imgFile.Size];
+        await imgFile.OpenReadStream(maxAllowedSize: imgFile.Size).ReadAsync(buffers);
+        string imageType = imgFile.ContentType;
+        imgUrl2 =$"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
+        file2 = imgFile; 
+        Image2 = imgFile.Name;
+        StateHasChanged();
+    }
+    private void Upload()
+    {
+        //Upload the files here
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+        Snackbar.Add("TODO: Upload your files!", Severity.Normal);
+    }
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+    private async void Submit()
+    {
+        if (Date is not null && Time is not null)
+        {
+            _event.EventTime = Date.Value.Add(Time.Value);
+            _event.Sections = SelectedVenue.Sections;
+            _event.Venue = SelectedVenue.VenueName;
+            _event.VenueImage = SelectedVenue.VenueThumbnail;
+            var test1 = await eventService.UploadFile(file1);
+            var test2 = await eventService.UploadFile(file2);
+            _event.FrontPageImage = test1.Url;
+            _event.Thumbnail = test2.Url;
+            var test3 = await eventService.Post(_event);
+            MudDialog.Close(DialogResult.Ok(_event));
+        }
+    }
+}

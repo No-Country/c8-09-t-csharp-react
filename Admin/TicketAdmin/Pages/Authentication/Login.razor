@@ -1,0 +1,199 @@
+﻿@page "/Login"
+@page "/Login/{token}"
+@using System.Text;
+@using Blazored.LocalStorage;
+@using System.Text.Json;
+@inject NavigationManager NavigationManager
+@inject IAuthService AuthService
+@inject ISnackbar Snackbar
+@inject ILocalStorageService _localStorage
+@layout LoginLayout
+
+<PageTitle>Login</PageTitle>
+
+    <div class="d-flex justify-center">
+        <MudText>Enter your login credentials below</MudText>
+    </div>
+    <MudTextField T="string" @bind-Value="@loginModel.Email" Label="E-mail" Variant="Variant.Outlined" Class="my-6"></MudTextField>
+    <MudTextField @bind-Value="@loginModel.Password" Label="Password" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
+    <div Class="d-flex justify-end align-center my-4">
+        <MudLink Href="/ForgotPassword">Forgot your password?</MudLink>
+    </div>
+    @if (_loaded)
+    {
+        <div Class="d-flex justify-center align-center">
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+        </div>
+    }
+    else
+    {
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleLogin" Size="Size.Large" FullWidth="true">Sign In</MudButton>
+    }
+    <div class="d-flex justify-space-around flex-grow-1 my-4 gap-4">
+        <MudButton Class="flex-grow-1" OnClick="@(()=>HandleLogin2("manuel@mailinator.com","Tiketfan123!"))" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Shield" ButtonType="ButtonType.Submit">
+            Sign In Admin
+        </MudButton>
+        <MudButton Class="flex-grow-1" OnClick="@(()=>HandleLogin2("bel@mailinator.com","Tiketfan123!"))" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Person" ButtonType="ButtonType.Reset">
+            Sign In User
+        </MudButton>
+    </div>
+    <div Class="d-flex justify-center">
+        <MudText Class="mt-4" Color="Color.Dark" Typo="Typo.subtitle1">TicketFan, 2022.</MudText>
+    </div>
+
+
+
+@code {
+    [Parameter]
+    public string token 
+    {
+        get;
+        set; 
+    }
+    bool PasswordVisibility;
+    bool _loaded;
+    InputType PasswordInput = InputType.Password;
+    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    void TogglePasswordVisibility()
+    {
+        @if (PasswordVisibility)
+        {
+            PasswordVisibility = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            PasswordVisibility = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
+    }
+
+    private LoginModel loginModel = new LoginModel();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (!string.IsNullOrEmpty(token))
+        {
+            try
+            {
+                var Token = Encoding.UTF8.GetString(Convert.FromBase64String(token));
+                await _localStorage.SetItemAsync("authToken", Token);
+                var user = new ClaimsIdentity(ParseClaimsFromJwt(Token), "jwt");
+                var roleIn = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+                if (roleIn is UserRoles.Admin)
+                {
+                    NavigationManager.NavigateTo("/Dashboard", true);
+                }
+                else
+                {
+                    NavigationManager.NavigateTo("/", true);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+    }
+    public async Task HandleLogin()
+    {
+        _loaded = true;
+        var result = await AuthService.Login(loginModel);
+        if (result.Successful)
+        {
+            var user = new ClaimsIdentity(ParseClaimsFromJwt(result.Token), "jwt");
+            var roleIn = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+            if (roleIn is UserRoles.Admin)
+            {
+                NavigationManager.NavigateTo("/Dashboard", true);
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/", true);
+            }
+        }
+        else
+        {
+            _loaded = false;
+            var Error = result.Error;
+            Snackbar.Add(Error, Severity.Error, config => { config.ShowCloseIcon = true; config.ShowTransitionDuration = 150; config.HideTransitionDuration = 150; config.VisibleStateDuration = 1000; });
+        }
+
+    }
+    public async Task HandleLogin2(string u, string p)
+    {
+        _loaded = true;
+        LoginModel loginModel = new()
+            {
+                Email = u,
+                Password = p
+            };
+        var result = await AuthService.Login(loginModel);
+        if (result.Successful)
+        {
+            var user = new ClaimsIdentity(ParseClaimsFromJwt(result.Token), "jwt");
+            var roleIn = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+            if (roleIn is UserRoles.Admin)
+            {
+                NavigationManager.NavigateTo("/Dashboard", true);
+            }else
+            {
+                NavigationManager.NavigateTo("/", true);
+            }
+        }
+        else
+        {
+            _loaded = false;
+            var Error = result.Error;
+            Snackbar.Add(Error, Severity.Error, config => { config.ShowCloseIcon = true; config.ShowTransitionDuration = 150; config.HideTransitionDuration = 150; config.VisibleStateDuration = 1000; });
+        }
+
+    }
+    private IEnumerable<Claim> ParseClaimsFromJwt(string jwt)
+    {
+        var claims = new List<Claim>();
+        var payload = jwt.Split('.')[1];
+        var jsonBytes = ParseBase64WithoutPadding(payload);
+        var keyValuePairs = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonBytes);
+
+        keyValuePairs.TryGetValue(ClaimTypes.Role, out object roles);
+
+        if (roles != null)
+        {
+            if (roles.ToString().Trim().StartsWith("["))
+            {
+                var parsedRoles = JsonSerializer.Deserialize<string[]>(roles.ToString());
+
+                foreach (var parsedRole in parsedRoles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, parsedRole));
+                }
+            }
+            else
+            {
+                claims.Add(new Claim(ClaimTypes.Role, roles.ToString()));
+            }
+
+            keyValuePairs.Remove(ClaimTypes.Role);
+        }
+
+        claims.AddRange(keyValuePairs.Select(kvp => new Claim(kvp.Key, kvp.Value.ToString())));
+
+        return claims;
+    }
+
+    private byte[] ParseBase64WithoutPadding(string base64)
+    {
+        switch (base64.Length % 4)
+        {
+            case 2: base64 += "=="; break;
+            case 3: base64 += "="; break;
+        }
+        return Convert.FromBase64String(base64);
+    }
+
+}

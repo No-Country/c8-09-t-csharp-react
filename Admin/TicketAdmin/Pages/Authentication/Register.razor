@@ -1,0 +1,39 @@
+﻿@page "/Register"
+
+@layout LoginLayout
+@attribute [Authorize(Roles = UserRoles.Admin)]
+
+
+<MudText Typo="Typo.h4" GutterBottom="true">Sign Up</MudText>
+
+<MudTextField T="string" Label="Username" Variant="Variant.Outlined" Class="my-4"></MudTextField>
+
+<MudTextField T="string" Label="E-mail" Variant="Variant.Outlined"></MudTextField>
+
+<MudTextField @bind-Value="@Password" Label="Password" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="TogglePasswordVisibility" Class="mt-4"/>
+
+<MudButton Variant="Variant.Filled" Color="Color.Primary"  Size="Size.Large" FullWidth="true">Register</MudButton>
+
+@code {
+    string Password { get; set; } 
+
+    bool PasswordVisibility;
+    InputType PasswordInput = InputType.Password;
+    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    void TogglePasswordVisibility()
+    {
+        @if (PasswordVisibility)
+        {
+            PasswordVisibility = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            PasswordVisibility = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
+    }
+}
