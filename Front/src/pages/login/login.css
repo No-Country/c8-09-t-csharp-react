@@ -143,3 +143,50 @@
     text-align: center;
     color: #B90A58;
 }
+
+
+
+@media screen and (min-width:424px) and (max-width:768px){
+
+
+
+.login_form_main{
+
+    width: 80%;
+    height: 80%;
+
+}
+
+.login_title{
+    font-size: 32px;
+    font-weight: 100;
+    text-align: center;
+    
+}
+
+.google_icon{
+    width: 20px;
+}
+
+.google_button{
+    max-width: 80%;
+}
+.form_button{
+    max-width: 80%;
+}
+
+.forgot_password{
+    margin-right: 100px;
+}
+
+
+.login_button{
+    width: 150px;
+}
+
+
+
+
+
+
+}
