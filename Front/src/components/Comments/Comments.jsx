@@ -8,6 +8,7 @@ import banner1 from './banner1.jpg'
 import banner2 from './banner2.jpg'
 
 const arrImg = [banner1, banner2]
+const arrayComments = [{autor:"Maxi Martins",comment:"Gracias a Ticket Fan ahorro un montón de tiempo a la hora de comprar entradas para mis eventos favoritos..."},{autor:"María José",comment:"Nunca fue tan fácil encontrar entradas para mis eventos hasta que conocí Ticket Fan..."}]
 
 const Comments = ({ images = arrImg, autoPlay = true, showButtons = true }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0)
@@ -56,10 +57,10 @@ const Comments = ({ images = arrImg, autoPlay = true, showButtons = true }) => {
 					<ButtonLeft action={previous} />
 
 					<div className={style.description}>
-						<h3>
-							{'"Lorem ipsum dolor sit amet consectetur adipisicing elit."'}
+						<h3 className={style.comment} >
+							{`" ${arrayComments[selectedIndex].comment} "`}
 						</h3>
-						<span className={style.descriptionName}>María José</span>
+						<span className={style.descriptionName}>{arrayComments[selectedIndex].autor}</span>
 					</div>
 
 					<ButtonRight action={next} />
