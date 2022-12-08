@@ -12,9 +12,9 @@ import rejectionImg from '../../../src/rejection.svg'
 import responseImg from '../../../src/response.svg'
 
 // import Login from '../../pages/login/login';
-import  rejectionImg  from '../../rejection.svg';
-import { Alert } from '../../utils/alert';
-import  responseImg from '../../response.svg';
+// import  rejectionImg  from '../../rejection.svg';
+// import { Alert } from '../../utils/alert';
+// import  responseImg from '../../response.svg';
 
 const PrePurchase = function () {
 

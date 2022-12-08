@@ -47,6 +47,25 @@
 
 @media screen and (min-width:424px) and (max-width:768px){
 
+.newsletter{
+	width: 100%;
+	flex-direction: column;
+}
 
+.newsletterTitle{
+	width: 100%;
+	font-size: 15px;
+	padding: 0px;
+}
+
+.formInput{
+	width: 100%;
+	margin: 0px;
+}
+
+.formButton{
+	width: 100%;
+	padding: 3px 20px;
+}
 	
 }
