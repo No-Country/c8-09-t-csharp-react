@@ -89,12 +89,11 @@ namespace CohorteApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Event>> PostEvent(Event @event)
+        public async Task<ActionResult<Event>> PostEvent(Event _event)
         {
-            _context.Events.Add(@event);
+            _context.Events.Add(_event);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetEvent", new { id = @event.Id }, @event);
+            return Ok(_event);
         }
 
         [HttpDelete("{id}")]
@@ -124,9 +123,18 @@ namespace CohorteApi.Controllers
         }
 
         [HttpGet("admin")]
-        public async Task<ActionResult<IEnumerable<Event>>> GetEventsAdmin([FromQuery] int categoryId)
+        public async Task<ActionResult<IEnumerable<Event>>> GetEventsAdmin()
         {
             return await _context.Events.Include(a => a.Category).Include(a => a.Sections).Include(a => a.Reviews).ToListAsync();
+        }
+        [HttpGet("TopEvents")]
+        public async Task<ActionResult<IEnumerable<Event>>> GetTopEvents()
+        {
+            var Events = await _context.Events.Include(a => a.Category).Include(a => a.Sections).Include(a => a.Reviews).ToListAsync();
+            var _sales = await _context.Sales.Include(a=>a.Event).ToListAsync();
+            var SalesGrouped = _sales.GroupBy(a => a.Event);
+            var TopEvents = SalesGrouped.OrderByDescending(a => a.Count()).Take(5).Select(a=>a.Key);
+            return TopEvents.ToList();
         }
     }
 }
