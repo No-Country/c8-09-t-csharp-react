@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import ButtonLeft from '../Buttons/ButtonLeft'
 import ButtonRight from '../Buttons/ButtonRight'
 
+
 const Carousel = () => {
 	const arrImg = [header, header1, header2]
 	const [selectedIndex, setSelectedIndex] = useState(0)
