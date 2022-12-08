@@ -101,23 +101,23 @@ const Register = function () {
         create.then(val => {
             if(val !== 200){
                 // console.log(val)
-                // alert("Error: " + val)
                 Alert.fire({
-                    title: 'Lo siento',
-                    html: `Ha ocurrido un error </br> Por favor inténtelo de nuevo`,
-                    imageUrl:rejectionImg ,
-                    imageAlt: 'confirm',
-                    confirmButtonText: `<button class="botonPrincipal" >Reintentar</button>`,
+                    title: 'Ooops',
+                    html: `Hubo un error, intente de nuevo </br>`,
+                    imageUrl: rejectionImg,
+                    imageAlt: 'error',
+                    confirmButtonText: `<button class="botonPrincipal" > OK </button>`,
                 })
             } else{
-                console.log("Success with status: " + val)
+                // console.log("Success with status: " + val)
                 Alert.fire({
-                    title: '¡ Bienvenido !',
-                    html: `Usuario <b>${input.username}</b> creado correctamente. </br> Porfavor inicie sesión`,
+                    title: '¡Listo!',
+                    html: `Usuario creado con exito!: </br> <b>${input.username}</b>`,
                     imageUrl: responseImg,
                     imageAlt: 'confirm',
-                    confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
-                }).then(res=>navigate("/login"))
+                    confirmButtonText: `<button class="botonPrincipal" > OK </button>`,
+                })
+                navigate("/")
             }
         })
     }

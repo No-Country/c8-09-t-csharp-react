@@ -7,9 +7,9 @@ import moment from 'moment';
 import '../prePurchase/prePurchase.css'
 import { loginUser, eventDetails } from '../../redux/actions';
 import CheckoutForm from '../CheckoutForm/checkoutForm';
-import { Alert } from "../../utils/alert";
-import rejectionImg from '../../../src/rejection.svg'
-import responseImg from '../../../src/response.svg'
+//import { Alert } from "../../utils/alert";
+//import rejectionImg from '../../../src/rejection.svg'
+//import responseImg from '../../../src/response.svg'
 
 // import Login from '../../pages/login/login';
 // import  rejectionImg  from '../../rejection.svg';
@@ -71,7 +71,13 @@ const PrePurchase = function () {
                         alert("Bienvenido!")
                      
                     } catch(error){
-                        console.log(error)
+                        Alert.fire({
+                            title: 'Lo siento',
+                            html: `Ha ocurrido un error </br> Por favor inténtelo de nuevo más tarde`,
+                            icon:"error",
+                            confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
+                        })
+                        return (error)
                     }
                 }
             })
