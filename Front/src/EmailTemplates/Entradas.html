@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/svg+xml" href="../../public/logo-ticketfan-negro.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+  <title>Entradas</title>
+</head>
+<body style="margin: 0">
+  <div class="Logo">
+    <img src="../../public/logo-ticketfan-negro.svg" alt="Logo" width="200px" height="62px"/>
+  </div>
+  <div class="Data">
+      
+        <div><h2 id="Title">¡Ya tienes tus entradas!</h2></div> 
+
+  			<div id="text">
+  				<h4>Estimado usuario:</h4>
+
+  				<p>
+                    Este correo electrónico lleva adjuntas las entradas en un PDF que puedes imprimir si lo deseas.
+                </br>
+            </br>
+                    ¡No olvides llevar contigo el archivo PDF que contiene el código QR con tu entrada al día del evento!
+  				</p>
+
+  			</div>
+
+              <div class="detalle" >
+                <h4 class="Titulo" >Resumen del pedido #123456</h4>
+                <img src="../../public/imageportada.png" alt="Logo" />
+                <h5 class="Titulo" style="margin:1rem 0;" >La  última vuelta world tour</h5>
+                <p>Daddy Yankee</p>
+                <p>
+                    <img src="../../public/local_activity.svg" alt="ticket"/>
+                    2 entradas</p>
+                <p>
+                    <img src="../../public/location_on.svg" alt="Logo"/> 
+                    Hipódromo de San Isidro</p>
+                <div style="display: flex; flex-direction: row;">
+                    <p style="margin-right: 1rem;">
+                        <img src="../../public/calendar_month.svg" alt="Logo"/> 
+                        27 Nov, 2022</p> 
+                        <p>
+                            <img src="../../public/reloj.svg" alt="reloj">
+                            9:00 PM</p>
+                </div>
+              </div>
+              <a href="https://tiketfan.vercel.app/catalogo" class="BotonEvento" > Ver más detalles del evento</a>
+        <p class="TituloRedSocial" >Seguinos en nuestras redes</p>
+        <div class="RedSocial">
+          <a href="#">
+            <img src="../../public/facebook2.svg" alt="Logo" align="left" />
+          </a>
+          <a href="#">
+            <img src="../../public/instagram2.svg" alt="Logo" align="left" />
+          </a>
+          <a href="#">
+            <img src="../../public/youtube.svg" alt="Logo" align="left" />
+          </a>
+        </div>
+      </div>
+  <div class="linkAlaWeb-cont">
+    <a id="link" href="https://tiketfan.vercel.app/">ticketfan.com</a>
+  </div>
+</body>
+<style type="text/css">
+
+  .Logo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 110px;
+    top: 0px;
+    left: 0px;
+    gap: 10px;
+    background: linear-gradient(95.66deg, #FC4A88 0%, #942DBD 100.38%);
+
+  }
+
+  .Data{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 3rem 14rem;
+    overflow: hidden;
+  }
+
+  .detalle p{
+    font-family: 'Poppins';
+    line-height: 27px;
+    color: #333333;
+    font-size: 18px;
+    margin: 0;
+  }
+  #Title{
+    		font-family: 'Poppins';
+/*			font-style: normal;*/
+			font-weight: 700;
+			font-size: 32px;
+			line-height: 40px;
+			text-align: center;
+			letter-spacing: 0.0025em;
+			color: #1F1F1F;
+    	}
+
+    	#text{
+    		font-family: 'Poppins';
+			font-style: normal;
+			font-weight: 400;
+			font-size: 18px;
+			line-height: 24px;
+			letter-spacing: 0.0015em;
+			color: #1F1F1F;
+    	}
+  .Titulo{
+    font-size: 26px;
+    font-family: 'Poppins';
+    font-weight: 600;
+  }
+  
+
+  
+  .Descripcion{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #000000;
+  }
+
+  .BotonEvento{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.75px;
+    padding: 8px 24px;
+    gap: 8px;
+    color: #FFFFFF;
+    background-color: #FC4A88;
+    border-radius: 100px;
+    border: none;
+    text-decoration:none ;
+    margin: 1rem 0;
+  }
+  
+  .BotonEvento:hover{
+    cursor: pointer;
+  }
+
+  .TituloRedSocial{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #000000;
+  }
+
+  .RedSocial {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .RedSocial a{
+    margin: 0 1rem;
+  }
+
+  .linkAlaWeb-cont{
+    display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+    width: 100%;
+  height: 66px;
+  background: #942DBD;
+  }
+
+  #link{
+    		font-family: "Poppins";
+			font-style: normal;
+			font-weight: 900;
+			font-size: 32px;
+			line-height: 40px;
+			letter-spacing: 0.0025em;
+			color: #FFFFFF;
+    		text-decoration: none;
+    	}
+</style>
+</html>
