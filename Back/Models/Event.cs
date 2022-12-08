@@ -10,28 +10,13 @@ namespace CohorteApi.Models
         public string FrontPageImage { get; set; }
         public string Thumbnail { get; set; }
         public string Venue { get; set; }
-        public double Price { get; set; }
-        public int AvailableSeats { get; set; }
         public DateTime Created { get; init; } = DateTime.Now.ToUniversalTime();
-        public DateTime EventTime { get; set; }
-        public ICollection<Tag>? EventTags { get; set; }
-        public ICollection<Review> Reviews { get; set; }
-
-        //public ICollection<Section>? Sections { get; set; }
+        public DateTime EventTime { get; set; }    
+        public ICollection<Review> Reviews { get; set; } = new List<Review>();
+        public ICollection<Section> Sections { get; set; } = new List<Section>();
         public Category Category { get; set; }
         [ForeignKey("Category")]
-        public int CategoryId { get; set; }
-        
-        public Event()
-        {
-            this.Reviews = new List<Review>();
+        public int CategoryId { get; set; }    
 
-            //for tests
-            //this.Sections = new List<Section>();
-            //this.Sections.Add(new Section() { Name = "VIP" });
-            //this.Sections.Add(new Section() { Name =  "PLATINIUM" });
-            //this.Sections.Add(new Section() { Name =  "GENERAL" });
-            //this.Sections.Add(new Section() { Name =  "PALCO" });
-        }
     }
 }
