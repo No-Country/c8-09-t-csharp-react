@@ -1,5 +1,6 @@
 ﻿using CohorteApi.Core.Interfaces;
 using CohorteApi.Core.Models.Email;
+using CohorteApi.Models;
 using Org.BouncyCastle.Cms;
 using System;
 using System.Xml.Linq;
@@ -55,6 +56,33 @@ namespace CohorteApi.Core.Business.Email
             var recipients = new[] { email };
             var message = new Message(recipients, "Welcome to TiketFan", content);
             await _service.SendEmailAsync(message);
+        }
+
+        public async Task SendNewsletterOptInEmail(string email)
+        {
+            var optInTemplate = System.IO.File.ReadAllText($"wwwroot/templates/optin.html");
+            //  var email = name;
+            optInTemplate= optInTemplate.Replace("#user#", "#");
+            //var content = string.Format(optInTemplate, email);
+
+            var recipients = new[] { email };
+            var message = new Message(recipients, "Welcome to TiketFan Newsletter", optInTemplate);
+            await _service.SendEmailAsync(message);
+        }
+
+        public async Task SendSaleConfirmationEmail(Sale sale)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SendPaymentConfirmationEmail(Sale sale)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SendCancelOrderConfirmationEmail(Sale sale)
+        {
+            throw new NotImplementedException();
         }
     }
 }
