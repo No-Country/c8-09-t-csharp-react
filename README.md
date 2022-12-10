@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/No-Country/c8-09-t-csharp-react"><img src="https://i.postimg.cc/gJ5R31PF/Group-32.png" alt="TicketFan" width="200"></a>
+  <a href="https://github.com/No-Country/c8-09-t-csharp-react"><img src="https://i.postimg.cc/NFcG9jgZ/logo-ticketfan.png" alt="TicketFan" width="400"></a>
  
 </h1>
 
