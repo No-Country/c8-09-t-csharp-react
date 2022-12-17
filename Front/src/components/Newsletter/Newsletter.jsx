@@ -35,7 +35,7 @@ const Newsletter = () => {
 			<h5 className={style.newsletterTitle}>
 				Suscribete a nuestro newsletter y no te pierdas tus artistas favoritos.
 			</h5>
-			<form className={style.form} onSubmit={handleSubmit}>
+			<form className={style.form} autoComplete="off" onSubmit={handleSubmit}>
 				<input
 					name='email'
 					className={style.formInput}
