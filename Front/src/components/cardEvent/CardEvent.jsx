@@ -32,7 +32,7 @@ const CardEvent = ({ evento }) => {
 						<div className='mesHora'>
 							<h3>
 								{' '}
-								{meses[fecha[1]]}, {fecha[0]}{' '}
+								{meses[fecha[1]] || "Dic"}, {fecha[0]}{' '}
 							</h3>
 							<h4> {horario} </h4>
 						</div>
