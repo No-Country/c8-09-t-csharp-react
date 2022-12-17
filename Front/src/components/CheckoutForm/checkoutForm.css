@@ -1,0 +1,281 @@
+.checkoutForm_main_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    /* border: 1.8px solid rgb(167, 61, 61); */
+}
+
+.checkoutFrom_subContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    /* border: 1.8px solid black; */
+    width: 85%;
+}
+
+.checkoutForm_title_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /* border: 1.8px solid rgb(167, 61, 61); */
+}
+
+.checkoutForm_title{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    color: #1F1F1F;
+    margin-bottom: 40px;
+}
+
+.form_inputs_container{
+    width: 100%;
+    margin-bottom: 30px;
+    /* border: 1.8px solid rgb(167, 61, 61); */
+}
+
+.checkoutForm_cardName_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    /* border: 1.8px solid rgb(167, 61, 61); */
+}
+
+.checkoutForm_input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 4px;
+    width: 93.5%;
+    height: 41px;
+    background: #FFFFFF;
+    border: 1px solid #FC4A88;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    text-align: center;
+}
+
+.checkoutForm_card_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* border: 1.8px solid rgb(167, 61, 61); */
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+  }
+  
+
+.checkoutForm_input_card{
+    gap: 4px;
+    height: 41px;
+    width: 75.5%;
+    background: #FFFFFF;
+    border: 1px solid #FC4A88;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    
+}
+.checkoutForm_input_cardLogo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    height: 47px;
+    width: 15%;
+    padding: 0.5rem;
+    background: #FFFFFF;
+    border: 1px solid #FC4A88;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: auto;
+    /* text-indent: 20px; */
+}
+
+.checkoutForm_fecha_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    /* border: 1.8px solid rgb(167, 61, 61); */
+    
+}
+
+.checkoutForm_fecha_subcontainer{
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-end;
+    align-items: center;
+    width: 260px;
+    
+    /* border: 1.8px solid rgb(167, 61, 61); */
+}
+
+.checkoutForm_input_fecha{
+    /* display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; */
+    gap: 10px;
+    width: 20%;
+    height: 41px;
+    background: #FFFFFF;
+    border: 1px solid #FC4A88;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 8px;
+    text-align: center;
+}
+
+.checkoutForm_CVV_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0px;
+    gap: 10px;
+    
+    /* border: 1.8px solid rgb(167, 61, 61);    */
+}
+
+.checkoutForm_hyphen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 8px;
+    height: 24px;
+    margin-right: 14px;
+    margin-left: 14px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #A0A0A0;
+
+    /* border: 1.8px solid rgb(167, 61, 61); */
+}
+
+.checkoutForm_CVV_Title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 55px;
+    /* border: 1.8px solid rgb(167, 61, 61);   */
+    
+}
+
+.checkoutForm_input_CVV{
+    gap: 4px;
+    height: 41px;
+    /* width: 35%; */
+    background: #FFFFFF;
+    border: 1px solid #FC4A88;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    text-align: center;
+}
+
+.checkoutForm_buttons_container{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    /* border: 1.8px solid rgb(167, 61, 61); */
+}
+
+.checkoutForm_button_cancel{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* padding: 8px 24px; */
+    gap: 8px;
+    width: 176px;
+    height: 35px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.75px;
+    color: #FC4A88;
+    border-radius: 100px;
+
+    /* border: 1.8px solid rgb(167, 61, 61); */
+
+}
+
+.checkoutForm_button_cancel:hover{
+    background: #fc4a8886;
+}
+
+.checkoutForm_button_finish{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 24px;
+    gap: 8px;
+    width: 176px;
+    height: 35px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #FC4A88;
+    border-radius: 100px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.75px;
+    color: white;
+    /* opacity: 0.38; */
+
+    margin-right: 15px;
+}
+
+.checkoutForm_button_finish:disabled{
+    background-color: #A0A0A0;
+    color: #1F1F1F;
+}
