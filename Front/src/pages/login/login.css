@@ -79,12 +79,16 @@
     /* border: 1.8px solid rgb(167, 61, 61); */
 }
 
+.form_button::placeholder{
+    text-align: left;
+}
 .form_button{
     width: 400px;
     height: 41px;
     background: #F5F5F5;
     border: 1px solid #000000;
     border-radius: 7px;
+    padding-left: 1rem;
     margin-top: 10px;   
 }
 
