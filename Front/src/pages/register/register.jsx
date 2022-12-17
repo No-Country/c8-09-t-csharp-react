@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createUser } from "../../redux/actions";
 
 import '../register/register.css'
@@ -113,12 +113,13 @@ const Register = function () {
             } else{
                 console.log("Success with status: " + val)
                 Alert.fire({
-                    title: '¡ Bienvenido !',
-                    html: `Usuario <b>${input.username}</b> creado correctamente. </br> Porfavor inicie sesión`,
+                    title: '¡Listo!',
+                    html: `Usuario creado con exito : </br> <b>${input.username}</b>`,
                     imageUrl: responseImg,
                     imageAlt: 'confirm',
-                    confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
-                }).then(res=>navigate("/login"))
+                    confirmButtonText: `<button class="botonPrincipal" > OK </button>`,
+                }).then(res =>navigate("/") )
+                
             }
         })
     }
@@ -137,7 +138,7 @@ const Register = function () {
 
                 O
 
-                <form className="register_form" onSubmit={submit}>
+                <form className="register_form" autoComplete="off" onSubmit={submit}>
 
                     <input
                         className="form_button"
@@ -161,7 +162,7 @@ const Register = function () {
 
                     <input
                         className="form_button"
-                        type="text"
+                        type="password"
                         name="password"
                         value={input.password}
                         placeholder="Contraseña"
@@ -171,7 +172,7 @@ const Register = function () {
 
                     <input
                         className="form_button"
-                        type="text"
+                        type="password"
                         name="confirmPassword"
                         value={input.confirmPassword}
                         placeholder="Confirmar contraseña"
