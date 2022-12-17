@@ -5,9 +5,8 @@ import { isUserLogged } from '../../utils/validations';
 import { checkLocalStorage } from '../../redux/actions';
 
 import '../prePurchase/prePurchase.css'
-import { loginUser } from '../../redux/actions';
+import { loginUser, eventDetails } from '../../redux/actions';
 
-// import Login from '../../pages/login/login';
 import  rejectionImg  from '../../rejection.svg';
 import { Alert } from '../../utils/alert';
 import  responseImg from '../../response.svg';
@@ -93,7 +92,7 @@ const PrePurchase = function () {
                             <h5 className='prepurchase_login_title'>Antes de continuar, por favor identifícate</h5>
 
                             <div className='login_ask_form_container'>
-                                <form className='form' onSubmit={submit}>
+                                <form className='form' autoComplete="off" onSubmit={submit}>
                                     <input
                                         className='prepurchase_form_input'
                                         type="text"
@@ -149,7 +148,7 @@ const PrePurchase = function () {
 
                         <div className='event_container'>
                             <div>
-                                <img src="https://i.ibb.co/NFQGy1h/Put-In.jpg" alt="Put-In" border="0"  className='event_image'/>
+                                <img src={event.frontPageImage} alt="Put-In" border="0"  className='event_image' onError={(e)=>{e.target.onerror = null; e.target.src="https://www.dafont.com/forum/attach/orig/9/9/997801.gif"}}/>
                             </div>
 
                             <div className='event_deatils_container'>
