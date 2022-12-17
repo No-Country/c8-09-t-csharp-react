@@ -17,7 +17,6 @@ const Login = function () {
     const navigate = useNavigate()
     const loginData = useSelector(state => state.userloginData)
     const dispatch = useDispatch()
-
     const [input, setInput] = useState({
         email: "",
         password: ""
@@ -88,7 +87,7 @@ const Login = function () {
                 <br />
                 O
 
-                <form className="login_form" onSubmit={submit}>
+                <form className="login_form" autoComplete="off" onSubmit={submit}>
                     <input
                         className="form_button"
                         type="text"
@@ -99,9 +98,10 @@ const Login = function () {
 
                     <input
                         className="form_button"
-                        type="text"
+                        type="password"
                         name="password"
                         placeholder="Contraseña"
+                        
                         value={input.password}
                         onChange={handleInput}
                     />
