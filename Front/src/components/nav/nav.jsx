@@ -15,6 +15,7 @@ const Nav = () => {
     const userInfo = useSelector(state => state.userloginData)
     const userStorage = useSelector(state => state.singleUser)
     const [userName, setUserName] = useState("Nadir Blanco")
+    const [activate,setActivate] = useState("inicio")
     const dispatch = useDispatch()
     const isLogged = useSelector(state => state.isLogged)
 
@@ -64,12 +65,12 @@ const Nav = () => {
     return(
         <nav>
             <div className="logo-links">
-                <Link to={"/"} className="logo">
+                <Link to={"/"}  onClick={()=>setActivate("inicio")} className="logo">
                     <img src="/logo-ticketfan.svg" alt="logo"/>
                 </Link>
                 <ul>
-                    <li className="active"><Link to={"/"} >Inicio</Link></li>
-                    <li className="active"><Link to={"/catalogo"} >Catalogo</Link></li>
+                    <li  ><Link onClick={()=>setActivate("inicio")} to={"/"} className={activate === "inicio"?"active":""} >Inicio</Link></li>
+                    <li  ><Link onClick={()=>setActivate("catalogo")} to={"/catalogo"} className={activate === "catalogo"?"active":""} >Catalogo</Link></li>
                 </ul>
             </div>
             <div className="button-carrito">
@@ -103,7 +104,7 @@ const Nav = () => {
                     </Menu.Items>
                 </Menu>
                 :
-                <Link to={"/login"}>
+                <Link onClick={()=>setActivate("")} to={"/login"}>
                     <div className="buttonIngresar">
                         <img src="/perfil.svg" alt="perfil" />
                         <span>Ingresar</span>
