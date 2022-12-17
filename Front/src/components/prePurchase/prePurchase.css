@@ -6,7 +6,7 @@
     height: 100vh; 
     background-image: url('../../../Detail_Background.png');
     background-size: cover;
-    /* overflow-y: scroll; */
+    overflow: hidden;
 }
 
 .container_forms{
@@ -16,10 +16,8 @@
     justify-content: space-evenly;
     width: 90%;
     margin-top: 100px;
-    height: 80%;
+    height: 85%;
     border-radius: 10px;
-    box-shadow: 0px 4px 4px 0px #00000040;
-      /* border: 1.8px solid white; */
 }
 
 .prepurchase_form_main{
@@ -32,7 +30,6 @@
     width: 41%;
     height: 80%;
     border-radius: 10px;
-    box-shadow: 0px 4px 4px 0px #00000040;
     /* border: 1.8px solid black */
 }
 
@@ -47,8 +44,6 @@
 }
 
 .prepurchase_login_title{
-    /* font-family: 'Poppins'; */
-    /* font-style: normal; */
     font-weight: 500;
     font-size: 24px;
     line-height: 32px;
@@ -66,11 +61,9 @@
     background: rgba(255, 255, 255, 0.9);
     opacity: 95%;
     width: 41%;
-    height: 80%;
+    height: 85%;
     border-radius: 10px;
-    box-shadow: 0px 4px 4px 0px #00000040;
 
-    /* border: 1.8px solid black */
 }
 
 .form{
@@ -104,8 +97,6 @@
     width: 50%;
     height: 95%;
     border-radius: 10px;
-    box-shadow: 0px 4px 4px 0px #00000040;
-    padding: 25px;
     /* border: 1.8px solid black */
 }
 
@@ -222,10 +213,15 @@
     flex-grow: 0;
 }
 
-.event_image{
-    width: 168px;
+.event_div_image{
+    width: auto;
     height: 168px;
+    overflow: hidden;
     border-radius: 10px;
+}
+
+.event_title_container{
+    color: white;
 }
 
 .details_subcontainer{
@@ -238,11 +234,10 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 16px;
+    padding: 8px;
     gap: 16px;
     background: rgba(0, 0, 0, 0.8);
     border-radius: 8px;
-    margin-top: 15px;
 }
 
 .subtotal_details{
