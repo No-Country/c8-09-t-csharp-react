@@ -41,6 +41,12 @@
 	background-color: #fc4a88;
 	border-radius: 20px;
 	font-weight: 600;
-	padding: 6px 30px;
+	padding: 8px 20px;
 	letter-spacing: 2px;
+	border: 1px solid transparent;
+}
+
+.formButton:hover{
+	transition: 0.5s;
+    background-color: #ba2d5f;
 }
