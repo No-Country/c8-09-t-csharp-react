@@ -10,7 +10,7 @@ import { checkLocalStorage } from "../../redux/actions";
 import "../login/login.css"
 import { loginUser } from "../../redux/actions";
 import { useEffect } from "react";
-
+import Dropdown from "../event/dropdown";
 
 const Login = function () {
 
@@ -110,7 +110,6 @@ const Login = function () {
 
                     <button className="login_button">Iniciar Sesión</button>
                 </form>
-
                 <div>¿No tienes una cuenta? <Link className="register_link" to="/register">Regístrate</Link></div>
             </div>
                 </div>

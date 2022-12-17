@@ -34,11 +34,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Migrations\" />
 	  <Folder Include="wwwroot\Newsletters\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="wwwroot\Templates\ChangePassword.html" />
+	  <None Include="wwwroot\images\Event_1_FrontPage.jpg" />
+	  <None Include="wwwroot\Templates\Auth\ChangePassword.html" />
 	  <None Include="wwwroot\Templates\Auth\Welcome\Welcome.html" />
 	</ItemGroup>
 

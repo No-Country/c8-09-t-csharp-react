@@ -1,0 +1,25 @@
+﻿@using TicketFanAdmin.Theme
+@inherits LayoutComponentBase
+
+
+<MudThemeProvider Theme="_currentTheme" />
+<MudSnackbarProvider />
+<style>
+    html, body {
+        background: linear-gradient(rgba(252,74,136),rgba(148,45,189));
+    }
+</style>
+
+
+    <div class="d-flex justify-center align-center" style="height:100vh">
+
+        @Body
+
+
+
+    </div>
+
+
+@code {
+    private MudTheme _currentTheme = new MudBlazorAdminDashboard();
+}

@@ -1,8 +1,6 @@
 import "./listEvents.css"
 import CardEvent from "../cardEvent/CardEvent.jsx"
-import {useDispatch, useSelector} from "react-redux"
-import { getEvents } from "../../redux/actions"
-import { useEffect, useState } from "react"
+import {useSelector} from "react-redux"
 
 const ListEvents = () => {
 

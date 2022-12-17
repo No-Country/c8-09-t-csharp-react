@@ -1,0 +1,69 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+@inject IAuthService AuthService
+<MudThemeProvider IsDarkMode=true Theme="_currentTheme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="3">
+        <AuthorizeView Roles="@UserRoles.Admin">
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        </AuthorizeView>
+            <MudLink Href=""><MudImage Width="225" Height="50" Src="./Img/logo-sm.png" /></MudLink>
+        <MudSpacer />
+        @*        <MudToggleIconButton Color="Color.Inherit" @bind-Toggled="_isDarkMode" Icon="@Icons.Material.Filled.DarkMode" ToggledIcon="@Icons.Material.Filled.LightMode" />
+        *@      <MudMenu AnchorOrigin="Origin.BottomRight" LockScroll="true" TransformOrigin="Origin.TopRight">
+            <ActivatorContent>
+                <MudIconButton Icon="@Icons.Filled.Person" Color="Color.Inherit" />
+            </ActivatorContent>
+            <ChildContent>
+                <div style="min-width: 220px">
+                    <PersonCard />
+                    <div class="mt-4 mx-4">
+                        <MudButton Color="Color.Error" FullWidth="true" StartIcon="@Icons.Material.Filled.Logout"
+                                   Variant="Variant.Filled" OnClick="Logout">
+                            Logout
+                        </MudButton>
+                    </div>
+                </div>
+            </ChildContent>
+        </MudMenu>
+    </MudAppBar>
+
+    <AuthorizeView Roles="@UserRoles.Admin">
+        <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+            <PersonCard></PersonCard>
+
+            <MudNavMenu>
+                <MudDivider Class="my-2 " />
+                <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="pb-2  px-4">Inicio</MudText>
+                <MudNavLink Href="Dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard">Reportes</MudNavLink>
+
+                <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="py-2 px-4">Administrador</MudText>
+                <MudNavLink Href="Events" Match="NavLinkMatch.All" Icon="@Icons.Filled.PriceChange">Eventos</MudNavLink>
+
+            </MudNavMenu>
+        </MudDrawer>
+    </AuthorizeView>
+    <MudMainContent>
+        <MudContainer Class="mt-6" MaxWidth="MaxWidth.False">
+            @Body
+        </MudContainer>
+
+    </MudMainContent>
+</MudLayout>
+@code {
+    //private bool _isDarkMode;
+    bool _drawerOpen = true;
+    private MudTheme _currentTheme = new MudBlazorAdminDashboard();
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+    public async Task Logout()
+    {
+        await AuthService.Logout();
+        NavigationManager.NavigateTo("/");
+    }
+}

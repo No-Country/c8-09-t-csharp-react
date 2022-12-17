@@ -1,9 +1,11 @@
 ﻿using CohorteApi.Core.Interfaces;
 using CohorteApi.Data;
 using CohorteApi.Models;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
 using System.Web;
@@ -16,25 +18,26 @@ namespace CohorteApi.Controllers
     {
 
         [HttpGet("GenerateRandomUsers")]
-        public async Task<IActionResult> GenerateTestUsers([FromServices] ApplicationDbContext context, [FromServices] UserManager<IdentityUser> umanager)
+        public async Task<IActionResult> GenerateTestUsers([FromServices] ApplicationDbContext context, [FromServices] UserManager<AppUser> umanager)
         {
-            var password = "Tikefan123!";
+            var password = "Tiketfan123!";
             var user = RandomString(6);
             var admin = RandomString(6);
             //  umanager.CreateAsync()
-            var u1 = new IdentityUser { UserName = user, Email = $"{user}@mailinator.com" };
-            var u2 = new IdentityUser { UserName = admin, Email = $"{admin}@mailinator.com" };
+            var u1 = new AppUser { UserName = user, Email = $"{user}@mailinator.com" };
+            var u2 = new AppUser { UserName = admin, Email = $"{admin}@mailinator.com" };
             var r1 = await umanager.CreateAsync(u1, password);
             var r2 = await umanager.CreateAsync(u2, password);
 
 
+            var a1 = await umanager.AddToRoleAsync(u1, "user");
+            var a2 = await umanager.AddToRoleAsync(u2, "admin");
+
             var result = new[]
             {
-                new {Username = user, Password = password, email =$"{user}@mailinator.com",  rol = "user", Succeeded = r1.Succeeded},
-                new {Username = admin, Password = password, email =$"{user}@mailinator.com", rol = "admin", Succeeded = r1.Succeeded},
+                new {Username = user, Password = password, email =$"{user}@mailinator.com",  rol = "User", Succeeded = r1.Succeeded},
+                new {Username = admin, Password = password, email =$"{admin}@mailinator.com", rol = "Admin", Succeeded = r2.Succeeded},
              };
-            await umanager.AddToRoleAsync(u2, "admin");
-            await umanager.AddToRoleAsync(u1, "user");
 
             return new JsonResult(result);
 
@@ -46,6 +49,33 @@ namespace CohorteApi.Controllers
                     .Select(s => s[random.Next(s.Length)]).ToArray());
             }
         }
+
+        [HttpGet("GetUsersTesting")]
+        public async Task<IActionResult> GetUsersTesting([FromServices] ApplicationDbContext context, [FromServices] UserManager<AppUser> umanager, [FromQuery] string email)
+        {
+            var result = await umanager.Users.Include(a => a.Sales).ThenInclude(a=>a.Event).ThenInclude(a=>a.Category).Include(a => a.Reviews).FirstAsync(a=>a.Email == email);
+            return new JsonResult(result);
+        }
+
+        [HttpGet("GenerateSales/{email}")]
+        public async Task<IActionResult> GenerateSale([FromServices] ApplicationDbContext context, [FromServices] UserManager<AppUser> umanager, string email)
+        {            
+            var user = await umanager.FindByEmailAsync(email);
+            var _event = await context.Events.FirstAsync(a=>a.Id == 7);
+            var _event2 = await context.Events.FirstAsync(a=>a.Id == 8);
+            var _event3 = await context.Events.FirstAsync(a=>a.Id == 9);
+            Sale sale3 = new()
+            {
+                CreatedAt= DateTime.Now,
+                Event= _event3,
+                Price = (decimal)49.99,
+                Qty=1,
+                User = user,
+                Section = "Platea"
+            };           
+            context.Add(sale3);           
+            return new JsonResult(await context.SaveChangesAsync());
+        }
     }
 
     [Route("api/[controller]")]
@@ -55,43 +85,93 @@ namespace CohorteApi.Controllers
         [HttpGet("GenerateEvents")]
         public IEnumerable<Event> GenerateEvents([FromServices] ApplicationDbContext context)
         {
-            var objs = new[] {
+            var objs = new[] { 
                 new Event() {
-                    //Id=1,
-                    FrontPageImage = "https://cohorteapi.azurewebsites.net/images/event1FrontPage.jpg",
-                    Thumbnail = "https://cohorteapi.azurewebsites.net/images/event1-thumb.jpg",
+                    CategoryId = new Random().Next(1,6),
+                    FrontPageImage = "https://cohorteapi.azurewebsites.net/images/Event_1_FrontPage.jpg",
+                    Thumbnail = "https://cohorteapi.azurewebsites.net/images/Event_1_Thumbnail.jpg",
                     EventName = "BIENVENIDO DICIEMBRE - UNA ALBORADA POR TODO LO ALTO",
                     EventDescription="Ven con nosotros a vivir una magnífica noche ubicada en la mejor zona de Medellín, con un acceso visual 360 de toda la ciudad, acompáñanos en esta noche mágica a vivir una alborada por todo lo alto, con una exquisita marranada gourmet.",
-                    Price = 10,
-                    AvailableSeats = 500,
-                    Venue  = "stadio garcia",
+                    Sections = new List<Section>
+                    {
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Platea",
+                            AvailableSeats = 50,
+                            TotalSeats = 50
+                        },
+
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Vip",
+                            AvailableSeats = 200,
+                            TotalSeats = 200
+                        },
+                    },
+                    Venue  = "Estadio Garcia",
                     Created = DateTime.Parse("2022-11-01T13:42:42.55"),
                     EventTime = DateTime.Parse("2022-11-30T13:42:42.55"),
                     },
                     new Event() {
-                     FrontPageImage = "https://cohorteapi.azurewebsites.net/images/evento2-Front.jpg",
-                     Thumbnail  =   "https://cohorteapi.azurewebsites.net/images/evento2-thumb.jpg",
+
+                        CategoryId = new Random().Next(1,6),
+                     FrontPageImage = "https://cohorteapi.azurewebsites.net/images/Event_2_FrontPage.jpg",
+                     Thumbnail  =   "https://cohorteapi.azurewebsites.net/images/Event_2_Thumbnail.jpg",
                     EventName = "KEVIN JOHANSEN - TU VE TOUR",
-                    EventDescription="",
-                    Price = 25,
+                    EventDescription="two nights with two different sets and two different opening acts",
                     Venue  = "Teatro Jorge Eliécer Gaitán",
-                    AvailableSeats = 250,
+                    Sections = new List<Section>
+                    {
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Platea",
+                            AvailableSeats = 100,
+                            TotalSeats = 100
+                        },
+
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Diamante",
+                            AvailableSeats = 180,
+                            TotalSeats = 180
+                        },
+                    },
                     Created = DateTime.Parse("2022-11-24T13:42:42.55"),
                     EventTime = DateTime.Parse("2022-12-03T13:42:42.55"),
                     },
                     new Event() {
-                    FrontPageImage = "https://cohorteapi.azurewebsites.net/images/evento3%20(1).jpg",
-                    Thumbnail  =   "https://cohorteapi.azurewebsites.net/images/evento3%20(2).jpg",
+
+                     CategoryId = new Random().Next(1,6),
+                    FrontPageImage = "https://cohorteapi.azurewebsites.net/images/Event_3_FrontPage.jpg",
+                    Thumbnail  =   "https://cohorteapi.azurewebsites.net/images/Event_3_Thumbnail.jpg",
                     EventName = "NATALIA JIMÉNEZ 20 AÑOS - ANTOLOGÍA TOUR - MEDELLÍN",
-                    EventDescription="",
-                    Price = 30,
+                    EventDescription="two nights with two different sets and two different opening acts",
                     Venue  = "Teatro de la Universidad de Medellín",
-                    AvailableSeats = 250,
+                    Sections = new List<Section>
+                    {
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Oro",
+                            AvailableSeats = 15,
+                            TotalSeats = 15
+                        },
+
+                        new Section()
+                        {
+                            Price = 1,
+                            Name = "Platinum",
+                            AvailableSeats = 100,
+                            TotalSeats = 100
+                        },
+                    },
                     Created = DateTime.Parse("2022-11-24T13:42:42.55"),
                     EventTime = DateTime.Parse("2023-03-23T13:42:42.55"),
-                    }};
-
-
+                    }};   
             context.Events.AddRange(objs);
             context.SaveChanges();
             return objs;
@@ -99,13 +179,13 @@ namespace CohorteApi.Controllers
         [HttpPost("DeleteEvents")]
         public IActionResult DeleteEvents([FromServices] ApplicationDbContext context)
         {
-            context.Events.RemoveRange(context.Events);
+            context.RemoveRange(context.Events.Include(a => a.Sections).ToList());
             var count = context.SaveChanges();
             return Ok($"Deleted {count} rows");
         }
 
         [HttpPost("UploadFiles")]
-        public IActionResult UploadImages([FromForm] List<IFormFile> files, string folder = "images")
+        public IActionResult UploadImages([FromForm] IEnumerable<IFormFile> files, string folder = "images")
         {
             var path = $"wwwroot/{folder}";
             //create folder if not exist
@@ -141,7 +221,7 @@ namespace CohorteApi.Controllers
                 }
             }
 
-            var json = results.Select(x => new { File = x.Item1, Url = x.Item2, Success = x.Item3 });
+            var json = results.Select(x => new { File = x.Item1, Url = x.Item2, Success = x.Item3 }).First();
             return new JsonResult(json);
         }
     }

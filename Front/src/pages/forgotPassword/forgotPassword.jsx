@@ -48,12 +48,13 @@ const ForgotPassword = function () {
                         icon:"error",
                         confirmButtonText: `<button class="botonPrincipal" >OK</button>`,
                     })
+                    return (error)
                 }
             }
         })
     }
 
-    console.log(forgotPassData)
+    // console.log(forgotPassData)
     // 
     return (
         <div className="forgotpassword_main">

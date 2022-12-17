@@ -28,6 +28,7 @@
 
 .formInput {
 	width: 70%;
+	height: 80px;
 	border-radius: 10px;
 	margin: 0 0.4rem;
 	padding: 0 0.5rem;
@@ -41,7 +42,11 @@
 	background-color: #fc4a88;
 	border-radius: 20px;
 	font-weight: 600;
+<<<<<<< HEAD
 	padding: 8px 20px;
+=======
+	padding: 12px 20px;
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
 	letter-spacing: 2px;
 	border: 1px solid transparent;
 }
@@ -49,4 +54,29 @@
 .formButton:hover{
 	transition: 0.5s;
     background-color: #ba2d5f;
+}
+
+@media screen and (min-width:424px) and (max-width:768px){
+
+.newsletter{
+	width: 100%;
+	flex-direction: column;
+}
+
+.newsletterTitle{
+	width: 100%;
+	font-size: 15px;
+	padding: 0px;
+}
+
+.formInput{
+	width: 100%;
+	margin: 0px;
+}
+
+.formButton{
+	width: 100%;
+	padding: 3px 20px;
+}
+	
 }

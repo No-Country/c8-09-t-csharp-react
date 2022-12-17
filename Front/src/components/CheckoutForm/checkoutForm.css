@@ -15,7 +15,11 @@
     align-items: center;
     height: 100%;
     /* border: 1.8px solid black; */
+<<<<<<< HEAD
     width: 85%;
+=======
+    width: 80%;
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
 }
 
 .checkoutForm_title_container{
@@ -110,9 +114,14 @@ input::-webkit-inner-spin-button {
     justify-content: center;
     align-items: center;
     gap: 4px;
+<<<<<<< HEAD
     height: 47px;
     width: 15%;
     padding: 0.5rem;
+=======
+    height: 41px;
+    width: 10%;
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
     background: #FFFFFF;
     border: 1px solid #FC4A88;
     border-radius: 10px;
@@ -226,11 +235,18 @@ input::-webkit-inner-spin-button {
     align-items: center;
     /* padding: 8px 24px; */
     gap: 8px;
+<<<<<<< HEAD
     width: 176px;
     height: 35px;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 10px;
+=======
+    width: 200px;
+    height: 35px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
 
     font-family: 'Poppins';
     font-style: normal;
@@ -239,16 +255,22 @@ input::-webkit-inner-spin-button {
     line-height: 20px;
     letter-spacing: 0.75px;
     color: #FC4A88;
+<<<<<<< HEAD
     border-radius: 100px;
+=======
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
 
     /* border: 1.8px solid rgb(167, 61, 61); */
 
 }
 
+<<<<<<< HEAD
 .checkoutForm_button_cancel:hover{
     background: #fc4a8886;
 }
 
+=======
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
 .checkoutForm_button_finish{
     display: flex;
     flex-direction: row;
@@ -256,7 +278,11 @@ input::-webkit-inner-spin-button {
     align-items: center;
     padding: 8px 24px;
     gap: 8px;
+<<<<<<< HEAD
     width: 176px;
+=======
+    width: 200px;
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
     height: 35px;
     margin-top: 10px;
     margin-bottom: 10px;

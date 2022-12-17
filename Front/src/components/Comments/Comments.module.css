@@ -71,3 +71,25 @@
 	right: 0;
 	bottom: 0;
 }
+
+@media screen and (min-width:424px) and (max-width:768px){
+
+	.container h3{
+		text-align: center;
+		font-size: 30px;
+		font-weight: 400;
+	}
+
+	.container div h3{
+		text-align: center;
+		width: 200px;
+		font-size: 15px;
+
+	}
+
+	.descriptionName{
+		font-size: 15px;
+		position: relative;
+	}
+
+}

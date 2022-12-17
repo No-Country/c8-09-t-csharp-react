@@ -4,8 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { purchaseEvent } from '../../redux/actions';
 import { Alert } from "../../utils/alert";
+<<<<<<< HEAD
 import logoTarjeta from "../../../src/Logos.png"
 import mastercard from "../../../src/tarjetamastercard.png"
+=======
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
 
 import rejectionImg from '../../../src/rejection.svg'
 import responseImg from '../../../src/response.svg'
@@ -89,6 +92,7 @@ const CheckoutForm = function(){
                     try{
                         Alert.fire({
                             title: 'Gracias por tu compra',
+<<<<<<< HEAD
                             html: `<h4>Numero de Orden: </h4> </br> <h5><b>${purchase.id || "#1423"}</b></h5>`,
                             imageUrl: responseImg,
                             imageAlt: 'confirm',
@@ -110,6 +114,16 @@ const CheckoutForm = function(){
                         navigate("/")
 
                         })
+=======
+                            html: `<h4>Numero de Orden: </h4> </br> <h5><b>${purchase.id}</b></h5>`,
+                            imageUrl: responseImg,
+                            imageAlt: 'confirm',
+                            confirmButtonText: `<button class="botonPrincipal" >Regresar al inicio</button>`,
+                        })
+                        // console.log(purchase)
+                        localStorage.removeItem("prepurchase")
+                     
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
                     } catch(error){
                         // console.log(error)
                     }
@@ -129,8 +143,12 @@ const CheckoutForm = function(){
                     <form onSubmit={submit}>
                         <div className='checkoutForm_cardName_container'>
                         <input 
+<<<<<<< HEAD
                         type="text"
                         autoComplete="off"
+=======
+                        type="text" 
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
                         placeholder="Titular de la tarjeta" 
                         className='checkoutForm_input'
                         name='CardName'
@@ -142,7 +160,10 @@ const CheckoutForm = function(){
                         <div className='checkoutForm_card_container'>
                             <input 
                             type="text"
+<<<<<<< HEAD
                             autoComplete="off"
+=======
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
                             placeholder="Numero de tarjeta" 
                             maxLength="16"
                             className='checkoutForm_input_card'
@@ -152,7 +173,11 @@ const CheckoutForm = function(){
                             /> 
 
                             <div className='checkoutForm_hyphen'>-</div>
+<<<<<<< HEAD
                             <div type="text" className='checkoutForm_input_cardLogo'><img src={input.CardNumber.length >= 4 ? mastercard: logoTarjeta}/></div>
+=======
+                            <div type="text" className='checkoutForm_input_cardLogo'><img src='../../src/Logos.png'/></div>
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
                         </div>
 
                         <div className='checkoutForm_fecha_container'>
@@ -160,8 +185,12 @@ const CheckoutForm = function(){
                             
                             <div className='checkoutForm_fecha_subcontainer'>
                                 <input 
+<<<<<<< HEAD
                                 type="text"
                                 autoComplete="off" 
+=======
+                                type="text" 
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
                                 placeholder="MM" 
                                 maxLength="2"
                                 className='checkoutForm_input_fecha'
@@ -173,7 +202,10 @@ const CheckoutForm = function(){
                                 <div className='checkoutForm_hyphen'>-</div>
                                 <input 
                                 type="text" 
+<<<<<<< HEAD
                                 autoComplete="off"
+=======
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
                                 placeholder="AA" 
                                 maxLength="2"
                                 className='checkoutForm_input_fecha'
@@ -189,7 +221,11 @@ const CheckoutForm = function(){
                             <div className='checkoutForm_CVV_Title'><p>Codigo de Seguridad</p></div>
                             <div>
                                 <input 
+<<<<<<< HEAD
                                 type="password" 
+=======
+                                type="text" 
+>>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
                                 placeholder="CVC" 
                                 maxLength="3"
                                 className='checkoutForm_input_CVV'

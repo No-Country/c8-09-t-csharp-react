@@ -1,0 +1,15 @@
+﻿<AuthorizeView>
+    <Authorized>
+        <MudCard Elevation="0"  Style="width:100%; background-color:transparent" Square="true">
+            <MudCardHeader Class="px-4 py-0 pt-4">
+                <CardHeaderAvatar>
+                    <MudAvatar Image="https://placeimg.com/64/64/people" />
+                </CardHeaderAvatar>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body2">@context.User.Identity?.Name</MudText>
+                    <MudText Typo="Typo.caption">@context.User.Claims.Where(a => a.Type == ClaimTypes.Role).Select(c=>c.Value).SingleOrDefault()</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+        </MudCard>
+    </Authorized>
+</AuthorizeView>

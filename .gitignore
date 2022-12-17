@@ -4,14 +4,12 @@
 
 /.vs
 /Back/.vs
-/Back/bin/Debug/net6.0
 /Back/obj
+/Back/bin
+/Back/.config
 /Back/Properties
 /Back/CohorteApi.csproj.user
-/Back/bin/Release/net6.0
-/Back/wwwroot/Newsletters
-/Back/appsettings.Development.json
-/Back/wwwroot/index.html
-/Back/Migrations
-/Back/wwwroot/images
-/Back/wwwroot
+
+/Admin/TicketAdmin/.vs
+/Admin/TicketAdmin/bin
+/Admin/TicketAdmin/obj

@@ -15,7 +15,10 @@ const initialState = {
     userloginData: [],
     isLogged: null,
     allEventsCopy: [],
-    forgotPasswordToken: []
+    forgotPasswordToken: [],
+    token: localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : null,
+    singleEventDetail: [],
+    purchaseEventResponse: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -39,10 +42,15 @@ function rootReducer(state = initialState, action) {
         case "LOGIN_USER":
             const initialData = action.payload
             const decode = jwt_decode(initialData.token)
+            const encodedData = btoa(initialData.token); // encode a string
+            //const decodedData = atob(encodedData); // decode the string
             localStorage.setItem("user", JSON.stringify(decode))
+            localStorage.setItem("token", JSON.stringify(encodedData))
             return{
                 ...state,
-                userloginData: decode
+                userloginData: decode,
+                singleUser: decode,
+                token: encodedData
             }
         case "CHECK_LOCAL_STORAGE":
             return {
@@ -77,6 +85,18 @@ function rootReducer(state = initialState, action) {
         case "RESET_PASSWORD":
             return{
                 ...state
+            }
+
+        case "GET_AN_EVENT":
+            return{
+                ...state,
+                singleEventDetail: action.payload
+            }
+
+        case "PURCHASE_EVENT":
+            return {
+                ...state,
+                purchaseEventResponse: action.payload
             }
             
         default: return state;

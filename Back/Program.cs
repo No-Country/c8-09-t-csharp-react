@@ -4,6 +4,7 @@ using CohorteApi.Core.Interfaces;
 using CohorteApi.Core.Models.Email;
 using CohorteApi.Core.Services;
 using CohorteApi.Data;
+using CohorteApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,24 +12,14 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
-// Add services to the container.
-
-builder.Services.AddScoped<INewsletterBusiness, NewsletterBusiness>();
-
-
-//Email
 var emailConfig = builder.Configuration
       .GetSection(EmailConfiguration.Section)
       .Get<EmailConfiguration>();
 builder.Services.AddSingleton(emailConfig);
-builder.Services.AddScoped<IEmailService, EmailService>();
-builder.Services.AddScoped<IEmailBusiness, EmailBusiness>();
-
-
-//builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -57,23 +48,19 @@ builder.Services.AddSwaggerGen(c =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
 });
-
-//if (builder.Environment.IsDevelopment())
-//    builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")));
-//else
-//{
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("SQLServer")));
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-//}
-
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Ticket")));
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
     options.User.RequireUniqueEmail = true;
+
 })
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider);
 
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
+   opt.TokenLifespan = TimeSpan.FromHours(2));
 
 builder.Services.AddAuthentication(options =>
 {
@@ -101,14 +88,18 @@ builder.Services.AddCors(o =>
         policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
+builder.Services.AddDirectoryBrowser();
+builder.Services.AddScoped<INewsletterBusiness, NewsletterBusiness>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IEmailBusiness, EmailBusiness>();
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseCors();
-app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();
+app.MapControllers( );
+app.UseDirectoryBrowser();
 app.Run();

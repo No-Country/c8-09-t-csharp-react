@@ -110,3 +110,44 @@
     height: 30px;
     background-color: white;    
 }
+
+@media screen and (min-width:424px) and (max-width:960px){
+*{
+width: 100%;
+}
+
+.error_main
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.cards_group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.error_card1{
+    margin: 0px;
+    align-items: center;
+    text-align: center;
+}
+
+
+.error_card2{
+    margin-top: 20px;
+    transform: none;
+    width: 200px;
+    text-align: center;
+
+}
+
+.vector1,.vector2,.vector3{
+    display: none;
+
+}
+}

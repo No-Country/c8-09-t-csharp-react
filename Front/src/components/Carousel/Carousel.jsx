@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import ButtonLeft from '../Buttons/ButtonLeft'
 import ButtonRight from '../Buttons/ButtonRight'
 
+
 const Carousel = () => {
 	const arrImg = [header, header1, header2]
 	const [selectedIndex, setSelectedIndex] = useState(0)
@@ -41,8 +42,8 @@ const Carousel = () => {
 			<div className={style.container}>
 				<ButtonLeft action={previous} />
 				<div className={style.headerInfo}>
-					<h1>{'Lorem ipsum dolor sit amet, consectetur.'}</h1>
-					<Link to={'/'} className={style.headerButton}>
+					<h1>{'Descubre los mejores eventos musicales, deportivos y muchos mas en TicketFan!'}</h1>
+					<Link to={'/catalogo'} className={style.headerButton}>
 						Mas información
 					</Link>
 				</div>
