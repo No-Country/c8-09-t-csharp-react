@@ -1,3 +1,22 @@
+body::-webkit-scrollbar-track {
+	background: rgba(255, 166, 0, 0);        
+	width: 2px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #FC4A88;
+    border-radius: 30px;
+}
+
+body::-webkit-scrollbar:vertical {
+	cursor: pointer;
+    width:10px;
+}
+
+body::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
 h1 {
 	font-weight: 'bold';
 	font-size: 56px;
@@ -51,3 +70,4 @@ button {
 .botonPrincipal:hover {
 	background: #b90a58;
 }
+
