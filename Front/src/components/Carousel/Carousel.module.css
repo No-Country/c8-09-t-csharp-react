@@ -46,7 +46,8 @@
 }
 
 .headerInfo h1 {
-	text-align: center;
+	text-align: left;
+	margin-bottom: 1rem;
 	font-size: 30px;
 	font-weight: 600;
 }
