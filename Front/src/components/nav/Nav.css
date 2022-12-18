@@ -24,15 +24,7 @@ nav ul {
     width: 40%;
 }
 
-<<<<<<< HEAD
 nav ul li a{
-=======
-a{
-    font-weight: 800;
-}
-
-nav ul li {
->>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
     color: white;
     font-size: 23px;
     padding: 3px 10px;
@@ -82,14 +74,8 @@ nav ul li a:hover{
     color: #FC4A88;
 }
 
-<<<<<<< HEAD
 .buttonIngresar img {
     margin-right: 0.5rem;
-=======
-.buttonIngresar span {
-    margin-left: 8px;
-    font-size: 20px;
->>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
 }
 
 
