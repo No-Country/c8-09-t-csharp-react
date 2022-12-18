@@ -112,21 +112,12 @@ const Register = function () {
                 // console.log("Success with status: " + val)
                 Alert.fire({
                     title: '¡Listo!',
-<<<<<<< HEAD
                     html: `Usuario creado con exito : </br> <b>${input.username}</b>`,
                     imageUrl: responseImg,
                     imageAlt: 'confirm',
                     confirmButtonText: `<button class="botonPrincipal" > OK </button>`,
                 }).then(res =>navigate("/") )
                 
-=======
-                    html: `Usuario creado con exito!: </br> <b>${input.username}</b>`,
-                    imageUrl: responseImg,
-                    imageAlt: 'confirm',
-                    confirmButtonText: `<button class="botonPrincipal" > OK </button>`,
-                })
-                navigate("/")
->>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
             }
         })
     }
