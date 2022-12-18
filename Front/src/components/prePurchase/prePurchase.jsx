@@ -6,22 +6,11 @@ import { checkLocalStorage } from '../../redux/actions';
 import moment from 'moment';
 import '../prePurchase/prePurchase.css'
 import { loginUser, eventDetails } from '../../redux/actions';
-<<<<<<< HEAD
 
 import  rejectionImg  from '../../rejection.svg';
 import { Alert } from '../../utils/alert';
 import  responseImg from '../../response.svg';
-=======
-import CheckoutForm from '../CheckoutForm/checkoutForm';
-//import { Alert } from "../../utils/alert";
-//import rejectionImg from '../../../src/rejection.svg'
-//import responseImg from '../../../src/response.svg'
-
-// import Login from '../../pages/login/login';
-// import  rejectionImg  from '../../rejection.svg';
-// import { Alert } from '../../utils/alert';
-// import  responseImg from '../../response.svg';
->>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
+import CheckoutForm from './../CheckoutForm/checkoutForm';
 
 const PrePurchase = function () {
 
@@ -176,34 +165,6 @@ const PrePurchase = function () {
                         <div className='event_container'>
                             <div>
                                 <img src={event.frontPageImage} alt="Put-In" border="0"  className='event_image' onError={(e)=>{e.target.onerror = null; e.target.src="https://www.dafont.com/forum/attach/orig/9/9/997801.gif"}}/>
-<<<<<<< HEAD
-=======
-                            </div>
-
-                            <div className='event_data_container'>
-                            <div className='event_title_container'>
-                                <p>{event.eventName}</p>
-                            </div>
-
-                            <div className='event_venue_container'>
-                                <img src='../../src/ubicacion.png'/>
-                                <p className='event_icon'>{event.venue}</p>
-                            </div>
-
-                            <div className='event_venue_container'>
-                                 <img src='../../src/calendario.png'/>
-                                    <p className='event_icon'>{moment(event.eventTime).format('D MMM, YYYY')}</p>
-                            </div> 
-
-                             <div className='event_venue_container'>
-                                 <img src='../../src/schedule.png'/>
-                                    <p className='event_icon'>{moment(event.eventTime).format('h:mm a')}</p>
-                            </div>
-
-                              <div className='event_venue_container'>
-                                 <img src='../../src/money.png'/>
-                                <p className='event_icon'>$ {eventInfo.price} C/U</p>
->>>>>>> 50b8427a6afda2445886b5cce877ab836134bf57
                             </div>
 
                             </div>
@@ -250,8 +211,6 @@ const PrePurchase = function () {
 
 
             </div>
-
-        </div>
     )
 }
 
